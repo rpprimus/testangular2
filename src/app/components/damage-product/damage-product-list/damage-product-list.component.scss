@@ -1,0 +1,69 @@
+@import './_variables';
+@import './_mixins';
+.mat-table {
+    .mat-header-row {
+        border-top: solid 1px #dedede;
+        .mat-header-cell {
+            &:nth-child(1) {
+                width: 20%;
+                flex: inherit;
+            }
+            &:nth-child(2) {
+                width: 20%;
+                flex: inherit;
+            }
+            &:nth-child(3) {
+                width: 20%;
+                flex: inherit;
+            }
+            &:nth-child(4) {
+                width: 19%;
+                flex: inherit;
+            }
+            &:nth-child(5) {
+                width: 13%;
+                flex: inherit;
+                justify-content: flex-start; padding-right: 8px;
+            }
+            &:nth-child(6) {
+                width: 8%;
+                flex: inherit;
+                padding-right: 0px;
+            }
+        }
+    }
+    .mat-row {
+        cursor:pointer;
+        //padding-right: 0px;
+        margin-bottom: 5px; // background: linear-gradient(to right, #F8F8F8 70%, #ffffff 31%);
+        .mat-cell {
+            &:nth-child(1) {
+                width: 20%;
+                flex: inherit;
+                color: #4d89f7;
+            }
+            &:nth-child(2) {
+                width: 20%;
+                flex: inherit;
+            }
+            &:nth-child(3) {
+                width: 20%;
+                flex: inherit;
+            }
+            &:nth-child(4) {
+                width: 19%;
+                flex: inherit;
+            }
+            &:nth-child(5) {
+                width: 13%;
+                flex: inherit;
+                justify-content: flex-start; padding-right: 8px;
+            }
+            &:nth-child(6) {
+                width: 8%;
+                flex: inherit;
+                padding-right: 0px;
+            }
+        }
+    }
+}

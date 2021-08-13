@@ -1,0 +1,81 @@
+<div class="custom-defined-msg-box" [ngClass]="dataSource.data.length > 0 ? 'product-associate' : ''">
+  <div class="popup-sec-icon">
+    <div class="sparkle-bg"></div>
+
+    <button class="alert-popup-icon">
+      <mat-icon><img src="../assets/images/s-popup-icon-img.png" alt="" /></mat-icon>
+    </button>
+
+  </div>
+
+  <mat-dialog-content class="add-sub-category-popup">
+    <!-- <h4>Select Product</h4>
+
+    <mat-form-field appearance="outline" class="s-popup-input-extnd-width-cls">
+        <mat-label>Search Product Id or Name</mat-label>
+        <input matInput placeholder="Search Product Id or Name" [(ngModel)]="searchText"
+        (keyup.enter)="searchProduct()" (ngModelChange)="searchProduct()" [matAutocomplete]="auto">
+        <mat-icon matSuffix (click)="clear()">close</mat-icon>
+        <mat-hint *ngIf="noRecords">{{noRecords}}</mat-hint>
+      </mat-form-field>
+
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let product of productList" [value]="product.productNumber" (click)="selectProduct(product.productId)">{{product.productNumber}}</mat-option>
+    </mat-autocomplete> -->
+
+    <mat-form-field class="s-popup-select-product">
+      <input matInput placeholder="Search Product" [(ngModel)]="searchText" name="searchTxt" (ngModelChange)="searchProduct()" />
+    </mat-form-field>
+
+    <div *ngIf="!noRecords">
+      <mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="selected">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox [checked]="selectAll" [(ngModel)]="selectAll" (ngModelChange)="selectAllProducts()"></mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-checkbox [(ngModel)]="element.selected" (ngModelChange)="changeSelected(element,element.selected)"></mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="productImg">
+          <mat-header-cell *matHeaderCellDef> Product Image</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <img [src]="element.url ? _domSanitizationService.bypassSecurityTrustUrl(element.url) : defaultImageSrc" />
+          </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="productId">
+          <mat-header-cell *matHeaderCellDef> PRODUCT ID </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.productNumber}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="productName">
+          <mat-header-cell *matHeaderCellDef> PRODUCT NAME </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="categories">
+          <mat-header-cell *matHeaderCellDef> CATEGORY </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.categories}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+
+  </mat-dialog-content>
+
+  <div class="popup-btn-sec aligned-right">
+    <div mat-dialog-actions>
+      <button mat-button class="transparent-btn popup-sec-btn" (click)="close()">CANCEL</button>
+      <button mat-flat-button class="active-btn popup-sec-btn" (click)="addProduct()">ADD PRODUCT</button>
+    </div>
+  </div>
+
+</div>

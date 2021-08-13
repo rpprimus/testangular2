@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15 15">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Icon_1_5);
+      }
+
+      .cls-2 {
+        fill: #b7b7b7;
+      }
+    </style>
+    <clipPath id="clip-Icon_1_5">
+      <rect width="15" height="15"/>
+    </clipPath>
+  </defs>
+  <g id="Icon_1_5" data-name="Icon 1 – 5" class="cls-1">
+    <g id="category" transform="translate(-2 1)">
+      <path id="Path_2286" data-name="Path 2286" class="cls-2" d="M9.811,8.659V6.735H7.886v3.849H9.811V9.621h3.849V13.47H9.811V11.546H6.924v-7.7H5V0H8.849V3.849H7.886V5.773H9.811V4.811h3.849V8.659Z"/>
+    </g>
+  </g>
+</svg>

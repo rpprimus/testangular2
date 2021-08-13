@@ -1,0 +1,140 @@
+<form #shipmentDetailForm="ngForm">
+  <div class="row">
+    <div class="col s12 m6 l6 padding-l-0">
+      <div class="left-col-content-sec">
+        <ul class="shippment-detail-sec" *ngFor="let item of orderCarrierDetails;let i = index;">
+          <li>
+            <mat-form-field>
+              <input matInput placeholder="Carrier" maxlength="50" appFocus [(ngModel)]="item.carrier"
+                [required]="!data.isorderCarrierDetailDisable" name="carrier_{{i}}" #carrier="ngModel"
+                [disabled]="data.orderStatus != enum.Order_Ready_to_ship || data.isorderCarrierDetailDisable">
+              <mat-hint *ngIf="carrier.errors?.required && (carrier.touched || !isFormValid)"
+                class="alert alert-danger">
+                {{appMessage.U0112}}
+              </mat-hint>
+            </mat-form-field>
+          </li>
+          <li>
+            <mat-form-field>
+              <input matInput placeholder="Tracking Number" maxlength="40" [pattern]="appConstant.trackingNumRegex"
+                [(ngModel)]="item.trackingNumber" [required]="!data.isorderCarrierDetailDisable" name="trackNum_{{i}}"
+                #trackNum="ngModel" [disabled]="data.orderStatus != enum.Order_Ready_to_ship || data.isorderCarrierDetailDisable">
+              <mat-hint *ngIf="trackNum.errors?.required && (trackNum.touched || !isFormValid)"
+                class="alert alert-danger">
+                {{appMessage.U0113}}
+              </mat-hint>
+              <mat-hint *ngIf="trackNum.errors?.pattern" class="alert alert-danger">
+                {{appMessage.U0054}}
+              </mat-hint>
+            </mat-form-field>
+          </li>
+          <li>
+            <button type="button" mat-mini-fab
+              *ngIf="orderCarrierDetails.length > 1 && item.carrierId == 0 && data.orderStatus == enum.Order_Ready_to_ship
+              && !data.isorderCarrierDetailDisable"
+              (click)="onRemoveCarrierDetailItems(i)">
+              <mat-icon class="mini-fab-btn"><i class="material-icons">clear</i></mat-icon>
+            </button>
+          </li>
+        </ul>
+        <button type="button" mat-mini-fab (click)="onAddCarrierDetailItems()"
+          *ngIf="data.orderStatus == enum.Order_Ready_to_ship && !data.isorderCarrierDetailDisable">
+          <mat-icon class="mini-fab-btn"><i class="material-icons">add</i></mat-icon>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="col s12 m6 l6 padding-l-0" 
+    *ngIf="data.orderStatus == enum.Order_Ready_to_ship || (data.orderStatus != enum.Order_Ready_to_ship && data.isorderCarrierDetailDisable)">
+      <mat-checkbox [(ngModel)]="data.isorderCarrierDetailDisable" name="byPassCarrierDetails"
+        [disabled]="data.orderStatus != enum.Order_Ready_to_ship">
+        Tracking Details Not Required
+      </mat-checkbox>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col s12 m12 l12 padding-l-0 padding-r-0">
+      <mat-table [dataSource]="dataSource" [hidden]="!noRecords">
+        <!-- Product Column -->
+        <ng-container matColumnDef="productNumber">
+          <mat-header-cell *matHeaderCellDef> PRODUCT ID </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.productNumber}} </mat-cell>
+        </ng-container>
+
+        <!-- Product Name Column -->
+        <ng-container matColumnDef="productName">
+          <mat-header-cell *matHeaderCellDef> PRODUCT NAME </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+        </ng-container>
+
+        <!-- Category Column -->
+        <ng-container matColumnDef="categories">
+          <mat-header-cell *matHeaderCellDef> CATEGORY </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.categories}} </mat-cell>
+        </ng-container>
+
+        <!-- Available Quantity Column -->
+        <ng-container matColumnDef="availableQuantity">
+          <mat-header-cell *matHeaderCellDef> AVAILABLE QUANTITY </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.availableQuantity}} </mat-cell>
+        </ng-container>
+
+        <!-- Ordered Quantity Column -->
+        <ng-container matColumnDef="orderedQuantity">
+          <mat-header-cell *matHeaderCellDef> ORDERED QUANTITY </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.orderedQuantity}} </mat-cell>
+        </ng-container>
+
+        <!--  Shipped Column -->
+        <ng-container matColumnDef="Shipped">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox [(ngModel)]="selectedAll" (change)="markAllShipped()" name="all-selected"
+              [disabled]="data.orderStatus != enum.Order_Ready_to_ship">
+              SHIPPED
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-checkbox [checked]="element.isShipped" (change)="toggleShipped(element)"
+              [disabled]="element.alreadyShipped || data.orderStatus != enum.Order_Ready_to_ship"></mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <!--  Not Shipped Column -->
+        <ng-container matColumnDef="NotShipped">
+          <mat-header-cell *matHeaderCellDef> NOT SHIPPED </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-checkbox [checked]="!element.isShipped" (change)="toggleShipped(element)"
+              [disabled]="element.alreadyShipped || data.orderStatus != enum.Order_Ready_to_ship"></mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <!--  Reason Column -->
+        <ng-container matColumnDef="Reason">
+          <mat-header-cell *matHeaderCellDef> REASON </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-form-field>
+              <mat-select [(ngModel)]="element.reasonId" placeholder="Reason" [ngModelOptions]="{standalone: true}"
+                [disabled]="data.orderStatus != enum.Order_Ready_to_ship">
+                <mat-option>Select Reason</mat-option>
+                <mat-option *ngFor="let reason of shipmentReason" [value]="reason.id">
+                  {{reason.name}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-hint *ngIf="(reason.touched || !isFormValid) && reason.errors?.required">Reason cannot be blank</mat-hint> -->
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;let i= index"></mat-row>
+      </mat-table>
+      <div class="" *ngIf="noRecords">
+        <mat-card>
+          <div class="center">No Records Found</div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</form>

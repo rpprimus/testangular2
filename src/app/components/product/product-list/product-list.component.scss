@@ -1,0 +1,172 @@
+@import './_variables';
+@import './_mixins';
+
+.mat-table{
+    @extend .offsetB2;
+
+    .mat-header-row{
+        border-top: solid 1px #ddd;
+        padding-right: 0px;
+
+        .mat-header-cell{
+            
+            &:nth-child(1){width:14%; flex: inherit; }
+            &:nth-child(2){width:17%; flex: inherit;}
+            &:nth-child(3){width:17%; flex: inherit;}
+            &:nth-child(4){width:12%; flex: inherit; }
+            &:nth-child(5){width:12%; flex: inherit;                 justify-content: flex-start;
+                padding-right: 0.5rem;}
+            &:nth-child(6){width:9%; flex: inherit;}
+            &:nth-child(7){width:13%; flex: inherit;}
+            &:nth-child(8){width:10%; flex: inherit;}
+            &:nth-child(9){width:6%; flex: inherit; justify-content: flex-end; padding-right:0px;}
+            
+        }
+    }
+    .mat-row{
+        cursor:pointer;
+        padding-right: 0px;
+        box-shadow: 0px 1px 4px 0px #d2d1d1;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 3px 18px 0px #d2d1d1;
+        }
+
+        .mat-cell{
+
+            &:nth-child(1){width:14%; flex: inherit; color: $color-4d89f7; text-transform: capitalize; }
+            &:nth-child(2){width:17%; flex: inherit;}
+            &:nth-child(3){width:17%; flex: inherit;}
+            &:nth-child(4){width:12%; flex: inherit; }
+            &:nth-child(5){width:12%; flex: inherit;                 justify-content: flex-start;
+                padding-right: 0.5rem;}
+            &:nth-child(6){width:9%; flex: inherit;}
+            &:nth-child(7){width:13%; flex: inherit;}
+            &:nth-child(8){width:10%; flex: inherit;}
+            &:nth-child(9){width:6%; flex: inherit; justify-content: flex-end; padding-right:0px;}
+        }
+
+    }
+}
+.additionalClassAdded.mat-table{
+    .mat-header-row{
+
+        .mat-header-cell{
+            
+            &:nth-child(1){width:15%; flex: inherit; }
+            &:nth-child(2){width:19%; flex: inherit;}
+            &:nth-child(3){width:19%; flex: inherit;}
+            &:nth-child(4){width:12%; flex: inherit; }
+            &:nth-child(5){width:13%; flex: inherit;                 justify-content: flex-start;
+                padding-right: 0.5rem;}
+            &:nth-child(6){width:10%; flex: inherit;}
+            &:nth-child(7){width:12%; flex: inherit;}
+            &:nth-child(8){width:6%; flex: inherit; justify-content: flex-end; padding-right:0px;}
+            
+        }
+    }
+    .mat-row{
+                box-shadow: 0px 1px 4px 0px #d2d1d1;
+                transition: all 0.3s ease-in-out;
+                &:hover {
+                    transition: all 0.3s ease-in-out;
+                    box-shadow: 0px 3px 18px 0px #d2d1d1;
+                }
+        .mat-cell{
+
+            &:nth-child(1){width:15%; flex: inherit; color: $color-4d89f7; text-transform: capitalize; }
+            &:nth-child(2){width:19%; flex: inherit;}
+            &:nth-child(3){width:19%; flex: inherit;}
+            &:nth-child(4){width:12%; flex: inherit; }
+            &:nth-child(5){width:13%; flex: inherit;                 justify-content: flex-start;
+                padding-right: 0.5rem;}
+            &:nth-child(6){width:10%; flex: inherit;}
+            &:nth-child(7){width:12%; flex: inherit;}
+            &:nth-child(8){width:6%; flex: inherit; justify-content: flex-end; padding-right:0px;}
+        }
+
+    }
+
+}
+
+.decreaseCol.mat-table{
+    .mat-header-row{
+
+        .mat-header-cell{
+            
+            &:nth-child(1){width:17%; flex: inherit; }
+            &:nth-child(2){width:21%; flex: inherit;}
+            &:nth-child(3){width:21%; flex: inherit;}
+            &:nth-child(4){width:17%; flex: inherit; }
+            &:nth-child(5){width:15%; flex: inherit;                 justify-content: flex-start;
+                padding-right: 0.5rem;}
+            &:nth-child(6){width:13%; flex: inherit;}
+            &:nth-child(7){width:6%; flex: inherit; justify-content: flex-end; padding-right:0px;}
+            
+        }
+    }
+    .mat-row{
+                box-shadow: 0px 1px 4px 0px #d2d1d1;
+                transition: all 0.3s ease-in-out;
+                &:hover {
+                    transition: all 0.3s ease-in-out;
+                    box-shadow: 0px 3px 18px 0px #d2d1d1;
+                }
+        .mat-cell{
+
+            &:nth-child(1){width:17%; flex: inherit; color: $color-4d89f7; text-transform: capitalize; }
+            &:nth-child(2){width:21%; flex: inherit;}
+            &:nth-child(3){width:21%; flex: inherit;}
+            &:nth-child(4){width:17%; flex: inherit; }
+            &:nth-child(5){width:15%; flex: inherit;                 justify-content: flex-start;
+                padding-right: 0.5rem;}
+            &:nth-child(6){width:13%; flex: inherit;}
+            &:nth-child(7){width:6%; flex: inherit; justify-content: flex-end; padding-right:0px;}
+        }
+
+    }
+
+}
+
+.btn-tab-sec {
+    text-decoration: none;
+    width: 31.33%;
+    .product-tab-btn {
+        color: #616167;
+        font-size: 0.875rem;
+        font-weight: 500;
+        padding: 0.65rem 0.5rem 0.62rem 1rem;
+        text-decoration: none;
+        background: #fff;
+        border-top-left-radius: 0.75rem;
+        border-bottom-left-radius: 0.75rem;
+        box-shadow: 0px 3px 19px 0px #d2cece;
+        margin-right: 1px;
+        width: 5rem;
+        display: inline-block;
+        text-align: center;
+        border: solid 1px #dedede;
+    }
+    .kits-tab-btn {
+        color: #616167;
+        font-size: 0.875rem;
+        font-weight: 500;
+        padding: 0.65rem 1rem 0.62rem 0.5rem;
+        text-decoration: none;
+        // background: #fff;
+        border: solid 1px #dedede;
+        border-top-right-radius: 0.75rem;
+        border-bottom-right-radius: 0.75rem;
+        width: 5rem;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+.content-heading-sec {
+    .page-heading-sec {
+        min-width:7rem;
+
+    }
+}

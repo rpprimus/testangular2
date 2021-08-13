@@ -1,0 +1,31 @@
+<div class="custom-defined-msg-box store-event-popup">
+  <div class="popup-sec-icon store-popup-header-sec">
+    <div class="store-popup-header-overlay dy-header-color"></div>
+
+    <div class="store-popup-heading-sec">
+      <button type="button" mat-mini-fab class="dy-action-btn-color close-btn-popup" (click)="dialogRef.close()">
+        <mat-icon class="mini-fab-btn"><i class="material-icons">close</i></mat-icon>
+      </button>
+      <!-- <h3 class="dy-body-txt-color">Category Info Display</h3> -->
+      <div class="cat-desc-info-sec" innerHtml="{{data.title}}"></div>
+    </div>
+  </div>
+
+  <mat-dialog-content>
+
+    <!-- <div class="dialog-content-section" *ngIf="data.title">
+      <h3>Title</h3>
+      <div class="cat-desc-info-sec dy-body-txt-color" innerHtml="{{data.title}}"></div>
+    </div>
+    <div class="dialog-content-section" *ngIf="data.description">
+      <h3>Category Description</h3> -->
+      <div class="dy-body-txt-color cat-desc-info-sec" innerHtml="{{data.description}}"></div>
+    <!-- </div> -->
+    <!-- <div mat-dialog-actions class="store-popup-content-sec">
+      <button mat-flat-button class="store-active-btn  dy-action-btn-color popup-sec-btn" (click)="dialogRef.close()">
+        OK
+      </button>
+    </div> -->
+
+  </mat-dialog-content>
+</div>

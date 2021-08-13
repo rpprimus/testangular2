@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div class="page-content-wrapper-sec  add-client-page-cls">
+
+    <div class="content-heading-sec">
+      <div class="page-heading-sec">
+        <h2>Damage Items List
+          <span class="total-record-cls">(Total {{totalRecords}} records)</span>
+        </h2>
+      </div>
+
+      <div class="button-group-in-heading-sec relative-sec-cls">
+        <app-filter-box [data]="{showFilter: true, categories : filterCat, values : filterValues}" (filterChange)="onChangeFilter($event)"></app-filter-box>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="page-content-sec">
+
+        <div class="row">
+          <div infiniteScroll [infiniteScrollDistance]="1" debounce [infiniteScrollThrottle]="300" (scrolled)="onScroll()"
+            [infiniteScrollUpDistance]="2">
+            <mat-table [dataSource]="dataSource" matSort class="" [hidden]="!noRecords">
+
+              <ng-container matColumnDef="productId">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Product Id </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.productId}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="productName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="categories">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.categories}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="orderNumber">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Order No </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.orderNumber}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="damageQuantity">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Damage Quantity </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.damageQuantity}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span [ngClass]="element.status == 'ACTIVE' ? 'active-status' : 'inactive-status'">{{element.status}}</span>
+                  </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/damageproduct/{{row.id}}"></mat-row>
+            </mat-table>
+          </div>
+          <div class="" *ngIf="noRecords">
+            <mat-card>
+              <div class="center">No Records Found</div>
+            </mat-card>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

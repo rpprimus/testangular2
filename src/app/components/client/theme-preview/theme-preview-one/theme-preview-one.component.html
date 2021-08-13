@@ -1,0 +1,50 @@
+<div class="col s12 m6 l6">
+  <div class="right-col-content-sec">
+
+    <div class="row">
+      <h5>Store Theme</h5>
+      <div class="template-preview-sec row">
+        <div class="temp-sec">
+          <div class="temp-sec-first-row">
+            <div class="logo">
+              <img [src]="data.logo ? data.logo : ''" alt="">
+            </div>
+            <div class="multi-theme-option"></div>
+          </div>
+          <div [ngStyle]="{background : data.headerColorCode ? data.headerColorCode : '#1C57B7'  }" class="temp-sec-second-row">
+            <div class="temp-header-sec"></div>
+          </div>
+
+          <div class="temp-body-sec">
+            <div class="temp-body-left-sec col s3 m3 l3">
+              <div [ngStyle]="{color : data.bodyTextColorCode ? data.bodyTextColorCode : '#616167'}" class="temp-cat-list"
+                *ngFor="let item of [1,2,3,4,5]">Category
+                {{item}}</div>
+            </div>
+            <div class="temp-body-right-sec col s9 m9 l9">
+              <div class="temp-body-heading-sec">
+                <div [ngStyle]="{color : data.bodyTextColorCode ? data.bodyTextColorCode : '#616167'}" class="temp-heading">Product
+                  List</div>
+                <div class="temp-btn-sec">
+                  <button mat-flat-button [ngStyle]="{background : data.actionButtonColorCode ? data.actionButtonColorCode : '#D11E47' }"
+                    class="cus-mat-flat-button">Button</button>
+                </div>
+              </div>
+              <div class="row">
+                <ul class="temp-prev-list">
+                  <li *ngFor="let item of [1,2,3,4,5,6,7,8,9]">
+                    <div class="item-box"></div>
+                    <div [ngStyle]="{color : data.bodyTextColorCode ? data.bodyTextColorCode : '#616167'}" class="item-name">Item
+                      Name</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

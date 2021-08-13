@@ -1,0 +1,70 @@
+@import './_variables';
+@import './_mixins';
+
+.freight-detail-dimention-sec{
+    padding:0;
+    margin:0rem 0rem 0.75rem 0rem;
+    @media screen and (max-width: $break-at-desktop) {
+        margin-bottom:0.9rem;
+    }
+    @media screen and (max-width: $break-at-ipad) {
+        margin-bottom:1rem;
+    }
+    li{
+        list-style: none;
+        padding:0rem 1rem;
+        margin:0rem;
+        display: inline-flex;
+        width:18%;
+        box-sizing: border-box;
+        @media screen and (max-width: $break-at-desktop) {
+            padding:0rem 0.5rem;
+            min-width:18%;
+        }
+
+        &:first-child {
+            padding-left:0rem;
+        }
+        &:nth-child(6) {
+            padding-right:0rem;
+            width:10%;
+            display: inline-flex;
+            justify-content: flex-end;
+            @media screen and (max-width: $break-at-ipad) {
+                min-width:auto;
+                justify-content: flex-start;
+            }
+        }
+    }
+    &.read-only-freight-detail-sec{
+        li{
+            width:20%;
+            &:last-child{
+                padding-right:0rem;
+                width:20%;
+            }
+        }
+    }
+    
+}
+
+.left-col-content-sec{
+    padding-right: 2.5rem;
+    @media screen and (max-width: $break-at-ipad) {
+        padding-right: 1.5rem;
+    }
+}
+.right-col-content-sec{
+    padding-left: 2.5rem;
+    @media screen and (max-width: $break-at-ipad) {
+        padding-left: 1.5rem;
+    }
+    textarea.mat-input-element{height:6rem;}
+}
+.padding-l-0{padding-left:0px;}
+.padding-r-0{padding-right:0px;}
+
+.mat-mini-fab{
+    background-color: #f3f0f0;
+    color:#727270;
+}

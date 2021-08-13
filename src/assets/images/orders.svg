@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 85 85">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Orders);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-Orders">
+      <rect width="85" height="85"/>
+    </clipPath>
+  </defs>
+  <g id="Orders" class="cls-1">
+    <g id="order" transform="translate(2 1)">
+      <g id="Group_1944" data-name="Group 1944" transform="translate(0)">
+        <g id="Group_1943" data-name="Group 1943" transform="translate(0)">
+          <path id="Path_608" data-name="Path 608" class="cls-2" d="M91,12.783a1.826,1.826,0,0,0-.519-1.291L79.523.535a1.8,1.8,0,0,0-1.291-.52V0H32.58a1.826,1.826,0,0,0-1.826,1.826V32.884l-2.107.018a1.826,1.826,0,0,0-1.278.548l-16.175,16.4a1.826,1.826,0,0,0-.526,1.278V73.025a1.826,1.826,0,0,0,.548,1.306l7.151,7a1.827,1.827,0,0,0,1.278.52h.018a1.826,1.826,0,0,0,1.278-.548l1.4-1.433A9.069,9.069,0,0,0,27.3,81.336h.1a9.088,9.088,0,0,0,3.356-.683v1.521A1.826,1.826,0,0,0,32.58,84H89.189a1.826,1.826,0,0,0,1.826-1.826V12.783ZM80.058,6.234l4.722,4.722H80.058ZM29.041,56.609a1.827,1.827,0,0,0-1.293.535L23.872,61.02A5.487,5.487,0,0,1,18.433,62.4L17.4,65.9a9.131,9.131,0,0,0,9.059-2.3L29.8,60.261h.957V76.436a5.418,5.418,0,0,1-3.384,1.247,5.343,5.343,0,0,1-3.89-1.565,1.659,1.659,0,0,0-1.3-.524,1.826,1.826,0,0,0-1.278.548l-1.278,1.306-5.308-5.19V51.879L29.432,36.54l1.322,0v7.29a1.825,1.825,0,0,0,.435,1.181l3.692,3.762a1.825,1.825,0,0,0,1.291.535H47.189v1.8a5.6,5.6,0,0,1-2.359,4.531,5.513,5.513,0,0,1-3.119.973H29.041ZM87.363,80.348H34.406V60.261h7.3a9.118,9.118,0,0,0,9.13-9.1V49.3a3.663,3.663,0,0,0-3.652-3.652H36.926l-2.52-2.515V3.652h42v7.3a3.652,3.652,0,0,0,3.652,3.652h7.3V80.348Z" transform="translate(-10.667)"/>
+        </g>
+      </g>
+      <g id="Group_1946" data-name="Group 1946" transform="translate(27.391 10.957)">
+        <g id="Group_1945" data-name="Group 1945" transform="translate(0)">
+          <rect id="Rectangle_1042" data-name="Rectangle 1042" class="cls-2" width="3.652" height="3.652"/>
+        </g>
+      </g>
+      <g id="Group_1948" data-name="Group 1948" transform="translate(34.696 10.957)">
+        <g id="Group_1947" data-name="Group 1947">
+          <rect id="Rectangle_1043" data-name="Rectangle 1043" class="cls-2" width="3.652" height="3.652"/>
+        </g>
+      </g>
+      <g id="Group_1950" data-name="Group 1950" transform="translate(27.391 21.913)">
+        <g id="Group_1949" data-name="Group 1949" transform="translate(0)">
+          <rect id="Rectangle_1044" data-name="Rectangle 1044" class="cls-2" width="42" height="3.652"/>
+        </g>
+      </g>
+      <g id="Group_1952" data-name="Group 1952" transform="translate(27.391 32.87)">
+        <g id="Group_1951" data-name="Group 1951" transform="translate(0)">
+          <rect id="Rectangle_1045" data-name="Rectangle 1045" class="cls-2" width="42" height="3.652"/>
+        </g>
+      </g>
+      <g id="Group_1954" data-name="Group 1954" transform="translate(42 10.957)">
+        <g id="Group_1953" data-name="Group 1953" transform="translate(0)">
+          <rect id="Rectangle_1046" data-name="Rectangle 1046" class="cls-2" width="18.261" height="3.652"/>
+        </g>
+      </g>
+      <g id="Group_1956" data-name="Group 1956" transform="translate(47.478 43.826)">
+        <g id="Group_1955" data-name="Group 1955">
+          <rect id="Rectangle_1047" data-name="Rectangle 1047" class="cls-2" width="14.609" height="3.652"/>
+        </g>
+      </g>
+      <g id="Group_1958" data-name="Group 1958" transform="translate(65.739 43.826)">
+        <g id="Group_1957" data-name="Group 1957">
+          <rect id="Rectangle_1048" data-name="Rectangle 1048" class="cls-2" width="3.652" height="3.652"/>
+        </g>
+      </g>
+      <g id="Group_1960" data-name="Group 1960" transform="translate(47.478 54.783)">
+        <g id="Group_1959" data-name="Group 1959">
+          <rect id="Rectangle_1049" data-name="Rectangle 1049" class="cls-2" width="14.609" height="3.652"/>
+        </g>
+      </g>
+      <g id="Group_1962" data-name="Group 1962" transform="translate(65.739 54.783)">
+        <g id="Group_1961" data-name="Group 1961">
+          <rect id="Rectangle_1050" data-name="Rectangle 1050" class="cls-2" width="3.652" height="3.652"/>
+        </g>
+      </g>
+      <g id="Group_1964" data-name="Group 1964" transform="translate(27.391 63.913)">
+        <g id="Group_1963" data-name="Group 1963" transform="translate(0)">
+          <rect id="Rectangle_1051" data-name="Rectangle 1051" class="cls-2" width="42" height="3.652"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

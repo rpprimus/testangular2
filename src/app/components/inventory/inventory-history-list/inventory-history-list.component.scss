@@ -1,0 +1,46 @@
+@import './_variables';
+@import './_mixins';
+
+h5{
+    @extend .subheading;
+    @extend .offsetB1;
+}
+
+.mat-table{
+    @extend .offsetB2;
+
+    .mat-header-row{
+        border-top: solid 1px #ddd;
+        // padding-right: 0px;
+
+        .mat-header-cell{
+            justify-content: flex-start;
+            text-transform: uppercase;
+            &:nth-child(1){width:13%; flex: inherit; }
+            &:nth-child(2){width:13%; flex: inherit;}
+            &:nth-child(3){width:18%; flex: inherit;}
+            &:nth-child(4){width:13%; flex: inherit; }
+            &:nth-child(5){width:16%; flex: inherit; padding-right:0.5rem; justify-content: flex-start;}
+            &:nth-child(6){width:27%; flex: inherit;padding-right:0.5rem; justify-content: flex-start;}           
+        }
+    }
+    .mat-row{
+        // cursor: default;
+        // // padding-right: 0px;
+        // min-height: 2.7rem;
+        // border: solid 1px #DEDEDE;
+        // margin-bottom: 0px;
+        // border-bottom: 0px;
+        // &:last-child(){border-bottom:solid 1px #DEDEDE!important;}
+        
+        .mat-cell{
+            &:nth-child(1){width:13%; flex: inherit; }
+            &:nth-child(2){width:13%; flex: inherit;}
+            &:nth-child(3){width:18%; flex: inherit;}
+            &:nth-child(4){width:13%; flex: inherit; }
+            &:nth-child(5){width:16%; flex: inherit; padding-right:0.5rem; justify-content: flex-start;}
+            &:nth-child(6){width:27%; flex: inherit; padding-right:0.5rem; justify-content: flex-start;}  
+        }
+
+    }
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 85 85">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Warehouse);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-Warehouse">
+      <rect width="85" height="85"/>
+    </clipPath>
+  </defs>
+  <g id="Warehouse" class="cls-1">
+    <g id="warehouse_1_" data-name="warehouse (1)" transform="translate(0.5 0.5)">
+      <path id="Path_589" data-name="Path 589" class="cls-2" d="M42,4.566,0,24.44V37.265H5.713V87h3.5V37.265H74.786V87h3.5V37.265H84V24.273Zm38.5,29.2H3.5V26.656L42,8.435,80.5,26.5v7.268Z" transform="translate(0 -4.566)"/>
+      <path id="Path_590" data-name="Path 590" class="cls-2" d="M156.243,277.674H140.23v15.8h16.013Zm-3.5,12.3H143.73v-8.8h9.013Z" transform="translate(-116.191 -230.856)"/>
+      <path id="Path_591" data-name="Path 591" class="cls-2" d="M272.368,277.674H256.355v15.8h16.013Zm-3.5,12.3h-9.013v-8.8h9.013Z" transform="translate(-212.409 -230.856)"/>
+      <path id="Path_592" data-name="Path 592" class="cls-2" d="M83.242,403.488H99.256v-15.8H83.242Zm3.5-12.3h9.014v8.8H86.742Z" transform="translate(-68.972 -322.014)"/>
+      <path id="Path_593" data-name="Path 593" class="cls-2" d="M198.29,403.488H214.3v-15.8H198.29Zm3.5-12.3H210.8v8.8H201.79Z" transform="translate(-164.297 -322.014)"/>
+      <path id="Path_594" data-name="Path 594" class="cls-2" d="M313.343,403.488h16.013v-15.8H313.343Zm3.5-12.3h9.013v8.8h-9.013Z" transform="translate(-259.627 -322.014)"/>
+      <rect id="Rectangle_1039" data-name="Rectangle 1039" class="cls-2" width="8.341" height="3.5" transform="translate(15.488 21.751)"/>
+      <rect id="Rectangle_1040" data-name="Rectangle 1040" class="cls-2" width="8.341" height="3.5" transform="translate(37.829 21.751)"/>
+      <rect id="Rectangle_1041" data-name="Rectangle 1041" class="cls-2" width="8.341" height="3.5" transform="translate(60.17 21.751)"/>
+    </g>
+  </g>
+</svg>

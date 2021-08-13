@@ -1,0 +1,43 @@
+<div class="container-fluid">
+
+  <div class="page-content-wrapper-sec check-inventory-page-cls">
+
+    <div class="content-heading-sec three-column-sec">
+      <div class="page-heading-sec">
+        <h2>Inventory# {{productId}}
+          <span class="total-record-cls">
+            ({{currentInvRecord}} of {{totalInvRecords}} records)
+          </span>
+        </h2>
+      </div>
+
+      <div class="multiple-btns-sec" *ngIf="id>0">
+        <a (click)="getRecord('first',$event)" [class.disable-link]="currentInvRecord == 1"> First</a>
+        <a (click)="getRecord('pre',$event)" [class.disable-link]="currentInvRecord == 1"> Previous</a>
+        <a (click)="getRecord('next',$event)" [class.disable-link]="currentInvRecord == totalInvRecords"> Next</a>
+        <a (click)="getRecord('last',$event)" [class.disable-link]="currentInvRecord == totalInvRecords"> Last </a>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="page-content-sec">
+        <div class="row">
+          <div class="card-view-layout">
+            <!-- Component Inventory Availability-->
+            <app-inventory-availability (productId)="getProductId($event)"></app-inventory-availability>
+
+            <!-- Component Inventory Details-->
+            <app-inventory-details></app-inventory-details>
+
+            <!-- Component Inventory History List-->
+            <app-inventory-history-list></app-inventory-history-list>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>

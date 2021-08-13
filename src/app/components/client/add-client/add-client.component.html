@@ -1,0 +1,53 @@
+<div class="container-fluid">
+
+  <div class="page-content-wrapper-sec  add-client-page-cls">
+    <div class="content-heading-sec">
+      <div class="page-heading-sec">
+        <h2>{{title}}</h2>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="page-content-sec">
+        <div class="row">
+          <div class="relative-sec-cls">
+            <mat-tab-group (selectedTabChange)="selectedTab($event.index)">
+              <mat-tab label="Client Details">
+                <div class="card-view-layout">
+                  <app-client-details></app-client-details>
+                </div>
+              </mat-tab>
+              <mat-tab label="Modules" [disabled]="isDisabled" >
+                <div class="card-view-layout-no-padding">
+                  <app-client-modules></app-client-modules>
+                </div>
+              </mat-tab>
+              <mat-tab label="Settings" [disabled]="isDisabled">
+                <div class="card-view-layout">
+                  <app-client-setting></app-client-setting>
+                </div>
+              </mat-tab>
+              <mat-tab label="Theme Settings" [disabled]="isDisabled">
+                <div class="card-view-layout">
+                  <app-client-theme-settings></app-client-theme-settings>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+
+            <div class="absolute-button-group-in-heading-sec">
+              <button mat-flat-button 
+              [class.active-btn]= "selectedTabIndex != 1 && (clientDetail.addClientForm.dirty || selectedTabIndex!=0)" 
+              [disabled]="selectedTabIndex == 1 || (!clientDetail.addClientForm.dirty && selectedTabIndex==0)" (click)="saveClient()">Submit</button>
+              <button mat-flat-button *ngIf="!storeCreated" 
+              [disabled]="!isCreateStore" 
+              [class.active-btn]= "isCreateStore" (click)="createStore()">Create Store</button>
+              <button mat-button class="transparent-btn" (click)="onCancel();">Cancel</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

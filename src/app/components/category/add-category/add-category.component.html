@@ -1,0 +1,46 @@
+<div class="container-fluid">
+
+  <div class="page-content-wrapper-sec category-page-cls">
+
+    <div class="content-heading-sec">
+      <div class="page-heading-sec">
+        <h2>Category</h2>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="page-content-sec">
+        <div class="row warehouse-pg-con-sec">
+          <div class="card-view-layout">
+            <h5>Add Product Categories</h5>
+
+            <form #categoryForm="ngForm">
+              <div class="add-category-name-form-sec">
+                <mat-form-field>
+                  <input matInput placeholder="Add Category Name" [(ngModel)]="category.name" #fieldName= "ngModel" appFocus
+                    name="fieldName" maxlength="100" [required] = "!isFormValid" (keypress)="onKeyPress($event)">
+                  <mat-hint *ngIf="(!isFormValid)" class="alert alert-danger">
+                    {{appMessage.U0040}}
+                  </mat-hint>
+                  <mat-icon matSuffix *ngIf="category.name" (click)="create()" class="done-btn">done</mat-icon>
+                  <mat-icon matSuffix *ngIf="category.name" (click)="close()">close</mat-icon>
+                </mat-form-field>
+              </div>
+            </form>
+            <div class="category-tree-structure">
+            <app-category-tree [displayActionButtons]="true" [data]= "categoryService.data" class="category-tree-component-sec"></app-category-tree>
+            </div>
+
+          </div>
+          <div class="warehouse-content-img-sec warehouse-bg-img">
+            <!-- <img title="" src="../assets/images/addcategory.svg" alt=""> -->
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+   
+</div>
+
+

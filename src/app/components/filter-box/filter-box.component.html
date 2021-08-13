@@ -1,0 +1,83 @@
+<div class="right">
+  <mat-list role="list" class="list-actions">
+    <mat-list-item role="listitem">
+      <div class="search-box">
+        <a (click)="onQuickSearchIconClicked()" class="seach-icon-link" *ngIf="!util.isStore">
+          <img *ngIf="!hasSearched" src="../assets/images/search.svg" alt="">
+          <img *ngIf="hasSearched" src="../assets/images/active-search.svg" alt="">
+        </a>
+        <a (click)="onQuickSearchIconClicked()" class="seach-icon-link" *ngIf="util.isStore">
+            <img *ngIf="!hasSearched" src="../assets/images/w-search.svg" alt="">
+            <img *ngIf="hasSearched" src="../assets/images/w-active-search.svg" alt="">
+          </a>
+        <input type="text" [(ngModel)]="quickSearchText" (keyup.enter)="onKeyEnter()" placeholder="Search" [class.store-srch]="util.isStore" #search
+          [ngClass]="isQuickSearchIconClicked ? 'expand-input-field' : ''" />
+
+        <mat-icon (click)="onClearQuickSearch()" *ngIf="hasSearched && isQuickSearchIconClicked" class="search-close-btn" [class.store-srch-close]="util.isStore">
+          <i class="material-icons">cancel</i>
+        </mat-icon>
+
+
+        <a class="fadeIn animated right"  *ngIf="!util.isStore" >
+          <img *ngIf="!hasfilter" id="filter" src="../assets/images/filter.svg" alt="">
+          <img *ngIf="hasfilter" id="filter" src="../assets/images/active-filter.svg" alt="">
+          <span class="filter-info" *ngIf="totalFilterCount != 0">{{totalFilterCount}}</span>
+        </a>
+        <a class="fadeIn animated right"  *ngIf="util.isStore">
+            <img *ngIf="!hasfilter" id="filter" src="../assets/images/w-filter.svg" alt="">
+            <img *ngIf="hasfilter" id="filter" src="../assets/images/w-active-filter.svg" alt="">
+            <!-- to show the total filter count -->
+            <span class="filter-info" *ngIf="totalFilterCount != 0">{{totalFilterCount}}</span>
+        </a>
+        
+
+        <!-- Filter Panel -->
+        <div class="filter-sec list-filter" *ngIf="showFilter">
+          <div class="filter-top-section">
+            <h3>Filter By</h3>
+            <span>Filters will be applied to your grid</span>
+          </div>
+          <div class="filter-bottom-section">
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let category of filterCatories">
+                <mat-expansion-panel-header [expandedHeight]="'48px'">{{category}}
+                  <span class="filter-cat-num" *ngIf="countValue[category]"> ({{countValue[category]}})</span>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                  <div class="expansion-panel-wrapper">
+                    <div class="filter-sec-search-box">
+                      <input type="text" matInput class="filter-search" placeholder="Search" [(ngModel)]="searchValue[category]">
+                      <a>
+                        <img class="search-icon" src="../assets/images/search.svg" alt="">
+                      </a>
+                    </div>
+
+                    <div class="row checkbox-section">
+                      <mat-checkbox class="checkbox-item col s12" *ngFor="let item of filterValues[category] | myfilter : searchValue[category]"
+                        [(ngModel)]="item['checked']" (change)="onCheck($event, item.id, category)">
+                        {{item.description || item.name}}
+                      </mat-checkbox>
+                    </div>
+
+                  </div>
+                </ng-template>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <div class="row filter-btn-sec">
+            <div class="s12">
+              <div class="">
+                <button mat-flat-button class="active-btn" (click)="applyFilter()">APPLY</button>
+                <button mat-button class="transparent-btn" (click)="clearFilter()">CLEAR FILTERS</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>

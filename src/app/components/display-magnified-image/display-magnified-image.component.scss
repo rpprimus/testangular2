@@ -1,0 +1,16 @@
+.magnified-img{
+    max-width:100%;
+    float: left;
+}
+.custom-defined-msg-box{
+    max-width:60vw;
+    height:auto;
+    .mat-dialog-content{padding:1rem 1rem 0rem 1rem; margin:0; max-height: 50vh; overflow: auto;}
+    .popup-footer-btn-sec{
+        display:inline-flex;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        padding:1rem 1.5rem;
+        width:100%;
+    }
+}

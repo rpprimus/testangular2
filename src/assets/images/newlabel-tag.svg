@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.107 66.74">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #34a853;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-size: 12px;
+        font-family: Roboto-Medium, Roboto;
+        font-weight: 500;
+      }
+    </style>
+  </defs>
+  <g id="Group_3566" data-name="Group 3566" transform="translate(18074 -2856)">
+    <path id="Path_2314" data-name="Path 2314" class="cls-1" d="M10064.87,3641.714v58.4l11.9,8.343,11.2-8.343v-58.4Z" transform="translate(-28138.871 -785.714)"/>
+    <text id="N_E_W" data-name="N
+E
+W" class="cls-2" transform="translate(-18062 2878)"><tspan x="-4.26" y="0">N</tspan><tspan x="-3.393" y="14">E</tspan><tspan x="-5.279" y="28">W</tspan></text>
+  </g>
+</svg>

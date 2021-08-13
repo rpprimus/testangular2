@@ -1,0 +1,157 @@
+<div class="container-fluid">
+
+  <div class="page-content-wrapper-sec add-user-page-cls">
+    <form [formGroup]="addUserForm">
+      <div class="content-heading-sec">
+        <div class="page-heading-sec">
+          <h2>{{title}}</h2>
+        </div>
+        <div class="button-group-in-heading-sec">
+          <button mat-flat-button [class.active-btn]="addUserForm.dirty" (click)="submitUserForm()"
+            [disabled]="!addUserForm.dirty">submit</button>     <!-- <button mat-flat-button class="active-btn" (click)="submitUserForm()">submit</button> -->
+          <!-- <button mat-button class="transparent-btn" type="reset" (click)="resetUserForm()">Reset</button> -->
+          <button mat-button class="transparent-btn" type="reset" routerLink="/users">Cancel</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="page-content-sec card-view-layout">
+          <div class="row">
+            <div class="col s12 m6 l6">
+              <div class="left-col-content-sec">
+                <h5>Basic Information</h5>
+                <div class="">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Full Name" maxlength="100" trimDirective appFocus
+                      formControlName="name" [errorStateMatcher]="matcher" required>
+                    <mat-error *ngIf="addUserForm.controls.name.hasError('required')">
+                      {{appMessage.U0003}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Email" maxlength="100" trimDirective formControlName="email"
+                      [errorStateMatcher]="matcher" required>
+                    <mat-error
+                      *ngIf="addUserForm.controls.email.errors && addUserForm.controls.email.value && addUserForm.controls.email.errors.pattern && !addUserForm.controls.email.hasError('required')">
+                      {{appMessage.U0005}}
+                    </mat-error>
+                    <mat-error *ngIf="addUserForm.controls.email.hasError('required')">
+                      {{appMessage.U0002}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Phone Number" maxlength="12" trimDirective
+                    [value]="addUserForm.get('phoneNumber').value | phoneNumber"
+                      formControlName="phoneNumber" [errorStateMatcher]="matcher" required>
+                    <mat-error *ngIf="addUserForm.controls.phoneNumber.hasError('required')">
+                      {{appMessage.U0148}}
+                    </mat-error>
+                    <mat-error *ngIf="addUserForm.controls.phoneNumber.errors && addUserForm.controls.phoneNumber.value && addUserForm.controls.phoneNumber.errors.pattern && !addUserForm.controls.phoneNumber.hasError('required')">
+                        {{appMessage.U0054}}
+                      </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col s12 m6 l6">
+              <div class="right-col-content-sec">
+                <!-- <h5>Roles*</h5>
+                <div class="">
+                  <mat-checkbox [checked]="role.checked" [ngModelOptions]="{standalone: true}" *ngFor="let role of roles"
+                    [(ngModel)]="role['checked']" (ngModelChange)="roleSelected(role)">{{role.name}}</mat-checkbox>
+                  <mat-error *ngIf="roleError">
+                    {{appMessage.U0006}}
+                  </mat-error>
+                </div> -->
+
+                <h5>Assign Clients <span class="mat-placeholder-required mat-form-field-required-marker">*</span></h5>
+                <div class="">
+                  <mat-checkbox [checked]="isSelectAll" [ngModelOptions]="{standalone: true}" [(ngModel)]="isSelectAll"
+                    (ngModelChange)="selectAll();addUserForm.markAsDirty()">Select
+                    All
+                  </mat-checkbox>
+                  <mat-form-field class="select-all-chip-list after-cls">
+                    <mat-chip-list #chipList>
+                      <mat-chip *ngFor="let client of selectedClient" [selectable]="selectable" [removable]="removable"
+                        (removed)="remove(client);addUserForm.markAsDirty()">
+                        {{client.name}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input type="text" aria-label="Number" matInput placeholder="Select Clients"
+                        [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur" [matAutocomplete]="auto" #matChip
+                        [formControl]="searchText" />
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option [value]="client.name" *ngFor="let client of filteredOptions"
+                          (click)="setClients(client);addUserForm.markAsDirty()">
+                          {{client.name}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-chip-list>
+                  </mat-form-field>
+                  <mat-error *ngIf="clientError">{{appMessage.U0004}}</mat-error>
+                  <mat-error *ngIf="noResult">{{appMessage.U0023}}</mat-error>
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row extra-top-margin-spc">
+            <div class="col s12 m6 l6">
+              <div class="left-col-content-sec">
+
+                <h5>Roles <span class="mat-placeholder-required mat-form-field-required-marker">*</span></h5>
+                <div class="">
+                  <mat-checkbox [checked]="role.checked" [ngModelOptions]="{standalone: true}"
+                    *ngFor="let role of roles" [(ngModel)]="role['checked']" (ngModelChange)="roleSelected(role);addUserForm.markAsDirty()">
+                    {{role.name}}</mat-checkbox>
+                  <mat-error *ngIf="roleError">
+                    {{appMessage.U0006}}
+                  </mat-error>
+                </div>
+
+
+                <!-- <h5>Assign Clients*</h5>
+                <div class="">
+                  <mat-checkbox [checked]="isSelectAll" [ngModelOptions]="{standalone: true}" [(ngModel)]="isSelectAll"
+                    (ngModelChange)="selectAll()">Select
+                    All
+                  </mat-checkbox>
+                  <mat-form-field class="select-all-chip-list">
+                    <mat-chip-list #chipList>
+                      <mat-chip *ngFor="let client of selectedClient" [selectable]="selectable" [removable]="removable"
+                        (removed)="remove(client)">
+                        {{client.name}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input type="text" aria-label="Number" matInput placeholder="Select Clients" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur" [matAutocomplete]="auto" #matChip [formControl]="searchText" />
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option [value]="client.name" *ngFor="let client of filteredOptions" (click)="setClients(client)">
+                          {{client.name}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-chip-list>
+                  </mat-form-field>
+                  <mat-error *ngIf="clientError">{{appMessage.U0004}}</mat-error>
+                  <mat-error *ngIf="noResult">{{appMessage.U0023}}</mat-error>
+                </div> -->
+              </div>
+            </div>
+            <div class="col s12 m6 l6"></div>
+          </div>
+
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

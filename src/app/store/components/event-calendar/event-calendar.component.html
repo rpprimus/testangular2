@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="main-container-sec">
+
+    <!-- Below code is used to call the global store header section -->
+
+    <!-- Below code is used to call the store header tabbing section -->
+  <div class="common-header-sec">
+      <div class="store-header-overlay dy-header-color"></div>
+
+      <div class="common-header-tab-sec">
+        <div class="cmn-hdr-title-sec">
+          Event Calendar
+        </div>
+        <div class="print-btn-sec">
+          <!-- <mat-icon class="mini-fab-btn print-icon">
+            <i class="material-icons" (click)="openPrintPopUp()">print</i>
+          </mat-icon> -->
+          <mat-icon class="mini-fab-btn print-icon">
+          <img (click)="openPrintPopUp()" src="../assets/images/print-order-detals.svg">
+        </mat-icon> 
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Below code is used to call the store left and right content section -->
+   <div class="store-page-content-sec s-calendar-page">
+
+      <div *ngIf="calendarOptions" class="white-bg">
+        <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="events" (eventClick)="eventClick($event.detail)"
+          (eventDrop)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+        <div class="add-user-btn-sec s-add-event-cal">
+          <button class="dy-action-btn-color" mat-fab (click)="onAddBtnClick()" *ngIf="canAddEdit"><i class="material-icons">add</i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

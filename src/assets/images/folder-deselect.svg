@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 22 22">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Folder_inactive);
+      }
+
+      .cls-2 {
+        opacity: 0.75;
+      }
+
+      .cls-3, .cls-5 {
+        fill: #b7b7b7;
+      }
+
+      .cls-4 {
+        fill: #fcfcfc;
+      }
+
+      .cls-5 {
+        fill-rule: evenodd;
+      }
+
+      .cls-10, .cls-6 {
+        fill: #fff;
+      }
+
+      .cls-6, .cls-7 {
+        stroke: red;
+        stroke-width: 0.5px;
+      }
+
+      .cls-7, .cls-9 {
+        fill: none;
+      }
+
+      .cls-8 {
+        stroke: none;
+      }
+    </style>
+    <clipPath id="clip-Folder_inactive">
+      <rect width="22" height="22"/>
+    </clipPath>
+  </defs>
+  <g id="Folder_inactive" data-name="Folder inactive" class="cls-1">
+    <rect class="cls-10" width="22" height="22"/>
+    <g id="Group_3769" data-name="Group 3769" transform="translate(-5794 -113)">
+      <g id="folder" class="cls-2" transform="translate(5795 115)">
+        <rect id="Rectangle_1023" data-name="Rectangle 1023" class="cls-3" width="16.263" height="12.12" transform="translate(0.716 0.775)"/>
+        <path id="Path_2311" data-name="Path 2311" class="cls-4" d="M0,0H15.372V12.432H0Z" transform="translate(0.716 1.394)"/>
+        <path id="Path_515" data-name="Path 515" class="cls-5" d="M211.131,110.9H196.314a1.684,1.684,0,0,1-1.684-1.684V96.34h5.556a2.923,2.923,0,0,1,2.9,2.42h9.448l0,10.144a1.81,1.81,0,0,1-1.392,2.015Z" transform="translate(-194.63 -96.34)"/>
+      </g>
+      <g id="Group_3677" data-name="Group 3677" transform="translate(5806.764 128.835) rotate(-60)">
+        <g id="Ellipse_49" data-name="Ellipse 49" class="cls-6" transform="translate(0 0)">
+          <ellipse class="cls-8" cx="3.513" cy="3.513" rx="3.513" ry="3.513"/>
+          <ellipse class="cls-9" cx="3.513" cy="3.513" rx="3.263" ry="3.263"/>
+        </g>
+        <line id="Line_66" data-name="Line 66" class="cls-7" x2="6.023" transform="translate(0.502 3.513)"/>
+      </g>
+    </g>
+  </g>
+</svg>

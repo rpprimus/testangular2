@@ -1,0 +1,7 @@
+@import './_variables';
+@import './_mixins';
+
+.mat-flat-button.popup-sec-btn,
+.mat-flat-button.popup-sec-btn.active-btn{@extend .button-shadow;}
+.sub-category-headline{display: flex!important; flex-direction: column; height: 7rem!important;}
+.headline-name{margin: 0;color: #fff;text-align: center;}

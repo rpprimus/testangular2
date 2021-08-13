@@ -1,0 +1,92 @@
+<div>
+
+  <!-- Table Heading Section -->
+  <div class="heading-row">
+    <div class="heading-row-col-cell">Description</div>
+    <div class="heading-row-col-cell">Field Type</div>
+    <div class="heading-row-col-cell">Look Up Value</div>
+    <div class="heading-row-col-cell">Field Length</div>
+    <div class="heading-row-col-cell">Required</div>
+    <div class="heading-row-col-cell">Active</div>
+    <div class="heading-row-col-cell"></div>
+  </div>
+
+  <!-- orderingType condition is > -1 because we have values on 0 index -->
+  <div class="bg-row-table-sec" style="pointer-events: none" *ngIf="orderingType > -1">
+    <div *ngFor="let item of util.moduleStandardFields[orderingType].fieldDetails" class="content-row">
+      <div class="content-row-col-cell">{{item.description}}</div>
+      <div class="content-row-col-cell"> - </div>
+      <div class="content-row-col-cell"> - </div>
+      <div class="content-row-col-cell">-</div>
+      <div class="content-row-col-cell">
+        <mat-checkbox [checked]="item.isRequired"></mat-checkbox>
+      </div>
+      <div class="content-row-col-cell">
+        <mat-checkbox [checked]="item.isActive"></mat-checkbox>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Add Custom Field Form Row -->
+  <!-- <div class="content-row" [style.pointer-events]="item.id >  0 ? 'none' : ''" *ngFor="let item of data.fieldDetails;let i = index;"> -->
+  <div class="content-row add-custom-field-form" *ngFor="let item of data.fieldDetails;let i = index;" (click)="selectRow(i, item)"
+    [class.cus-field-row-clicked]="item.isClicked">
+    <div class="content-row-col-cell">
+      <mat-form-field [style.pointer-events]="item.id >  0 ? 'none' : ''">
+        <input matInput placeholder="Field Name" [(ngModel)]="item.description" trimDirective appFocus [ngModelOptions]="{standalone: true}"
+          maxlength="300" required #description="ngModel">
+        <mat-hint *ngIf="(description.touched || invalid) && description.errors?.required">Description cannot be blank</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="content-row-col-cell">
+      <mat-form-field [style.pointer-events]="item.id >  0 ? 'none' : ''">
+        <mat-select placeholder="Select" [(ngModel)]="item.type" [ngModelOptions]="{standalone: true}" required #type="ngModel">
+          <mat-option *ngFor="let options of customefieldTypes;" [value]="options.value">{{options.text}}</mat-option>
+        </mat-select>
+        <mat-hint *ngIf="(type.touched || invalid) && type.errors?.required">Type cannot be blank</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="content-row-col-cell">
+      <mat-form-field [style.pointer-events]="item.id >  0 ? 'none' : ''" *ngIf="item.type!='READ_ONLY'">
+        <input    matInput placeholder="Values" [(ngModel)]="item.lookupValue" name="lookupValue{{i}}" maxlength="2000">
+      </mat-form-field>
+      <mat-form-field *ngIf="item.type=='READ_ONLY'">
+        <textarea [disabled]="item.id > 0"  matInput placeholder="Values" [(ngModel)]="item.lookupValue" name="lookupValue{{i}}" maxlength="2000"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="content-row-col-cell">
+      <mat-form-field [style.pointer-events]="item.id >  0 ? 'none' : ''">
+        <input matInput placeholder="Length" [(ngModel)]="item.fieldLength" name="fieldLength{{i}}" maxlength="4">
+      </mat-form-field>
+    </div>
+    <div class="content-row-col-cell">
+        <mat-checkbox [(ngModel)]="item.isRequired" name="isRequired{{i}}"></mat-checkbox>
+      <!-- <mat-checkbox [(ngModel)]="item.isRequired" [style.pointer-events]="item.id >  0 ? 'none' : ''" name="isRequired{{i}}"></mat-checkbox> -->
+    </div>
+    <div class="content-row-col-cell"> 
+      <mat-checkbox [(ngModel)]="item.isActive" name="isActive{{i}}"></mat-checkbox>
+    </div>
+    <div class="content-row-col-cell">
+        <button (click)="linkCustomField(item,data.fieldDetails)" type="button" mat-mini-fab 
+        [disabled]="data.fieldDetails[0].id == 0" [class.active-btn]="checkIsLinked(item)">
+          <mat-icon class="mini-fab-btn">
+              <!-- <img src="../assets/images/link-icon.svg" alt="" /> -->
+            <i class="material-icons">link</i>
+          </mat-icon>
+        </button>
+      </div>
+    <div *ngIf="item.id == 0" class="content-row-col-cell">
+      <button (click)="onRemoveCustomField(i)" type="button" mat-mini-fab>
+        <mat-icon class="mini-fab-btn"><i class="material-icons">clear</i></mat-icon>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Add Custom Field Click Section -->
+  <div class="content-row">
+    <h5 (click)="onAddCustomField()"><i class="material-icons">add</i> ADD CUSTOM FIELD</h5>
+  </div>
+
+</div>

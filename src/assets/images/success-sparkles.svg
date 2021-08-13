@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 143.758 77.681">
+  <defs>
+    <style>
+      .cls-1, .cls-3, .cls-5, .cls-6, .cls-9 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #ffec68;
+      }
+
+      .cls-3 {
+        stroke: #ffec68;
+      }
+
+      .cls-3, .cls-5, .cls-6, .cls-9 {
+        stroke-width: 2px;
+      }
+
+      .cls-4 {
+        fill: #f2f4fa;
+      }
+
+      .cls-5 {
+        stroke: #119df5;
+        opacity: 0.422;
+      }
+
+      .cls-6 {
+        stroke: #fb8c8b;
+      }
+
+      .cls-12, .cls-7 {
+        fill: #17e3b0;
+      }
+
+      .cls-14, .cls-8 {
+        fill: #fb8c8b;
+      }
+
+      .cls-9 {
+        stroke: #f2f4fa;
+      }
+
+      .cls-10 {
+        fill: #d1dbfd;
+      }
+
+      .cls-11, .cls-12, .cls-14 {
+        stroke: none;
+      }
+
+      .cls-13 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_921" data-name="Group 921" transform="translate(-260.173 -2793.821)">
+    <g id="Path_481" data-name="Path 481" class="cls-1" transform="translate(384.689 2829.16) rotate(-11)">
+      <path class="cls-11" d="M 4.055100440979004 5.071647167205811 L 1.775994777679443 3.621308088302612 L 4.055100440979004 1.963775157928467 L 4.055100440979004 5.071647167205811 Z"/>
+      <path class="cls-12" d="M 5.055100440979004 1.430511474609375e-06 L 5.055100440979004 6.89332103729248 L 4.76837158203125e-07 3.676441192626953 L 5.055100440979004 1.430511474609375e-06 Z"/>
+    </g>
+    <g id="Group_899" data-name="Group 899" transform="translate(374.053 2797.573)">
+      <rect id="Rectangle_793" data-name="Rectangle 793" class="cls-2" width="5.33" height="1.254" rx="0.627" transform="translate(0.646 0.697) rotate(31)"/>
+      <rect id="Rectangle_794" data-name="Rectangle 794" class="cls-2" width="5.33" height="1.254" rx="0.627" transform="translate(4.517 0.646) rotate(121)"/>
+    </g>
+    <g id="Ellipse_12" data-name="Ellipse 12" class="cls-3" transform="translate(359.566 2804.718)">
+      <ellipse class="cls-11" cx="2.068" cy="2.068" rx="2.068" ry="2.068"/>
+      <ellipse class="cls-13" cx="2.068" cy="2.068" rx="1.068" ry="1.068"/>
+    </g>
+    <g id="Group_900" data-name="Group 900" transform="translate(400.611 2829.74) rotate(21)">
+      <rect id="Rectangle_793-2" data-name="Rectangle 793" class="cls-4" width="4.439" height="1.044" rx="0.522" transform="translate(0.538 0.581) rotate(31)"/>
+      <rect id="Rectangle_794-2" data-name="Rectangle 794" class="cls-4" width="4.439" height="1.044" rx="0.522" transform="translate(3.762 0.538) rotate(121)"/>
+    </g>
+    <g id="Group_901" data-name="Group 901" transform="translate(391.365 2856.137) rotate(66)">
+      <rect id="Rectangle_793-3" data-name="Rectangle 793" class="cls-4" width="4.439" height="1.044" rx="0.522" transform="translate(0.538 0.581) rotate(31)"/>
+      <rect id="Rectangle_794-3" data-name="Rectangle 794" class="cls-4" width="4.439" height="1.044" rx="0.522" transform="translate(3.762 0.538) rotate(121)"/>
+    </g>
+    <g id="Path_482" data-name="Path 482" class="cls-1" transform="translate(380.36 2850.937) rotate(90)">
+      <path class="cls-11" d="M 4.05510139465332 5.071645736694336 L 1.77599573135376 3.621306419372559 L 4.05510139465332 1.963773488998413 L 4.05510139465332 5.071645736694336 Z"/>
+      <path class="cls-14" d="M 5.05510139465332 -4.76837158203125e-07 L 5.05510139465332 6.893319606781006 L 1.430511474609375e-06 3.676439523696899 L 5.05510139465332 -4.76837158203125e-07 Z"/>
+    </g>
+    <g id="Ellipse_13" data-name="Ellipse 13" class="cls-5" transform="translate(356.99 2865.528)">
+      <ellipse class="cls-11" cx="2.987" cy="2.987" rx="2.987" ry="2.987"/>
+      <ellipse class="cls-13" cx="2.987" cy="2.987" rx="1.987" ry="1.987"/>
+    </g>
+    <g id="Ellipse_14" data-name="Ellipse 14" class="cls-6" transform="translate(302.531 2803.799)">
+      <ellipse class="cls-11" cx="2.987" cy="2.987" rx="2.987" ry="2.987"/>
+      <ellipse class="cls-13" cx="2.987" cy="2.987" rx="1.987" ry="1.987"/>
+    </g>
+    <g id="Group_902" data-name="Group 902" transform="translate(278.888 2807.658) rotate(-17)">
+      <rect id="Rectangle_793-4" data-name="Rectangle 793" class="cls-7" width="6.164" height="1.45" rx="0.725" transform="translate(0.747 0.806) rotate(31)"/>
+      <rect id="Rectangle_794-4" data-name="Rectangle 794" class="cls-7" width="6.164" height="1.45" rx="0.725" transform="translate(5.224 0.747) rotate(121)"/>
+    </g>
+    <g id="Group_903" data-name="Group 903" transform="matrix(0.719, -0.695, 0.695, 0.719, 271.497, 2833.023)">
+      <rect id="Rectangle_793-5" data-name="Rectangle 793" class="cls-2" width="6.164" height="1.45" rx="0.725" transform="translate(0.747 0.806) rotate(31)"/>
+      <rect id="Rectangle_794-5" data-name="Rectangle 794" class="cls-2" width="6.164" height="1.45" rx="0.725" transform="translate(5.224 0.747) rotate(121)"/>
+    </g>
+    <g id="Group_904" data-name="Group 904" transform="translate(261.65 2842.455) rotate(-29)">
+      <rect id="Rectangle_793-6" data-name="Rectangle 793" class="cls-8" width="3.934" height="0.926" rx="0.463" transform="translate(0.477 0.515) rotate(31)"/>
+      <rect id="Rectangle_794-6" data-name="Rectangle 794" class="cls-8" width="3.934" height="0.926" rx="0.463" transform="translate(3.334 0.477) rotate(121)"/>
+    </g>
+    <g id="Ellipse_15" data-name="Ellipse 15" class="cls-9" transform="translate(266.686 2857.107)">
+      <ellipse class="cls-11" cx="2.987" cy="2.987" rx="2.987" ry="2.987"/>
+      <ellipse class="cls-13" cx="2.987" cy="2.987" rx="1.987" ry="1.987"/>
+    </g>
+    <g id="Group_905" data-name="Group 905" transform="translate(342.876 2794.071) rotate(-5)">
+      <rect id="Rectangle_793-7" data-name="Rectangle 793" class="cls-4" width="4.439" height="1.044" rx="0.522" transform="translate(0.538 0.581) rotate(31)"/>
+      <rect id="Rectangle_794-7" data-name="Rectangle 794" class="cls-4" width="4.439" height="1.044" rx="0.522" transform="translate(3.762 0.538) rotate(121)"/>
+    </g>
+    <g id="Group_906" data-name="Group 906" transform="translate(313.415 2794.396) rotate(-5)">
+      <rect id="Rectangle_793-8" data-name="Rectangle 793" class="cls-4" width="2.54" height="0.598" rx="0.299" transform="translate(0.308 0.332) rotate(31)"/>
+      <rect id="Rectangle_794-8" data-name="Rectangle 794" class="cls-4" width="2.54" height="0.598" rx="0.299" transform="translate(2.153 0.308) rotate(121)"/>
+    </g>
+    <g id="Group_907" data-name="Group 907" transform="matrix(0.875, -0.485, 0.485, 0.875, 278.145, 2797.473)">
+      <rect id="Rectangle_793-9" data-name="Rectangle 793" class="cls-4" width="2.54" height="0.598" rx="0.299" transform="translate(0.308 0.332) rotate(31)"/>
+      <rect id="Rectangle_794-9" data-name="Rectangle 794" class="cls-4" width="2.54" height="0.598" rx="0.299" transform="translate(2.153 0.308) rotate(121)"/>
+    </g>
+    <g id="Group_908" data-name="Group 908" transform="matrix(0.875, -0.485, 0.485, 0.875, 292.851, 2818.613)">
+      <rect id="Rectangle_793-10" data-name="Rectangle 793" class="cls-4" width="2.54" height="0.598" rx="0.299" transform="translate(0.308 0.332) rotate(31)"/>
+      <rect id="Rectangle_794-10" data-name="Rectangle 794" class="cls-4" width="2.54" height="0.598" rx="0.299" transform="translate(2.153 0.308) rotate(121)"/>
+    </g>
+    <g id="Group_909" data-name="Group 909" transform="matrix(0.875, -0.485, 0.485, 0.875, 259.763, 2815.855)">
+      <rect id="Rectangle_793-11" data-name="Rectangle 793" class="cls-4" width="2.54" height="0.598" rx="0.299" transform="translate(0.308 0.332) rotate(31)"/>
+      <rect id="Rectangle_794-11" data-name="Rectangle 794" class="cls-4" width="2.54" height="0.598" rx="0.299" transform="translate(2.153 0.308) rotate(121)"/>
+    </g>
+    <g id="Group_910" data-name="Group 910" transform="matrix(0.875, -0.485, 0.485, 0.875, 259.763, 2815.855)">
+      <rect id="Rectangle_793-12" data-name="Rectangle 793" class="cls-4" width="2.54" height="0.598" rx="0.299" transform="translate(0.308 0.332) rotate(31)"/>
+      <rect id="Rectangle_794-12" data-name="Rectangle 794" class="cls-4" width="2.54" height="0.598" rx="0.299" transform="translate(2.153 0.308) rotate(121)"/>
+    </g>
+    <g id="Group_911" data-name="Group 911" transform="matrix(0.875, -0.485, 0.485, 0.875, 292.851, 2837.455)">
+      <rect id="Rectangle_793-13" data-name="Rectangle 793" class="cls-10" width="2.54" height="0.598" rx="0.299" transform="translate(0.308 0.332) rotate(31)"/>
+      <rect id="Rectangle_794-13" data-name="Rectangle 794" class="cls-10" width="2.54" height="0.598" rx="0.299" transform="translate(2.153 0.308) rotate(121)"/>
+    </g>
+    <g id="Group_912" data-name="Group 912" transform="matrix(0.875, -0.485, 0.485, 0.875, 362.753, 2828.723)">
+      <rect id="Rectangle_793-14" data-name="Rectangle 793" class="cls-10" width="2.54" height="0.598" rx="0.299" transform="translate(0.308 0.332) rotate(31)"/>
+      <rect id="Rectangle_794-14" data-name="Rectangle 794" class="cls-10" width="2.54" height="0.598" rx="0.299" transform="translate(2.153 0.308) rotate(121)"/>
+    </g>
+    <g id="Group_913" data-name="Group 913" transform="translate(380.284 2827.706) rotate(21)">
+      <rect id="Rectangle_793-15" data-name="Rectangle 793" class="cls-4" width="2.899" height="0.682" rx="0.341" transform="translate(0.351 0.379) rotate(31)"/>
+      <rect id="Rectangle_794-15" data-name="Rectangle 794" class="cls-4" width="2.899" height="0.682" rx="0.341" transform="translate(2.457 0.351) rotate(121)"/>
+    </g>
+    <g id="Group_914" data-name="Group 914" transform="translate(367.876 2817.136) rotate(21)">
+      <rect id="Rectangle_793-16" data-name="Rectangle 793" class="cls-4" width="2.328" height="0.548" rx="0.274" transform="translate(0.282 0.304) rotate(31)"/>
+      <rect id="Rectangle_794-16" data-name="Rectangle 794" class="cls-4" width="2.328" height="0.548" rx="0.274" transform="translate(1.973 0.282) rotate(121)"/>
+    </g>
+    <g id="Ellipse_16" data-name="Ellipse 16" class="cls-3" transform="translate(305.132 2866.414)">
+      <circle class="cls-11" cx="2.446" cy="2.446" r="2.446"/>
+      <circle class="cls-13" cx="2.446" cy="2.446" r="1.446"/>
+    </g>
+  </g>
+</svg>

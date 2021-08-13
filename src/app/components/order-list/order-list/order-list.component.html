@@ -1,0 +1,114 @@
+<div class="container-fluid">
+
+  <div [ngClass]="!util.isStore ? 'page-content-wrapper-sec' : 'main-container-sec'">
+    <!-- Below code is used for Store Order List Page -->
+    <div class="common-header-sec" *ngIf="util.isStore">
+      <div class="store-header-overlay dy-header-color"></div>
+      <div class="common-header-tab-sec">
+        <div class="cmn-hdr-title-sec">
+          Store Order List
+        </div>
+        <div class="button-group-in-heading-sec relative-sec-cls">
+          <app-filter-box [data]="{showFilter: true, categories : filterCat, values : filterValues}" (filterChange)="onChangeFilter($event)"></app-filter-box>
+        </div>
+      </div>
+    </div>
+
+    <!-- Below code is used for Order List of Admin Sec -->
+    <div class="content-heading-sec" *ngIf="!util.isStore">
+      <div class="page-heading-sec">
+        <h2>Order List
+          <span class="total-record-cls">(Total {{totalRecords}} records)</span>
+        </h2>
+      </div>
+      <div class="button-group-in-heading-sec relative-sec-cls">
+        <app-filter-box [data]="{showFilter: true, categories : filterCat, values : filterValues}" (filterChange)="onChangeFilter($event)"></app-filter-box>
+      </div>
+    </div>
+
+
+
+    <div class="store-page-content-sec s-order-list-page">
+      <div class="white-bg" [ngClass]="!util.isStore ? 'page-content-sec' : 'store-order-list-content-sec'">
+        <div class="row">
+          <div infiniteScroll [infiniteScrollDistance]="1" debounce [infiniteScrollThrottle]="300" (scrolled)="onScroll()"
+            [infiniteScrollUpDistance]="2">
+            <mat-table [dataSource]="dataSource" matSort [hidden]="!noRecords">
+
+              <ng-container matColumnDef="orderNumber">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>ORDER # </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.orderNumber}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="OrderDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>ORDER DATE </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.orderDate}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="ArrivalDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> ARRIVAL DATE </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <span *ngIf="element.arrivalDate">{{element.arrivalDate}} </span>
+                  <span *ngIf="!element.arrivalDate">&mdash;</span>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="EventName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> EVENT NAME </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <span *ngIf="element.eventName">{{element.eventName}} </span>
+                  <span *ngIf="!element.eventName">&mdash;</span>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="RequestedBy">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>REQUESTED BY </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <span *ngIf="element.requestedBy">{{element.requestedBy}} </span>
+                  <span *ngIf="!element.requestedBy">&mdash;</span>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <span [ngClass]="element.status == 'Placed' ? 'placed-status' : element.status == 'Confirmed' ? 'confirmed-status' : 
+                    element.status == 'Processing' ? 'processing-status': element.status == 'Ready To Ship' ? 'readytoship-status':
+                    element.status == 'Shipped' ? 'shipped-status': element.status == 'Received' ? 'received-status':
+                    element.status == 'Complete' ? 'complete-status': 'canceled-status' ">
+                    {{element.status}}
+                  </span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="link">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <button id="link" mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon aria-label="" >
+                      <i id="link" class="material-icons three-dots-icon">more_vert</i>
+                    </mat-icon>
+                    <mat-menu #menu="matMenu" y-position="below" [overlapTrigger]="false">
+                      <button [disabled]="element.status == 'Shipped' || element.status == 'Received' || element.status == 'Complete' || element.status == 'Canceled'"
+                        mat-menu-item (click)="cancelOrder(element.id)">Cancel Order</button>
+                    </mat-menu>
+                  </button>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToManageOrder($event,row.id)"></mat-row>
+            </mat-table>
+            <div class="" *ngIf="noRecords">
+              <mat-card>
+                <div class="center">No Records Found</div>
+              </mat-card>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,121 @@
+<div>
+  <div class="associate-product on-demand-popup upload-img-popup">
+    <div class="associate-header">
+      <div class="associate-header-overlay dy-header-color"></div>
+      <button type="button" mat-mini-fab class="dy-action-btn-color close-btn-popup" (click)="dialogRef.close()">
+        <mat-icon class="mini-fab-btn"><i class="material-icons">close</i></mat-icon>
+      </button>
+      <div class="associate-header-info">
+        <p>Credit Card Details</p>
+      </div>
+    </div>
+
+    <div class="on-demand-graphics-cls">
+
+      <div class="card-detail-sec">
+
+        <div class="add-card-info-sec">
+          <form #creditForm="ngForm">
+            <mat-dialog-content class="add-card-sec">
+              <div class="sub-head">Add a new card</div>
+              <mat-form-field class="card-info-row">
+                <input matInput placeholder="Name on Card" maxlength="100" trimDirective required class="form-control"
+                  [(ngModel)]="creditCardData.name" #name=ngModel name="name" autocomplete="off" />
+                <mat-hint *ngIf="name.errors?.required && (name.touched && !isValid)" class="alert alert-danger">
+                  {{appMessage.U0003}}
+                </mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="card-info-row">
+                <input matInput placeholder="Card Number" maxlength="23" minlength="13" trimDirective required class="form-control"
+                  [ngModel]="creditCardData.number | creditCardMask" #cardNum=ngModel name="cardNum"
+                  (ngModelChange)="creditCardData.number=$event" [pattern]="appConstant.phoneNumberRegEx" autocomplete="off" />
+                <mat-hint *ngIf="cardNum.errors?.required && (cardNum.touched && !isValid)" class="alert alert-danger">
+                  {{appMessage.U0172}}
+                </mat-hint>
+                <mat-hint *ngIf="cardNum.errors?.pattern" class="alert alert-danger">
+                  {{appMessage.U0054}}
+                </mat-hint>
+              </mat-form-field>
+              <div class="exp-n-cvv-no-sec card-info-row">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="expiryDatePicker" placeholder="Expiry Date" required
+                    [formControl]="expiryDate" readonly (click)="expiryDatePicker.open()" (ngModelChange)="validateDate()">
+                  <mat-datepicker-toggle matSuffix [for]="expiryDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #expiryDatePicker id="expiryDatePicker" startView="multi-year" (yearSelected)="chosenYearHandler($event)"
+                    (monthSelected)="chosenMonthHandler($event, expiryDatePicker)" panelClass="example-month-picker">
+                  </mat-datepicker>
+                  <mat-hint *ngIf="dateError" class="alert alert-danger">
+                    {{appMessage.U0180}}
+                  </mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="">
+                  <input matInput placeholder="CVV" maxlength="4" minlength="3" required class="form-control"
+                    [(ngModel)]="creditCardData.cvv" #cvv=ngModel name="cvv" [pattern]="appConstant.wholeNumberRegEx" />
+                  <mat-hint *ngIf="cvv.errors?.required && (cvv.touched && !isValid)" class="alert alert-danger">
+                    {{appMessage.U0174}}
+                  </mat-hint>
+                  <mat-hint *ngIf="cvv.errors?.pattern" class="alert alert-danger">
+                    {{appMessage.U0054}}
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+
+            </mat-dialog-content>
+            <div class="popup-btn-sec aligned-right">
+              <div mat-dialog-actions class="popup-left-right-btn-sec">
+                <button mat-flat-button [class.dy-action-btn-color]="validateCard()" (click)="saveCreditCard()"
+                  [disabled]="!validateCard()">SAVE</button>
+                <button mat-button class="transparent-btn popup-sec-btn" (click)="dialogRef.close()">CANCEL</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="card-list-sec no-card-info" *ngIf="!userCards.length">No card available</div>
+
+        <div class="card-list-sec"  *ngIf="userCards.length > 0">
+          <div class="card-added-sec" *ngFor="let card of userCards" (click)="selectCard(card.cardId)">
+            <!-- <span (click)="deleteCard(card.cardId)">Delete</span> -->
+            <button type="button" mat-mini-fab class="card-delete-icon" (click)="deleteCard(card.cardId)">
+                <mat-icon class="mini-fab-btn"><i class="material-icons">close</i></mat-icon>
+              </button>
+              <small>CARD</small>
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="selectedCard.id"
+              (ngModelChange)="onCardSelection()" name="selectedCard">
+              <mat-radio-button class="card-radio-btn" value="{{card.cardId}}">{{card.securityOne.number}}
+              </mat-radio-button>
+            </mat-radio-group>
+            <div *ngIf="selectedCard.id == card.cardId" id="card.cardId" class="cvv-and-btn-sec">
+              <mat-form-field class="cvv-no-sec">
+                <input matInput placeholder="CVV" maxlength="4" trimDirective required class="form-control"
+                  [(ngModel)]="selectedCard.cvv" #selectedCardCVV=ngModel name="selectedCardCVV" [pattern]="appConstant.wholeNumberRegEx"/>
+                <mat-hint *ngIf="!selectedCard.cvv && selectedCardCVV.touched" class="alert alert-danger">
+                  {{appMessage.U0174}}
+                </mat-hint>
+                <mat-hint *ngIf="selectedCardCVV.errors?.pattern && selectedCardCVV.touched" class="alert alert-danger">
+                  {{appMessage.U0054}}
+                </mat-hint>
+              </mat-form-field>
+              <button type="button" mat-mini-fab [class.dy-action-btn-color]="!checkCvv()" (click)="selectOrderCard()"
+                [disabled]="checkCvv()">
+                <mat-icon class="mini-fab-btn"><i class="material-icons">arrow_forward</i></mat-icon>
+              </button>
+              <!-- <button type="button" mat-mini-fab class="dy-action-btn-color close-btn-popup" >
+                        <mat-icon class="mini-fab-btn"><i class="material-icons">close</i></mat-icon>
+                      </button> -->
+
+            </div>
+            
+          </div>
+          <!-- <div class="note"><strong>Note:</strong> Your card details will be saved for future use.</div> -->
+
+        </div>
+        <div class="note"><strong>Note: &nbsp;</strong> Your card details will be saved for future use.</div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

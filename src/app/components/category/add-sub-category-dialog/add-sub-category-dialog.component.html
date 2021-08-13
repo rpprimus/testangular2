@@ -1,0 +1,31 @@
+<div class="custom-defined-msg-box">
+  <div class="popup-sec-icon sub-category-headline">
+    <div class="sparkle-bg"></div>
+
+    <button class="alert-popup-icon">
+      <mat-icon><img src="../assets/images/active-popup.svg" alt="" /></mat-icon>
+    </button>
+    <p class="headline-name">{{data.childData.name}}</p>
+  </div>
+
+  <mat-dialog-content class="add-sub-category-popup">
+    <form #subCategoryForm="ngForm">
+      <mat-form-field class="add-sub-category-popup-form">
+        <input matInput placeholder="{{data.content}}" trimDirective [(ngModel)]="category.name" #fieldName=ngModel
+          name="fieldName" maxlength="100" (keypress)="onKeyPressEnter($event)" required>
+        <mat-hint *ngIf="fieldName.errors?.required && (fieldName.touched || !isFormValid)" class="alert alert-danger">
+          {{category.parentId == null ? appMessage.U0040 : appMessage.U0039}}
+        </mat-hint>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <div class="popup-btn-sec aligned-right">
+    <div mat-dialog-actions>
+      <button mat-button class="transparent-btn popup-sec-btn" (click)="close()">CANCEL</button>
+      <button *ngIf="data.isEdit == null" mat-flat-button class="active-btn popup-sec-btn" (click)="create()" [class.active-btn]="subCategoryForm.dirty" [disabled]="!subCategoryForm.dirty">CREATE</button>
+      <button *ngIf="data.isEdit != null" mat-flat-button class="active-btn popup-sec-btn" (click)="create()" [class.active-btn]="subCategoryForm.dirty" [disabled]="!subCategoryForm.dirty">SUBMIT</button>
+    </div>
+  </div>
+
+</div>

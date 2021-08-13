@@ -1,0 +1,37 @@
+<div class="custom-defined-msg-box">
+  <div class="popup-sec-icon">
+    <div class="sparkle-bg"></div>
+
+    <button class="alert-popup-icon">
+      <mat-icon><img src="../assets/images/contact-email-popup.png" alt="" /></mat-icon>
+    </button>
+
+  </div>
+  <form #twoFacAuth="ngForm">
+  <mat-dialog-content class="add-sub-category-popup">
+    <mat-form-field class="otp-row">
+      <input matInput placeholder="Enter OTP" maxlength="6" trimDirective required class="form-control"
+        [(ngModel)]="twoFacAuthKey" #otp=ngModel name="otp" autocomplete="off" appFocus
+        (ngModelChange)="invalidOTPerror=false;" />
+      <mat-hint *ngIf="otp.errors?.required && otp.touched" class="alert alert-danger">
+        {{appMessage.U0193}}
+      </mat-hint>
+      <mat-hint *ngIf="invalidOTPerror && !otp.errors?.required" class="alert alert-danger">
+        {{appMessage.U0194}}
+      </mat-hint>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <div class="popup-btn-sec aligned-right">
+
+    <div mat-dialog-actions class="dialog-bottom">
+      <a (click)="resendOtp()" class="resend-txt" [class.disable-resend]="resendCount > 3"> Resend OTP</a>
+      <div>
+        <button mat-flat-button [class.dy-action-btn-color]="twoFacAuth.dirty && twoFacAuth.valid" 
+        class="store-active-btn" [disabled]="!twoFacAuth.dirty || twoFacAuth.invalid" (click)="validateOtp()">SUBMIT</button>
+        <button mat-button class="transparent-btn popup-sec-btn" (click)="dialogRef.close()">CANCEL</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>

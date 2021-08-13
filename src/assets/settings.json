@@ -1,0 +1,8 @@
+{
+    "baseUrl" : "http://uatapi.sparkslink.com/SparksLink/",
+    "http" : "http",                                
+    "www" : "",                             
+    "existingPortal" : "https://sv2.sparkslink.com/",
+    "feedbackLink" : "https://app.smartsheet.com/b/form/d116e10d3a554f60bfced3634215891a"
+
+} 

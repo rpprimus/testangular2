@@ -1,0 +1,36 @@
+<div class="associate-product">
+  <div class="associate-header">
+      <div class="associate-header-overlay dy-header-color"></div>
+      <button type="button" mat-mini-fab class="dy-action-btn-color close-btn-popup" (click)="close()">
+          <mat-icon class="mini-fab-btn"><i class="material-icons">close</i></mat-icon>
+      </button>
+      <div class="associate-header-info">
+          <p>Associated Products</p>
+      </div>
+  </div>
+
+  <form [formGroup]="stepForm" class="associate-form">
+    <mat-horizontal-stepper class="associate-stepper" [linear]="true" #stepper>
+
+      <mat-step formArrayName="associateOrderingStep"
+        [completed]="valid(stepForm.controls.associateOrderingStep['controls'][i].value)"
+        *ngFor="let step of stepForm['controls']['associateOrderingStep']['controls']; let i = index">
+        <ng-template matStepLabel>{{step.controls.stepName.value}}
+          <span class="req-symbol-cls" *ngIf="step.controls.isRequired.value">*</span></ng-template>
+        <div class="stepper-content-sec">
+          <app-associate-product [step]="step.value"></app-associate-product>
+        </div>
+        <div class="associate-btn">
+          <button  mat-flat-button class="dy-action-btn-color stepper-btn" matStepperPrevious *ngIf="i != 0">Previous</button>
+          <button  mat-flat-button class="stepper-btn" (click)="validateStep(step.value,stepper)"
+            [disabled]="step.value.isRequired && !step.value.isProductAdded" [class.dy-action-btn-color]="(!step.value.isRequired) || (step.value.isRequired && step.value.isProductAdded)"
+            *ngIf="stepForm['controls']['associateOrderingStep'].value.length != i+1">Next</button>
+          <button  mat-flat-button class="stepper-btn" (click)="submitAssociateOrdering(step.value)"
+          [disabled]="step.value.isRequired && !step.value.isProductAdded" [class.dy-action-btn-color]="(!step.value.isRequired) || (step.value.isRequired && step.value.isProductAdded)"
+            *ngIf="stepForm['controls']['associateOrderingStep'].value.length == i+1">Done</button>
+        </div>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+  </form>
+</div>

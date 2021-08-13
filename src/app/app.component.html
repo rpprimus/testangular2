@@ -1,0 +1,33 @@
+<div class="container-fluid">
+
+  <div class="loader-overlay" *ngIf="loaderService.isLoading | async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <mat-drawer-container class="content-outer-wrapper example-container" (click)="clickEvent($event)">
+
+    <mat-drawer [style.pointer-events]="backgroundOverlay ? 'none' : ''" *ngIf="!util.isStore && isLoggedIn" class="side-nav-sec"
+      #drawer mode="over" [ngClass]="status ? 'opened-side-nav' : 'collapsed-stage'">
+      <app-side-nav></app-side-nav>
+
+    </mat-drawer>
+    <mat-drawer-content class="content-inner-wrapper" [ngClass]="!util.isStore && isLoggedIn && !isLandingPage ? 'margin-left' : ''">
+      <header *ngIf="!util.isStore && isLoggedIn && !isLandingPage;else storeheader;">
+        <app-header></app-header>
+      </header>
+      <ng-template #storeheader>
+        <app-store-header *ngIf="isStoreLoggedIn && !isLandingPage"></app-store-header>
+      </ng-template>
+
+      <router-outlet></router-outlet>
+      <div class="loader-overlay-filter" *ngIf="backgroundOverlay"></div>
+
+      <!-- Below code is used to call the global store footer section -->
+      <app-store-footer *ngIf="isStoreLoggedIn && !isLandingPage" class="footer-on-dashboard"></app-store-footer>
+    </mat-drawer-content>
+
+
+
+  </mat-drawer-container>
+
+</div>

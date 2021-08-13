@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 202.185 103.16">
+  <defs>
+    <style>
+      .cls-1, .cls-4, .cls-6 {
+        fill: #fff;
+      }
+
+      .cls-13, .cls-2 {
+        fill: #f2f4fa;
+      }
+
+      .cls-3 {
+        opacity: 0.2;
+      }
+
+      .cls-4 {
+        stroke: #f2f4fa;
+        stroke-width: 2px;
+      }
+
+      .cls-4, .cls-9 {
+        opacity: 0.1;
+      }
+
+      .cls-5 {
+        opacity: 0.458;
+      }
+
+      .cls-7 {
+        opacity: 0.168;
+      }
+
+      .cls-8 {
+        fill: #626266;
+      }
+
+      .cls-10 {
+        fill: #d1dbfd;
+      }
+
+      .cls-11 {
+        opacity: 0.44;
+      }
+
+      .cls-12, .cls-13 {
+        stroke: none;
+      }
+
+      .cls-14 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_915" data-name="Group 915" transform="translate(-324.049 -2828.865)">
+    <g id="Path_481" data-name="Path 481" class="cls-1" transform="translate(399.618 2915.869) rotate(-11)">
+      <path class="cls-12" d="M 11.06933784484863 14.63652038574219 L 1.775992035865784 8.722572326660156 L 11.06933784484863 1.963769316673279 L 11.06933784484863 14.63652038574219 Z"/>
+      <path class="cls-13" d="M 10.0693359375 3.927535057067871 L 3.551973342895508 8.667439460754395 L 10.0693302154541 12.81485176086426 L 10.0693359375 3.927535057067871 M 12.06933784484863 -3.814697265625e-06 L 12.06932830810547 16.45819473266602 L -1.9073486328125e-06 8.777706146240234 L 12.06933784484863 -3.814697265625e-06 Z"/>
+    </g>
+    <g id="Group_901" data-name="Group 901" transform="translate(460.606 2918.417) rotate(66)">
+      <rect id="Rectangle_793" data-name="Rectangle 793" class="cls-2" width="10.598" height="2.493" rx="1.247" transform="translate(1.284 1.386) rotate(31)"/>
+      <rect id="Rectangle_794" data-name="Rectangle 794" class="cls-2" width="10.598" height="2.494" rx="1.247" transform="translate(8.982 1.284) rotate(121)"/>
+    </g>
+    <g id="Group_903" data-name="Group 903" class="cls-3" transform="matrix(0.719, -0.695, 0.695, 0.719, 367.68, 2876.485)">
+      <rect id="Rectangle_793-2" data-name="Rectangle 793" class="cls-2" width="14.716" height="3.462" rx="1.731" transform="translate(1.783 1.925) rotate(31)"/>
+      <rect id="Rectangle_794-2" data-name="Rectangle 794" class="cls-2" width="14.716" height="3.463" rx="1.731" transform="translate(12.472 1.783) rotate(121)"/>
+    </g>
+    <g id="Ellipse_15" data-name="Ellipse 15" class="cls-4" transform="translate(468.373 2843.886)">
+      <ellipse class="cls-12" cx="7.132" cy="7.132" rx="7.132" ry="7.132"/>
+      <ellipse class="cls-14" cx="7.132" cy="7.132" rx="6.132" ry="6.132"/>
+    </g>
+    <g id="Group_906" data-name="Group 906" class="cls-5" transform="translate(505.272 2901.394) rotate(-5)">
+      <rect id="Rectangle_793-3" data-name="Rectangle 793" class="cls-6" width="6.064" height="1.427" rx="0.713" transform="translate(0.735 0.793) rotate(31)"/>
+      <rect id="Rectangle_794-3" data-name="Rectangle 794" class="cls-6" width="6.064" height="1.427" rx="0.713" transform="translate(5.14 0.735) rotate(121)"/>
+    </g>
+    <g id="Group_907" data-name="Group 907" class="cls-5" transform="matrix(0.875, -0.485, 0.485, 0.875, 366.362, 2900.159)">
+      <rect id="Rectangle_793-4" data-name="Rectangle 793" class="cls-6" width="6.064" height="1.427" rx="0.713" transform="translate(0.735 0.793) rotate(31)"/>
+      <rect id="Rectangle_794-4" data-name="Rectangle 794" class="cls-6" width="6.064" height="1.427" rx="0.713" transform="translate(5.14 0.735) rotate(121)"/>
+    </g>
+    <g id="Group_908" data-name="Group 908" class="cls-7" transform="matrix(0.875, -0.485, 0.485, 0.875, 374.136, 2839.088)">
+      <rect id="Rectangle_793-5" data-name="Rectangle 793" class="cls-8" width="6.064" height="1.427" rx="0.713" transform="translate(0.735 0.793) rotate(31)"/>
+      <rect id="Rectangle_794-5" data-name="Rectangle 794" class="cls-8" width="6.064" height="1.427" rx="0.713" transform="translate(5.14 0.735) rotate(121)"/>
+    </g>
+    <g id="Group_910" data-name="Group 910" class="cls-9" transform="matrix(0.875, -0.485, 0.485, 0.875, 323.071, 2830.764)">
+      <rect id="Rectangle_793-6" data-name="Rectangle 793" class="cls-2" width="6.064" height="1.427" rx="0.713" transform="translate(0.735 0.793) rotate(31)"/>
+      <rect id="Rectangle_794-6" data-name="Rectangle 794" class="cls-2" width="6.064" height="1.427" rx="0.713" transform="translate(5.14 0.735) rotate(121)"/>
+    </g>
+    <g id="Group_911" data-name="Group 911" transform="matrix(0.875, -0.485, 0.485, 0.875, 339.071, 2861.333)">
+      <rect id="Rectangle_793-7" data-name="Rectangle 793" class="cls-10" width="6.064" height="1.427" rx="0.713" transform="translate(0.735 0.793) rotate(31)"/>
+      <rect id="Rectangle_794-7" data-name="Rectangle 794" class="cls-10" width="6.064" height="1.427" rx="0.713" transform="translate(5.14 0.735) rotate(121)"/>
+    </g>
+    <g id="Group_913" data-name="Group 913" class="cls-11" transform="translate(521.058 2854.058) rotate(21)">
+      <rect id="Rectangle_793-8" data-name="Rectangle 793" class="cls-2" width="6.92" height="1.628" rx="0.814" transform="translate(0.839 0.905) rotate(31)"/>
+      <rect id="Rectangle_794-8" data-name="Rectangle 794" class="cls-2" width="6.92" height="1.628" rx="0.814" transform="translate(5.865 0.839) rotate(121)"/>
+    </g>
+    <g id="Group_914" data-name="Group 914" transform="translate(500.196 2828.822) rotate(21)">
+      <rect id="Rectangle_793-9" data-name="Rectangle 793" class="cls-2" width="5.558" height="1.308" rx="0.654" transform="translate(0.674 0.727) rotate(31)"/>
+      <rect id="Rectangle_794-9" data-name="Rectangle 794" class="cls-2" width="5.558" height="1.308" rx="0.654" transform="translate(4.711 0.674) rotate(121)"/>
+    </g>
+  </g>
+</svg>

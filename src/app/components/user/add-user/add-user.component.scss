@@ -1,0 +1,48 @@
+@import './_variables';
+@import './_mixins';
+
+.page-content-sec {
+
+  .extra-top-margin-spc {
+    margin-top: 2.75rem;
+  }
+
+  h5 {
+    @extend .subheading;
+    border-bottom: solid 1px #ddd;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25em;
+  }
+
+  .left-col-content-sec {
+    @extend .gutterR2nh;
+
+    @media screen and (max-width: $break-at-mobile-414) {
+      padding-right: 0rem;
+    }
+  }
+
+  .right-col-content-sec {
+    @extend .gutterL2nh;
+
+    @media screen and (max-width: $break-at-mobile-414) {
+      padding-left: 0rem;
+    }
+  }
+
+  .mat-checkbox {
+    width: 50%;
+    display: inline-block;
+    margin-bottom: 0.7rem;
+  }
+
+  // .select-all-chip-list{
+  //     max-height: 8rem;
+  //     overflow-y: auto;
+  //     overflow-x: hidden;
+  // }
+
+
+}
+
+

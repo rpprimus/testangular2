@@ -1,0 +1,25 @@
+<div class="store-header">
+  
+  <div  (click)= "onLogoClick()" class="store-client-logo"><img [src]="_domSanitizationService.bypassSecurityTrustUrl(common.storeLogo)" /></div>
+
+  <div class="loggedin-user-sec">
+    <div class="help-n-res-sec" routerLink="/helpresource">
+      <button type="button" mat-mini-fab >
+          <mat-icon class="mini-fab-btn"><img _ngcontent-c11="" src="../assets/images/dshbrd-help-resource-tab-icon.svg"></mat-icon>
+        </button>
+        Help & Resources
+      </div>
+    <div class="user-sec">
+      <span class="first-char-circle">{{firstChar}}</span> Hello,
+      <aside [matMenuTriggerFor]="menu">{{name}} <i class="material-icons pro-drop-dn-icon">
+          keyboard_arrow_down
+          </i>
+        <mat-menu #menu="matMenu" class="logout-btn-sec" y-position="below" [overlapTrigger]="false" xPosition="before">
+            <!-- <button mat-menu-item class="small-menu-item-btn" (click)="feedback()">Feedback</button> -->
+          <button mat-menu-item class="small-menu-item-btn" (click)="logout()">Logout</button>
+        </mat-menu>
+      </aside>
+    </div>
+  </div>
+
+</div>

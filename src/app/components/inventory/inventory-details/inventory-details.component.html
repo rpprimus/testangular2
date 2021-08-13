@@ -1,0 +1,130 @@
+<div class="row">
+
+  <h5>Update Inventory</h5>
+  <form #inventoryDetailForm="ngForm">
+    <div infiniteScroll [infiniteScrollDistance]="1" debounce [infiniteScrollThrottle]="300" (scrolled)="onScroll()"
+      [infiniteScrollUpDistance]="2">
+      <mat-table [dataSource]="dataSource" class="" [hidden]="!noRecords">
+
+        <!-- Warehouse Column -->
+        <ng-container matColumnDef="warehouseName">
+          <mat-header-cell *matHeaderCellDef>WAREHOUSE</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="!element.isEdit">{{element.warehouseName}}</span>
+            <mat-form-field *ngIf="element.isEdit">
+              <input matInput class="form-control" disabled [(ngModel)]="element.warehouseName" [ngModelOptions]="{standalone: true}" />
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Current Total Quantity Column -->
+        <ng-container matColumnDef="totalQuantity">
+          <mat-header-cell *matHeaderCellDef>CURRENT TOTAL QUANTITY</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="!element.isEdit">{{element.totalQuantity}}</span>
+            <mat-form-field *ngIf="element.isEdit">
+              <input matInput class="form-control" disabled [(ngModel)]="element.totalQuantity" [ngModelOptions]="{standalone: true}" />
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Modified Quantity Column -->
+        <ng-container matColumnDef="modifiedquantity">
+          <mat-header-cell *matHeaderCellDef> MODIFIED QUANTITY </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="!element.isEdit">{{element.updatedQuantity}}</span>
+
+            <mat-form-field *ngIf="element.isEdit">
+              <input matInput class="form-control" placeholder="Modified Quantity" maxlength="10" [(ngModel)]="element.updatedQuantity" appFocus
+                #updatedQuantity="ngModel" required name="updatedQuantity" pattern="^[-+]?(\d)*$" (ngModelChange)="restrictUpdatedQuantity(element)" />
+              <mat-hint *ngIf="updatedQuantity.errors?.required && (updatedQuantity.touched || !isFormValid) && !updatedQuantity.errors?.pattern"
+                class="alert alert-danger">
+                {{appMessage.U0067}}</mat-hint>
+              <mat-hint *ngIf="updatedQuantity.errors?.pattern" class="alert alert-danger">
+                {{appMessage.U0054}}
+              </mat-hint>
+            </mat-form-field>
+
+          </mat-cell>
+        </ng-container>
+
+        <!-- Modified Quantity Column -->
+        <ng-container matColumnDef="updatedQuantity">
+          <mat-header-cell *matHeaderCellDef> UPDATED TOTAL QUANTITY </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="!element.isEdit">&mdash;</span>
+            <mat-form-field *ngIf="element.isEdit">
+              <input matInput class="form-control" disabled [value]="getUpdatedValue(element)" />
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Reason Column -->
+        <ng-container matColumnDef="reason">
+          <mat-header-cell *matHeaderCellDef> REASON </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="!element.isEdit">&mdash;</span>
+            <mat-form-field *ngIf="element.isEdit">
+              <mat-select [(ngModel)]="element.reasonId" placeholder="Reason" [ngModelOptions]="{standalone: true}"
+                [required]="element.isRequired" #reason="ngModel">
+                <mat-option>Select Reason</mat-option>
+                <mat-option *ngFor="let reason of updateReason" [value]="reason.id">
+                  {{reason.reason}}
+                </mat-option>
+              </mat-select>
+              <mat-hint *ngIf="(reason.touched || !isFormValid) && reason.errors?.required">Reason cannot be blank</mat-hint>
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Notes Column -->
+        <ng-container matColumnDef="notes">
+          <mat-header-cell *matHeaderCellDef> NOTES</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="!element.isEdit">&mdash;</span>
+            <div *ngIf="element.isEdit">
+              <mat-form-field>
+                <input matInput class="form-control" placeholder="Notes" maxlength="250" [(ngModel)]="element.notes"
+                  #notes="ngModel" name="notes" [required]="element.reasonId == 36" />
+                <mat-hint *ngIf="notes.errors?.required && (!isFormValid || notes.touched)" class="alert alert-danger">
+                  {{appMessage.U0068}}
+                </mat-hint>
+                <mat-hint *ngIf="element.notes && element.notes.trim().length == 0" class="alert alert-danger">
+                  {{appMessage.U0068}}
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="link">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-button *ngIf="!element.isEdit" (click)="element.isEdit = true;isUpdateInventory = true;element.isRequired = true;"
+              [style.pointer-events]="isUpdateInventory ? 'none': ''">
+              <mat-icon class="edit-btn-cus">
+                <i id="link" class="material-icons three-dots-icon">edit</i>
+              </mat-icon>
+              Edit
+            </button>
+            <button mat-icon-button *ngIf="element.isEdit" class="done-btn" (click)="updateInventoryDetail(element)">
+              <mat-icon matSuffix>done</mat-icon>
+            </button>
+            <button mat-icon-button *ngIf="element.isEdit" (click)="close(element)">
+              <mat-icon matSuffix>close</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;let i= index" [ngClass]="!row.isEdit ? 'not-editable-table-row' : 'editable-table-row'"></mat-row>
+      </mat-table>
+    </div>
+
+    <div class="" *ngIf="noRecords">
+      <mat-card>
+        <div class="center">No Records Found</div>
+      </mat-card>
+    </div>
+  </form>
+</div>

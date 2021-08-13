@@ -1,0 +1,55 @@
+@import './_variables';
+@import './_mixins';
+
+
+.inventory-availability-date-picker-sec{
+    padding-top:1.0rem;
+    border-top: solid 1px #ddd;
+    
+    .date-picker-sec{
+        width: 33.333%;
+        box-sizing: border-box;
+        display: inline-flex;
+        padding-right: 13.333%;
+        justify-content: flex-start;
+    }
+}
+
+h5{
+    @extend .subheading;
+    @extend .offsetB1;
+}
+
+.mat-table{
+    @extend .offsetB2;
+
+    .mat-header-row{
+        // border-top: solid 1px #ddd;
+        padding-right: 0px;
+
+        .mat-header-cell{
+            text-transform: uppercase;
+            justify-content: flex-start;
+            &:nth-child(1){width:32%; flex: inherit; }
+            &:nth-child(2){width:34%; flex: inherit;}
+            &:nth-child(3){width:34%; flex: inherit; padding-right:0px;}
+
+            
+        }
+    }
+    .mat-row{
+        // cursor:pointer;
+        padding-right: 0px;
+
+        .mat-cell{
+
+            &:nth-child(1){width:32%; flex: inherit;  }
+            &:nth-child(2){width:34%; flex: inherit;}
+            &:nth-child(3){width:34%; flex: inherit;  padding-right:0px;}
+
+        }
+
+    }
+}
+
+.active-btn.mat-primary.mat-flat-button{@extend .button-shadow;}

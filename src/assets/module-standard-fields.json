@@ -1,0 +1,369 @@
+{
+  "modulesData": [
+    {
+      "fieldDetails": [
+        {
+          "id": -1,
+          "description": "Event Name",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 500,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "title",
+          "isReadOnly" : true
+        },
+       
+        {
+          "id": -2,
+          "description": "Event Venue",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 500,
+          "isActive": true,
+          "isRequired": false,
+          "fieldSequence": 0,
+          "dbPropertyName" : "venue"
+        },
+        {
+          "id": -3,
+          "description": "Event Address 1",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 500,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "addressOne"
+        },
+        {
+          "id": -4,
+          "description": "Event Address 2",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 500,
+          "isActive": true,
+          "isRequired": false,
+          "fieldSequence": 0,
+          "dbPropertyName" : "addressTwo"
+        },
+        {
+          "id": -5,
+          "description": "Event Country",
+          "type": "REMOTE_DROP_DOWN", 
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "countryId",
+          "bindProperty" : "countryList",
+          "childFieldId" : -6,
+          "value" : 231,
+          "countryName" : "United States"
+        },
+        {
+          "id": -6,
+          "description": "Event State",
+          "type": "REMOTE_DROP_DOWN",
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "stateId",
+          "parentFieldId" : -5,
+          "dataLoadAPI" : "getStates"
+        },
+        {
+          "id": -7,
+          "description": "Event City",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 100,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "city"
+        },
+        {
+          "id": -8,
+          "description": "Zip",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 10,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "eventZip"
+        },
+        {
+          "id": -9,
+          "description": "Event Start Date",
+          "type": "DATE_FIELD",
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "start",
+          "isReadOnly" : true
+        },
+        {
+          "id": -10,
+          "description": "Event End Date",
+          "type": "DATE_FIELD",
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "end",
+          "isReadOnly" : true
+        }
+      ]
+    },
+    {
+      "fieldDetails": [
+        {
+          "id": -1,
+          "description": "Name",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 200,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "name"
+        },
+        {
+          "id": -2,
+          "description": "Location",
+          "type": "DROP_DOWN",
+          "lookupValue": "Home~Office~Convention Center~Hotel~Advance Warehouse~Show Site~Other",
+          "fieldLength": 500,
+          "isActive": true,
+          "isRequired": false,
+          "fieldSequence": 0,
+          "dbPropertyName" : "eventVenue"
+        },
+        {
+          "id": -3,
+          "description": "Address 1",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 500,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "addressOne"
+        },
+        {
+          "id": -4,
+          "description": "Address 2",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 500,
+          "isActive": true,
+          "isRequired": false,
+          "fieldSequence": 0,
+          "dbPropertyName" : "addressTwo"
+        },
+       
+        {
+          "id": -5,
+          "description": "Country",
+          "type": "REMOTE_DROP_DOWN", 
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "countryId",
+          "bindProperty" : "countryList",
+          "childFieldId" : -6,
+          "value" : 231,
+          "countryName" : "United States"
+        },
+        {
+          "id": -6,
+          "description": "State",
+          "type": "REMOTE_DROP_DOWN", 
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "stateId",
+          "parentFieldId" : -5,
+          "dataLoadAPI" : "getStates"
+        },
+        {
+          "id": -7,
+          "description": "City",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 100,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "city"
+        },
+        {
+          "id": -8,
+          "description": "Zip",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 10,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "zip"
+        },
+        {
+          "id": -9,
+          "description": "Arrival Date",
+          "type": "DATE_FIELD",
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "arrivalDate"
+        },
+        {
+          "id": -10,
+          "description": "Arrival Time",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": false,
+          "fieldSequence": 0,
+          "dbPropertyName" : "arrivalTime"
+        }
+      ]
+    },
+    {
+      "fieldDetails": [
+        {
+          "id": -1,
+          "description": "Name",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 200,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "name"
+        },
+        {
+          "id": -2,
+          "description": "Location",
+          "type": "DROP_DOWN",
+          "lookupValue": "Home~Office~Convention Center~Hotel~Advance Warehouse~Show Site~Other",
+          "fieldLength": 500,
+          "isActive": true,
+          "isRequired": false,
+          "fieldSequence": 0,
+          "dbPropertyName" : "eventVenue"
+        },
+        {
+          "id": -3,
+          "description": "Address 1",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 500,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "addressOne"
+        },
+        {
+          "id": -4,
+          "description": "Address 2",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 500,
+          "isActive": true,
+          "isRequired": false,
+          "fieldSequence": 0,
+          "dbPropertyName" : "addressTwo"
+        },
+        {
+          "id": -5,
+          "description": "Country",
+          "type": "REMOTE_DROP_DOWN",
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "countryId",
+          "bindProperty" : "countryList",
+          "childFieldId" : -6,
+          "value" : 231,
+          "countryName" : "United States"
+        },
+        {
+          "id": -6,
+          "description": "State",
+          "type": "REMOTE_DROP_DOWN",
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "stateId",
+          "parentFieldId" : -5,
+          "dataLoadAPI" : "getStates"
+        },
+        {
+          "id": -7,
+          "description": "City",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 100,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "city"
+        },
+        {
+          "id": -8,
+          "description": "Zip",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 10,
+          "dbPropertyName" : "zip"
+        },
+        {
+          "id": -9,
+          "description": "Pick Up Date",
+          "type": "DATE_FIELD",
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": true,
+          "fieldSequence": 0,
+          "dbPropertyName" : "pickupDate"
+        },
+        {
+          "id": -10,
+          "description": "Pick Up Time",
+          "type": "TEXT_BOX",
+          "lookupValue": "",
+          "fieldLength": 0,
+          "isActive": true,
+          "isRequired": false,
+          "fieldSequence": 0,
+          "dbPropertyName" : "pickupTime"
+        }
+      ]
+    }
+  ]
+}

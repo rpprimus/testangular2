@@ -1,0 +1,41 @@
+<div class="custom-defined-msg-box">
+  <div class="popup-sec-icon">
+    <div class="sparkle-bg"></div>
+
+    <button *ngIf="data.code == 'cs'" class="alert-popup-icon">
+      <mat-icon><img src="../assets/images/success-icon-img.png" alt="" /></mat-icon>
+    </button>
+    <button *ngIf="data.code == 'c'" class="alert-popup-icon">
+      <mat-icon><img src="../assets/images/popup-icon.svg" alt="" /></mat-icon>
+    </button>
+    <button *ngIf="data.code == 'e'" class="alert-popup-icon">
+      <mat-icon><img src="../assets/images/popup-icon.svg" alt="" /></mat-icon>
+    </button>
+    <button *ngIf="data.code == 's'" class="alert-popup-icon">
+      <mat-icon><img src="../assets/images/success-icon-img.png" alt="" /></mat-icon>
+    </button>
+
+  </div>
+
+  <mat-dialog-content>{{data.content}}</mat-dialog-content>
+
+  <div class="popup-btn-sec">
+    <div mat-dialog-actions *ngIf="data.code == 'c'">
+      <button mat-flat-button class="popup-sec-btn" [ngClass]="util.isStore ? 'dy-action-btn-color' : 'active-btn'" (click)="confirm()">Yes</button>
+      <button mat-button class="transparent-btn popup-sec-btn" (click)="close()">No</button>
+    </div>
+    <div mat-dialog-actions *ngIf="data.code == 'cs'">
+      <button mat-flat-button class="popup-sec-btn" [ngClass]="util.isStore ? 'dy-action-btn-color' : 'active-btn'" (click)="confirm()">Yes</button>
+      <button mat-button class="transparent-btn popup-sec-btn" (click)="close()">No</button>
+    </div>
+    <div mat-dialog-actions *ngIf="data.code == 'e'">
+      <button mat-flat-button class="popup-sec-btn" [ngClass]="util.isStore ? 'dy-action-btn-color' : 'active-btn'" (click)="close()">Ok</button>
+    </div>
+<!-- success alert box to show the valid success message like after store signup success-->
+    <div mat-dialog-actions *ngIf="data.code == 's'">
+      <button mat-flat-button class="popup-sec-btn" [ngClass]="util.isStore ? 'dy-action-btn-color' : 'active-btn'" (click)="close()">Ok</button>
+    </div>
+
+  </div>
+
+</div>

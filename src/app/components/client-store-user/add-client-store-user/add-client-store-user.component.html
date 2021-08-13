@@ -1,0 +1,318 @@
+<div class="container-fluid">
+
+  <div [ngClass]="!util.isStore ? 'page-content-wrapper-sec add-client-store-user-page-cls' : 'main-container-sec'">
+    <form #storeForm="ngForm">
+      <div class="content-heading-sec" *ngIf="!util.isStore">
+        <div class="page-heading-sec">
+          <h2>{{(id>0 && !util.isClone) ? 'Store User Details' : 'Add Store User'}}</h2>
+        </div>
+        <div class="button-group-in-heading-sec">
+          <!-- <button mat-flat-button class="active-btn" (click)="onSubmit()">submit</button> -->
+          <button mat-flat-button [class.active-btn]="storeForm.dirty" (click)="onSubmit()"
+            [disabled]="!storeForm.dirty">submit</button>
+          <button mat-button class="transparent-btn" routerLink="/client-store-users">Cancel</button>
+          <!-- <button mat-button class="transparent-btn" (click)="resetForm()" type="reset">Reset</button> -->
+        </div>
+      </div>
+
+      <!-- Below code is used for Store Header Heading Section -->
+      <div class="common-header-sec" *ngIf="util.isStore">
+        <div class="store-header-overlay dy-header-color"></div>
+
+        <div class="common-header-tab-sec">
+          <div class="cmn-hdr-title-sec">
+            Store User Details
+          </div>
+          <!-- <div class="button-group-in-heading-sec relative-sec-cls">
+            <button mat-flat-button [class.active-btn]="storeForm.dirty" (click)="onSubmit()" [disabled]="!storeForm.dirty">submit</button>
+            <button mat-button class="transparent-btn" routerLink="/client-store-users">Cancel</button>
+            </div> -->
+        </div>
+      </div>
+
+      <!-- <div class="row"> -->
+      <div [class.store-page-content-sec]="util.isStore">
+        <div class="page-content-sec card-view-layout" [class.rad-bg-onstore]="util.isStore">
+          <div class="row">
+            <div class="store-page-heading" *ngIf="util.isStore">
+              <div class="dsbrd-left-hdng-sec dy-body-txt-color">User Details</div>
+              <div class="dsbrd-right-hdng-sec">
+                <button mat-flat-button [class.active-btn]="storeForm.dirty && !util.isStore"
+                  [class.dy-action-btn-color]="storeForm.dirty && util.isStore" (click)="onSubmit()"
+                  [disabled]="!storeForm.dirty">submit</button>
+                <button mat-button class="transparent-btn" routerLink="/client-store-users">Cancel</button>
+              </div>
+            </div>
+
+            <div class="col s12 m12 l12" *ngIf="!util.isStore">
+              <h5>User Details</h5>
+            </div>
+
+            <!-- <div class="col s12 m6 l6">
+              <div class="left-col-content-sec-up"> -->
+            <div class="col s12 m12 l12 class-for-tabbing">
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <input matInput placeholder="Name" maxlength="100" trimDirective appFocus required
+                    class="form-control" [(ngModel)]="data.name" #name=ngModel name="name">
+                  <mat-hint *ngIf="name.errors?.required && (name.touched || !isFormValid)" class="alert alert-danger">
+                    {{appMessage.U0003}}
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field>
+                  <input matInput placeholder="E-mail" maxlength="100" class="form-control" trimDirective
+                    [(ngModel)]="data.email" #email=ngModel name="email" [pattern]="appConstant.emailRegex" required>
+                  <mat-hint *ngIf="email.errors?.required && (email.touched || !isFormValid)"
+                    class="alert alert-danger">
+                    {{appMessage.U0002}}
+                  </mat-hint>
+                  <mat-hint *ngIf="email.errors?.pattern" class="alert alert-danger">
+                    {{appMessage.U0005}}
+                  </mat-hint>
+                </mat-form-field>
+
+              </div>
+
+
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <input matInput placeholder="Password" maxlength="30" trimDirective
+                    [type]="isVisiblePassword ? 'text' : 'password'" [(ngModel)]="data.password"
+                    (ngModelChange)="validatePassword()" name="text" #password=ngModel class="form-control"
+                    [readonly]="id>0 && !isEditPassword  && !util.isClone" onCopy="return false" onDrag="return false"
+                    onDrop="return false" onPaste="return false" autocomplete=off [required]="!isFormSubmitted"
+                    [pattern]="appConstant.passwordRegex" />
+                  <mat-hint *ngIf="password.errors?.required && (password.touched || !isFormValid)"
+                    class="alert alert-danger">
+                    {{appMessage.U0029}}
+                  </mat-hint>
+                  <mat-hint *ngIf="password.errors?.pattern && (password.touched || !isFormValid)"
+                    class="alert alert-danger signup-pg">
+                    {{appMessage.U0159}} <mat-icon matTooltipClass="tooltip-wrap-cls" matTooltip={{appMessage.U0186}}>info</mat-icon>
+                  </mat-hint>
+
+                  <mat-icon *ngIf="id>0 && !isEditPassword && !util.isClone" (click)="editPassword()" matSuffix>edit
+                  </mat-icon>
+                  <mat-icon *ngIf="id>0 && isEditPassword && !util.isClone" class="done-btn" matSuffix
+                    (click)="close('password')">done</mat-icon>
+                  <mat-icon *ngIf="id>0 && isEditPassword && !util.isClone" matSuffix (click)="close('password',true)">
+                    close</mat-icon>
+                  <mat-icon matSuffix *ngIf="data.password != fixVal" (click)="isVisiblePassword = !isVisiblePassword">{{isVisiblePassword
+                    ? 'visibility' :
+                    'visibility_off' }}
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <input matInput placeholder="Confirm Password" maxlength="30" trimDirective
+                    [type]="isVisibleConfirmPassword ? 'text' : 'password'" [(ngModel)]="data.confirmPassword"
+                    (ngModelChange)="validatePassword()" name="confirmPassword" #confirmPassword=ngModel
+                    class="form-control" [readonly]="id>0 && !isEditConfirmPassword  && !util.isClone"
+                    onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
+                    autocomplete=off [required]="!isFormSubmitted" />
+                  <mat-hint
+                    *ngIf="confirmPassword.errors?.required && (confirmPassword.touched || !isFormValid) && isValidPassword"
+                    class="alert alert-danger">
+                    {{appMessage.U0036}}
+                  </mat-hint>
+                  <mat-hint *ngIf="!isValidPassword" class="alert alert-danger">
+                    {{appMessage.U0034}}
+                  </mat-hint>
+
+                  <mat-icon *ngIf="id>0 && !isEditConfirmPassword && !util.isClone" (click)="editConfirmPassword()"
+                    matSuffix>edit</mat-icon>
+                  <mat-icon *ngIf="id>0 && isEditConfirmPassword && !util.isClone" class="done-btn" matSuffix
+                    (click)="close('confirmPassword')">done</mat-icon>
+                  <mat-icon *ngIf="id>0 && isEditConfirmPassword && !util.isClone" matSuffix
+                    (click)="close('confirmPassword',true)">close</mat-icon>
+                  <mat-icon matSuffix *ngIf="data.confirmPassword != fixVal"
+                    (click)="isVisibleConfirmPassword = !isVisibleConfirmPassword">{{isVisibleConfirmPassword
+                    ? 'visibility' :
+                    'visibility_off' }}
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <input matInput placeholder="Mobile Number" maxlength="12" class="form-control"
+                    [ngModel]="data.mobileNumber | phoneNumber" name="mobileNumber" #mobileNumber=ngModel
+                    [pattern]="appConstant.phoneNumberRegEx" (ngModelChange)="data.mobileNumber=$event">
+                  <mat-hint *ngIf="mobileNumber.errors?.pattern" class="alert alert-danger">
+                    {{appMessage.U0035}}
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <input matInput placeholder="Work Phone Number" maxlength="12" class="form-control" trimDirective
+                    (ngModelChange)="data.workPhoneNumber=$event" [ngModel]="data.workPhoneNumber| phoneNumber"
+                    #workPhoneNumber=ngModel name="workPhoneNumber" [pattern]="appConstant.phoneNumberRegEx" required>
+                  <mat-hint *ngIf="workPhoneNumber.errors?.required && (workPhoneNumber.touched || !isFormValid)"
+                    class="alert alert-danger">
+                    {{appMessage.U0030}}
+                  </mat-hint>
+                  <mat-hint *ngIf="workPhoneNumber.errors?.pattern" class="alert alert-danger">
+                    {{appMessage.U0037}}
+                  </mat-hint>
+                </mat-form-field>
+
+              </div>
+
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <input matInput placeholder="Title" maxlength="100" class="form-control"
+                    [(ngModel)]="data.designation" name="designation">
+                </mat-form-field>
+              </div>
+
+              <div [class.store-user-detail-form-sec]="util.isStore" *ngIf="isHierarchy">
+                <mat-form-field>
+                  <mat-select placeholder="Regional Manager" [(ngModel)]="data.regionalManagerId"
+                    name="regionalManagerId">
+                    <mat-option>Select Regional Manager</mat-option>
+                    <mat-option *ngFor="let manager of regionalManager" [value]="manager.id">
+                      {{manager.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <!-- </div> -->
+
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <input matInput placeholder="Address 1" maxlength="100" class="form-control"
+                    [(ngModel)]="data.addressOne" name="addressOne">
+                </mat-form-field>
+              </div>
+
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <input matInput placeholder="Address 2" maxlength="100" class="form-control"
+                    [(ngModel)]="data.addressTwo" name="addressTwo">
+                </mat-form-field>
+              </div>
+
+
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <mat-select placeholder="Country" [(ngModel)]="data.countryId" name="countryId"
+                    (ngModelChange)="changeCountry();data.stateId = '';">
+                    <mat-option>Select Country</mat-option>
+                    <mat-option *ngFor="let country of common.countryList" [value]="country.id">
+                      {{country.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <mat-select placeholder="State" [(ngModel)]="data.stateId" name="stateId">
+                    <mat-option>Select State</mat-option>
+                    <mat-option *ngFor="let state of stateList" [value]="state.id">
+                      {{state.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+
+
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <input matInput placeholder="City" maxlength="100" class="form-control" [(ngModel)]="data.city"
+                    name="city">
+                </mat-form-field>
+              </div>
+
+              <div [class.store-user-detail-form-sec]="util.isStore">
+                <mat-form-field class="">
+                  <input matInput placeholder="Zip" maxlength="100" class="form-control" [(ngModel)]="data.eventZip"
+                    name="eventZip">
+                </mat-form-field>
+              </div>
+
+
+
+            </div>
+
+          </div>
+
+          <div class="row extra-top-margin-spc">
+            <div class="col s12 m6 l6">
+              <div class="left-col-content-sec">
+                <h5>Roles <span class="mat-placeholder-required mat-form-field-required-marker">*</span></h5>
+                <div [class.store-user-detail-form-sec]="util.isStore">
+                  <mat-checkbox [checked]="role.checked" *ngFor="let role of roles;let i = index;" name="role{{i}}"
+                  (ngModelChange)="roleSelected()" [(ngModel)]="role['checked']">{{role.name}}</mat-checkbox>
+                    <!-- (ngModelChange)="roleSelected()" (change)="storeRoleCheck(role)" [(ngModel)]="role['checked']">{{role.name}}</mat-checkbox> -->
+                  <mat-error *ngIf="roleError">
+                    {{appMessage.U0006}}
+                  </mat-error>
+                </div>
+
+              </div>
+            </div>
+            <div class="col s12 m6 l6">
+              <div class="right-col-content-sec">
+                <h5>Notifications</h5>
+                <div class="">
+                  <mat-checkbox [(ngModel)]="data.isLowThreshold" name="isLowThreshold">Low Threshold</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="data.isOrderNotification" name="isOrderNotification">All Order Notification
+                  </mat-checkbox>
+                  <mat-checkbox [(ngModel)]="data.isExpirationNotification" name="isExpirationNotification">Expiration Notification</mat-checkbox>
+                  <!-- <mat-checkbox *ngIf="isStoreAdmin" [(ngModel)]="data.isExpirationNotification" name="isExpirationNotification">Expiration Notification</mat-checkbox> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row extra-top-margin-spc" *ngIf="isVisibility || !util.isStore || isHierarchy">
+            <div class="col s12 m12 l12">
+              <h5>Permissions</h5>
+            </div>
+            <div class="col s12 m6 l6" *ngIf="isVisibility || !util.isStore">
+              <div class="left-col-content-sec">
+                <div [class.store-user-detail-form-sec]="util.isStore" *ngIf="!util.isStore && creditCardPayment">
+                  <mat-checkbox [(ngModel)]="data.isOrderWithoutPayment" name="isOrderWithoutPayment">Place Order
+                    without Payment </mat-checkbox>
+                </div>
+
+                <div class="extra-bottom-margin-with-checkbox" *ngIf="isVisibility">
+                  <app-chip class="chipset-sec" [class.store-user-detail-form-sec]="util.isStore"
+                    [data]="visibilityGroup" [isReset]="isReset" [selected]="selectedGroup"
+                    (chipValueChange)="onChangeVisibilityGroup($event)"></app-chip>
+                </div>
+              </div>
+            </div>
+            <div class="col s12 m6 l6" *ngIf="isHierarchy || !util.isStore">
+              <div class="right-col-content-sec">
+                <div [class.store-user-detail-form-sec]="util.isStore" *ngIf="!util.isStore">
+                  <mat-checkbox [(ngModel)]="data.isAssociateOrdering" name="isAssociateOrdering">
+                    Associate Ordering
+                  </mat-checkbox>
+                </div>
+                <div [class.store-user-detail-form-sec]="util.isStore" *ngIf="isHierarchy">
+                  <mat-form-field>
+                    <mat-select [placeholder]="hierarchies.hierachyLabelName" [(ngModel)]="data.hierarchyId"
+                      name="hierarchyName">
+                      <mat-option>Select {{hierarchies.hierachyLabelName}}</mat-option>
+                      <mat-option *ngFor="let hierarchy of hierarchies.hierarchies" [value]="hierarchy.id">
+                        {{hierarchy.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

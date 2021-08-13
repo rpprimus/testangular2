@@ -1,0 +1,105 @@
+@import './_variables';
+@import './_mixins';
+
+.login-page-cls{   
+    background: url('./../../../assets/images/login-bg-big-image.png') no-repeat center center;
+    background-size:cover;
+    height:100vh;
+    display: flex;
+    align-items: center;
+
+    .login-pg-informative-sec{
+        width:61%;
+        float:left; 
+        box-sizing: border-box;
+        padding-left: 11%;
+        // width: $container-width * 3/4; 
+
+            h1{
+                color: $color-ffffff;
+                font-size:4rem;
+                font-weight:400;
+                line-height: 1;
+                @extend .offsetT0;
+                @extend .offsetB1;
+                // @extend .heading;
+            }
+            span{
+                color: $color-ffffff;
+                font-size:1.5rem;
+                font-weight:300;
+                line-height: 1;
+            }
+    }
+
+    .login-pg-sign-in-sec{
+        float: right; 
+        box-sizing: border-box; 
+        width: 39%;
+        // width: $container-width * 1/4;
+        
+        .sign-in-sec{
+            width: 74.075%;
+            background: $color-ffffff;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: $border-radius-4;
+            flex-direction: column;
+            box-shadow: 3px 7px 46px 2px rgba(0, 0, 0, 0.5490196078431373);
+            @extend .gutterT7;
+            @extend .gutterB7;
+            // max-width:400px;
+            // height: 400px; 
+
+            .main-logo-sec{
+                padding:0rem 25%;
+                text-align: center;
+                @extend .offsetB5;
+                @extend .float-full-sec;
+
+                img{
+                    float: none;
+                    max-width: 100%;
+                }
+            }
+
+            // .sign-in-google-sec{
+            //     @extend .offsetB5;
+            //     @extend .float-full-sec;
+            //     text-align: center;
+
+            //     #sparksLink-signin{
+            //         display: inline-block;
+
+            //         .abcRioButtonBlue {
+            //             background-color: transparent;
+            //             color: #616167;
+            //         }
+
+            //         .abcRioButton{
+                        
+            //             border: solid 1px #d5d7d6;
+            //             border-radius: 0px;
+            //             box-shadow: none;
+            //             text-transform: uppercase;
+
+            //             .abcRioButtonContentWrapper {
+            //                 border: 0px;
+
+            //                 .abcRioButtonContents{
+            //                     font-size: 1rem!important;
+            //                     font-weight: 400;
+            //                     letter-spacing: 0px;
+            //                     margin-left: 0px;
+            //                     margin-right: 0px;
+            //                     line-height: 1!important;
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+        }
+
+    }
+}

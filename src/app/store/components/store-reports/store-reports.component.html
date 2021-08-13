@@ -1,0 +1,198 @@
+<div class="container-fluid">
+  <div class="main-container-sec">
+    <div class="common-header-sec">
+      <div class="store-header-overlay dy-header-color"></div>
+
+      <div class="common-header-tab-sec">
+        <div class="cmn-hdr-title-sec">
+          Reports
+        </div>
+      </div>
+
+    </div>
+
+    <div class="store-page-content-sec s-order-list-page">
+      <div class="white-bg store-order-list-content-sec">
+
+        <div class="store-page-heading">
+          <div class="dsbrd-left-hdng-sec dy-body-txt-color">Select Report</div>
+          <div class="dsbrd-right-hdng-sec">
+
+            <button mat-flat-button
+              [class.dy-action-btn-color]="storeReportsForm.dirty && !storeToDateError && !storeFromDateError"
+              (click)="reportExport()"
+              [disabled]="!storeReportsForm.dirty || storeToDateError || storeFromDateError">Export</button>
+            &nbsp;&nbsp;
+
+            <button mat-flat-button class="dy-action-btn-color mat-primary" (click)="goBackPage()">Back</button>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="container-fluid">
+            <div class="page-content-sec">
+              <div class="row reports-pg-con-sec">
+                <div class="card-view-layout">
+                  <form class="store-report-sec" #storeReportsForm="ngForm">
+                    <mat-form-field>
+                      <mat-select placeholder="Report Type" [(ngModel)]="report.type" name="type" required
+                        #type="ngModel" (ngModelChange)="selectedStoreReportType(report.type)">
+                        <mat-option *ngFor="let options of storeReportTypes" [value]="options.id">
+                          {{options.name}}
+                        </mat-option>
+                        <mat-hint *ngIf="(type.touched || isStoreFormValid) && type.errors?.required">
+                          {{appStoreMessage.U0140}}
+                        </mat-hint>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <!-- Dates field will not appear for Product listing report, Monthly Orders By Client Report and 
+                    Monthly Product Usage Summary Report -->
+                    <div class="" *ngIf="report.type != 2 && report.type != 6 && report.type != 7">
+                      <div class="col s12 m6 l6 padding-l-0">
+                        <mat-form-field>
+                          <input matInput [matDatepicker]="reportFromDate" placeholder="From Date"
+                            [(ngModel)]="report.fromDate" [ngModelOptions]="{standalone: true}"
+                            (ngModelChange)="dateChangeStoreReport('fromDate')" readonly (click)="reportFromDate.open()"
+                            required>
+                          <mat-datepicker-toggle matSuffix [for]="reportFromDate"></mat-datepicker-toggle>
+                          <mat-datepicker #reportFromDate></mat-datepicker>
+                          <mat-hint *ngIf="storeFromDateError" class="alert alert-danger">
+                            {{appStoreMessage.U0070}}
+                          </mat-hint>
+                        </mat-form-field>
+                      </div>
+                      <div class="col s12 m6 l6 padding-r-0">
+                        <mat-form-field>
+                          <input matInput [matDatepicker]="reportToDate" placeholder="To Date"
+                            [(ngModel)]="report.toDate" [ngModelOptions]="{standalone: true}"
+                            (ngModelChange)="dateChangeStoreReport('toDate')" readonly (click)="reportToDate.open()"
+                            required>
+                          <mat-datepicker-toggle matSuffix [for]="reportToDate"></mat-datepicker-toggle>
+                          <mat-datepicker #reportToDate></mat-datepicker>
+                          <mat-hint *ngIf="storeToDateError" class="alert alert-danger">
+                            {{appStoreMessage.U0071}}
+                          </mat-hint>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <!-- Event Date Checkbox field will appear only for  Monthly Orders By Client Report and 
+                    Monthly Product Usage Summary Report -->
+                    <div class="align-column-cls" *ngIf="report.type == 6 || report.type == 7">
+                      <div class="col s6 m6 l6 not-for-all padding-l-0">
+                        <mat-form-field>
+                          <mat-select placeholder="Year" [(ngModel)]="report.year" name="year" required #year="ngModel">
+                            <mat-option *ngFor="let options of yearListStore" [value]="options">
+                              {{options}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-error class="error-move-up-sec"
+                          *ngIf="(year.touched || !isStoreFormValid) && year.errors?.required">
+                          {{appStoreMessage.U0171}}
+                        </mat-error>
+                      </div>
+                      <!-- Event Date Checkbox field will appear only for  Monthly Orders By Client Report and 
+                    Monthly Product Usage Summary Report -->
+                      <div class="col s6 m6 l6 not-for-all padding-r-0">
+                        <mat-checkbox [ngModelOptions]="{standalone: true}" [(ngModel)]="isEvent">Event Date Based
+                        </mat-checkbox>
+                      </div>
+                    </div>
+                    <mat-form-field class="">
+                      <input matInput placeholder="Report Title" maxlength="100" trimDirective required
+                        class="form-control" [(ngModel)]="report.title" #title=ngModel name="title" />
+
+                      <mat-hint *ngIf="title.errors?.required && (title.touched || !isStoreFormValid)"
+                        class="alert alert-danger">
+                        {{appStoreMessage.U0141}}
+                      </mat-hint>
+                    </mat-form-field>
+
+                    <!-- This checkbox will only come for Product usage listing report -->
+                    <div class="row" *ngIf="report.type == 7">
+                      <mat-checkbox name="include-all" [(ngModel)]="storeisIncludeAll">Include All Items
+                      </mat-checkbox>
+                    </div>
+
+                    <div *ngIf="this.report.isInventory && report.type == 1">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Select Product" required aria-label="Number"
+                          [formControl]="storeProductSearchText" [matAutocomplete]="auto">
+                        <mat-icon matSuffix (click)="clearField()">close</mat-icon>
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let product of storeFilteredOptions" [value]="product.name"
+                            (onSelectionChange)="selectInventoryProductStoreReport(product.id,$event)">
+                            {{product.name}}
+                          </mat-option>
+                        </mat-autocomplete>
+                        <mat-hint *ngIf="storenoRecords">{{appStoreMessage.U0100}}</mat-hint>
+                        <mat-hint *ngIf="storeInventoryError" class="alert alert-danger">
+                          {{appStoreMessage.U0053}}
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+
+                    <div *ngIf="this.report.isProductListing">
+
+                      <mat-select-autocomplete class="mat-select-autocomplete-sec-cls" placeholder="Select Category"
+                        [options]="storeCategoryGroup.arrayValue" [multiple]='true' name="optionsCatSelector"
+                        [labelCount]="storeCategoryGroup.arrayValue.length"
+                        (selectionChange)="onSelectionChange($event,'categoryReport')">
+                      </mat-select-autocomplete>
+
+                      <mat-error *ngIf="storeproductListingError" class="alert alert-danger">
+                        {{appStoreMessage.U0040}}
+                      </mat-error>
+                    </div>
+
+                    <div *ngIf="this.report.isProductUsage">
+                      <div class="report-radio-btn-sec">
+                        <mat-radio-group class="excel-pdf-chk-list" aria-labelledby="select-price-method"
+                          [(ngModel)]="storemediaType" name="price-range">
+                          <mat-radio-button value="XLSX">Excel</mat-radio-button>
+                          <mat-radio-button value="PDF">PDF</mat-radio-button>
+                        </mat-radio-group>
+                        <mat-checkbox [ngModelOptions]="{standalone: true}" [(ngModel)]="isEvent">Event Date Based
+                        </mat-checkbox>
+
+                      </div>
+
+
+                      <mat-select-autocomplete class="mat-select-autocomplete-sec-cls" placeholder="Select Products"
+                        [options]="storeProductGroup.arrayValue" [multiple]='true' name="optionsProdSelector"
+                        [labelCount]="storeProductGroup.arrayValue.length"
+                        (selectionChange)="onSelectionChange($event,'productReport')">
+                      </mat-select-autocomplete>
+
+                      <mat-error *ngIf="storeProductUsageError" class="alert alert-danger">
+                        {{appStoreMessage.U0053}}
+                      </mat-error>
+                    </div>
+                  </form>
+
+                </div>
+                <div class="reports-content-img-sec">
+                  <img title="" src="../assets/images/reports-pg-img.svg" alt="">
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="" *ngIf="noRecords">
+            <mat-card>
+              <div class="center">No Records Found</div>
+            </mat-card>
+          </div> -->
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

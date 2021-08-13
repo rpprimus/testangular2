@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 22 22">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Folder_red);
+      }
+
+      .cls-2 {
+        fill: #8e8c4c;
+      }
+
+      .cls-3 {
+        fill: #fcfcfc;
+      }
+
+      .cls-4 {
+        fill: #dbd863;
+        fill-rule: evenodd;
+      }
+
+      .cls-5 {
+        fill: #d31347;
+      }
+
+      .cls-6 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-Folder_red">
+      <rect width="22" height="22"/>
+    </clipPath>
+  </defs>
+  <g id="Folder_red" data-name="Folder red" class="cls-1">
+    <rect class="cls-6" width="22" height="22"/>
+    <g id="Group_3773" data-name="Group 3773" transform="translate(-3367.319 -2040.133)">
+      <g id="Group_3772" data-name="Group 3772" transform="translate(3370.819 2044.85)">
+        <g id="folder">
+          <rect id="Rectangle_1023" data-name="Rectangle 1023" class="cls-2" width="16.042" height="11.727" transform="translate(0.852 0.922)"/>
+          <rect id="Rectangle_1024" data-name="Rectangle 1024" class="cls-3" width="14.982" height="12.294" transform="translate(0.852 1.659)"/>
+          <path id="Path_515" data-name="Path 515" class="cls-4" d="M210.918,110.974H196.323a1.693,1.693,0,0,1-1.693-1.693V96.34h5.585a2.938,2.938,0,0,1,2.919,2.432h9.5V109.3a1.693,1.693,0,0,1-1.693,1.693Z" transform="translate(-194.63 -96.34)"/>
+        </g>
+      </g>
+      <circle id="Ellipse_51" data-name="Ellipse 51" class="cls-5" cx="3.5" cy="3.5" r="3.5" transform="translate(3367.819 2042.133)"/>
+    </g>
+  </g>
+</svg>

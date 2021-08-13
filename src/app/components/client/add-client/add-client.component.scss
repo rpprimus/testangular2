@@ -1,0 +1,19 @@
+@import './_variables';
+@import './_mixins';
+
+.add-client-page-cls{
+
+    .page-content-sec{
+        .absolute-button-group-in-heading-sec {
+            position: absolute;
+            right: 0;
+            top: 0;
+
+            .active-btn.mat-flat-button, .mat-flat-button, .transparent-btn.mat-button{@extend .offsetL04;}
+            .active-btn.mat-flat-button{@extend .button-shadow;}
+        }
+
+    }
+
+        
+}

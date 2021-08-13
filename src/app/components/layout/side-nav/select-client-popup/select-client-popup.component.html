@@ -1,0 +1,32 @@
+<div class="custom-defined-msg-box">
+  <div class="popup-sec-icon">
+    <div class="sparkle-bg"></div>
+
+    <button class="alert-popup-icon">
+      <mat-icon><img src="../assets/images/s-popup-icon-img.png" alt="" /></mat-icon>
+    </button>
+
+  </div>
+
+  <mat-dialog-content class="add-sub-category-popup">
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Select Client" aria-label="Number" matInput [formControl]="searchText" [matAutocomplete]="auto">
+      <mat-icon matSuffix (click)="clear()">close</mat-icon>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let client of filteredOptions" [value]="client.name" (onSelectionChange)="clientSelected(client,$event)" >
+          {{client.name}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-hint *ngIf="noResult">{{appMessage.U0100}}</mat-hint>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <div class="popup-btn-sec aligned-right">
+    <div mat-dialog-actions>
+      <button mat-button class="transparent-btn popup-sec-btn" (click)="close()">CANCEL</button>
+      <button mat-flat-button class="popup-sec-btn" [class.active-btn]="data.isClientSelected && !noResult"
+       [disabled]="noResult || !data.isClientSelected" (click)="select()">SELECT</button>
+    </div>
+  </div>
+
+</div>

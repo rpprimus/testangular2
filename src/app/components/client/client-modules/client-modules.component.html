@@ -1,0 +1,214 @@
+<mat-accordion [multi]="true">
+  <mat-expansion-panel #ordering [hideToggle]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span class="panel-title-sec">Ordering</span>
+      </mat-panel-title>
+
+      <!-- Accordian row Open/Close Icon-->
+      <mat-panel-description>
+        <mat-icon *ngIf="!ordering.expanded">add</mat-icon>
+        <mat-icon *ngIf="ordering.expanded">remove</mat-icon>
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+
+
+    <div class="module-ordering-checkbox-list">
+      <mat-checkbox (change)="onOrderingSectionCheckboxChange(false,$event, '')" [(ngModel)]="servicePageData.isServicePageChecked"
+        name="isServicePageChecked">Service Page</mat-checkbox>
+      <div *ngIf="servicePageData.isServicePageChecked" class="module-page-btn-group">
+        <button (click)="onSaveServicePage()" mat-flat-button [class.active-btn]="util.isServiceDirty"
+         class="popup-sec-btn" [disabled]="!util.isServiceDirty">Submit</button>
+        <app-drag-drop-rows [data]="servicePageCustomFieldData" [rowIndex]="servicePageCustomFieldData.selectedRowIndex"></app-drag-drop-rows>
+      </div>
+    </div>
+
+    <div *ngIf="servicePageData.isServicePageChecked" class="module-ordering-tab-content">
+
+      <div class="module-ordering-tab-left-content">
+        <div class="section-con-parallel">
+            <span class="service-title">Service Title Name</span>
+            <app-drag-drop-rows class="ser-title-sec-arrow" [data]="servicePageData" [rowIndex]="servicePageData.selectedRowIndex"></app-drag-drop-rows>
+        </div>
+        
+        <div (click)="onServiceTitleClick(i, item);" *ngFor="let item of servicePageData?.serviceTitle;let i = index;"
+        (click)="selectRow(i, item)" [ngClass]="item.isActive && item.isClicked ? 'cus-field-row-clicked' : ''">
+
+          <div *ngIf="item.id == 0" class="clickable-tab click-input-form" [class.servicePageActiveTab]="item.isClicked">
+            <div class="visible-tab-heading">
+              <mat-form-field>
+                <input matInput placeholder="Service Title Name" [(ngModel)]="item.serviceTitleName" trimDirective appFocus [ngModelOptions]="{standalone: true}"
+                  [required]="item.fieldDetails.length > 0" #title="ngModel" maxlength="300">
+                <mat-hint *ngIf="(title.touched || servicePageData.formInvalid) && title.errors?.required">Service
+                  Title cannot be blank</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="visible-tab-icon">
+              <button (click)="onRemoveServiceTitle(i)" type="button" mat-mini-fab>
+                <mat-icon class="mini-fab-btn"><i class="material-icons">clear</i></mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="item.id > 0" class="visible-tab" [class.disabled-tab-cls]="!item.isActive"
+            [class.servicePageActiveTab]="item.isClicked">
+            <div class="visible-tab-heading">{{item.serviceTitleName}}</div>
+            <div class="visible-tab-icon">
+              <i (click)="enableSubmit(item);" class="material-icons">{{item.isActive ? 'visibility' :
+                'visibility_off' }}</i>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="clickable-tab">
+          <h5 (click)="onAddServiceTitle()"><i class="material-icons">add</i> ADD SERVICE TITLE</h5>
+        </div>
+
+
+      </div>
+      <app-module-custom-fields class="module-ordering-tab-right-content" [invalid]="servicePageData.formInvalid"
+        [data]="servicePageCustomFieldData"></app-module-custom-fields>
+
+    </div>
+
+    <div class="module-ordering-checkbox-list">
+      <mat-checkbox disabled [(ngModel)]="eventDetailData.isChecked">Event
+        Details <i class="info-sec"> (To add event details fields, please enable Events Module) </i></mat-checkbox>
+        
+      <div *ngIf="eventDetailData.isChecked" class="module-page-btn-group">
+        <button (click)="onSaveOrderingDetail(eventDetailData)" mat-flat-button class="popup-sec-btn"
+        [class.active-btn]="util.isEventDirty" [disabled]="!util.isEventDirty">Submit</button>
+        <app-drag-drop-rows [data]="eventDetailData" [rowIndex]="eventDetailData.selectedRowIndex"></app-drag-drop-rows>
+      </div>
+    </div>
+
+    <div *ngIf="eventDetailData.isChecked" class="module-ordering-tab-content">
+      <app-module-custom-fields class="module-ordering-tab-right-content custom-field-sec-full-width" [orderingType]="0"
+        [invalid]="eventDetailData.formInvalid" [data]="eventDetailData"></app-module-custom-fields>
+    </div>
+
+
+
+    <div class="module-ordering-checkbox-list">
+      <mat-checkbox (change)="onOrderingSectionCheckboxChange(false,$event, shipmentDetailsData)" [(ngModel)]="shipmentDetailsData.isChecked">Shipment
+        Details</mat-checkbox>
+      <div *ngIf="shipmentDetailsData.isChecked" class="module-page-btn-group">
+        <button (click)="onSaveOrderingDetail(shipmentDetailsData)" mat-flat-button class="popup-sec-btn"
+        [class.active-btn]="util.isShipmentDirty" [disabled]="!util.isShipmentDirty">Submit</button>
+        <app-drag-drop-rows [data]="shipmentDetailsData" [rowIndex]="shipmentDetailsData.selectedRowIndex"></app-drag-drop-rows>
+      </div>
+    </div>
+    <div *ngIf="shipmentDetailsData.isChecked" class="module-ordering-tab-content">
+      <app-module-custom-fields class="module-ordering-tab-right-content custom-field-sec-full-width" [orderingType]="1"
+        [invalid]="shipmentDetailsData.formInvalid" [data]="shipmentDetailsData"></app-module-custom-fields>
+    </div>
+
+
+    <div class="module-ordering-checkbox-list">
+      <mat-checkbox (change)="onOrderingSectionCheckboxChange(false,$event, pickupDetailsData)" [(ngModel)]="pickupDetailsData.isChecked">Pick
+        up Details</mat-checkbox>
+      <div *ngIf="pickupDetailsData.isChecked" class="module-page-btn-group">
+        <button (click)="onSaveOrderingDetail(pickupDetailsData)" mat-flat-button class="popup-sec-btn"
+        [class.active-btn]="util.isPickupDirty" [disabled]="!util.isPickupDirty">Submit</button>
+        <app-drag-drop-rows [data]="pickupDetailsData" [rowIndex]="pickupDetailsData.selectedRowIndex"></app-drag-drop-rows>
+      </div>
+    </div>
+
+    <div *ngIf="pickupDetailsData.isChecked" class="module-ordering-tab-content">
+      <app-module-custom-fields class="module-ordering-tab-right-content custom-field-sec-full-width" [orderingType]="2"
+        [invalid]="pickupDetailsData.formInvalid" [data]="pickupDetailsData"></app-module-custom-fields>
+    </div>
+
+
+    <div class="module-ordering-checkbox-list">
+      <mat-checkbox (change)="onOrderingSectionCheckboxChange(false,$event, additionalInfoDetailsData)" [(ngModel)]="additionalInfoDetailsData.isChecked">Additional
+        Info</mat-checkbox>
+      <div *ngIf="additionalInfoDetailsData.isChecked" class="module-page-btn-group">
+        <button (click)="onSaveOrderingDetail(additionalInfoDetailsData)" mat-flat-button class="popup-sec-btn"
+        [class.active-btn]="util.isAdditionalDirty" [disabled]="!util.isAdditionalDirty">Submit</button>
+        <app-drag-drop-rows [data]="additionalInfoDetailsData" [rowIndex]="additionalInfoDetailsData.selectedRowIndex"></app-drag-drop-rows>
+      </div>
+    </div>
+
+    <div *ngIf="additionalInfoDetailsData.isChecked" class="module-ordering-tab-content">
+      <app-module-custom-fields class="module-ordering-tab-right-content custom-field-sec-full-width" [invalid]="additionalInfoDetailsData.formInvalid"
+        [data]="additionalInfoDetailsData"></app-module-custom-fields>
+    </div>
+
+  </mat-expansion-panel>
+
+
+
+  <!-- 2nd Row Accordian Start Here -->
+  <mat-expansion-panel #events [hideToggle]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span class="panel-title-sec">Events</span>
+        <!-- (click)="$event.stopPropagation();"  we have to stop expanded panel show hide on slider toggle click -->
+        <mat-slide-toggle [(ngModel)]="moduleEventData.isEventEnabled" (click)="$event.stopPropagation();" (ngModelChange)="checkEventSection($event)"></mat-slide-toggle>
+      </mat-panel-title>
+
+      <!-- Accordian row Open/Close Icon-->
+      <mat-panel-description>
+        <mat-icon *ngIf="!events.expanded">add</mat-icon>
+        <mat-icon *ngIf="events.expanded">remove</mat-icon>
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+
+    <!-- 2nd Row Accordian Content Sec-->
+    <div class="row">
+      <div class="module-ordering-checkbox-list">
+        <mat-checkbox [(ngModel)]="moduleEventData.isAddEventChecked" (ngModelChange)="isEventChanged = true;">Store User can Add Event</mat-checkbox>
+        <div class="module-page-btn-group">
+          <button (click)="onSaveEventData(false)" mat-flat-button class="popup-sec-btn"
+          [class.active-btn]= "isEventChanged" [disabled]="!isEventChanged">Submit</button>
+        </div>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+
+
+  <!-- 3rd Row Accordian Start Here -->
+  <mat-expansion-panel #signup [hideToggle]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span class="panel-title-sec">Sign up</span>
+        <!-- (click)="$event.stopPropagation();"  we have to stop expanded panel show hide on slider toggle click -->
+        <mat-slide-toggle [(ngModel)]="signUpModuleData.isSignUpEnabled" (change)="onChangeSignUp($event)" (click)="$event.stopPropagation();"></mat-slide-toggle>
+      </mat-panel-title>
+
+      <!-- Accordian row Open/Close Icon-->
+      <mat-panel-description>
+        <mat-icon *ngIf="!signup.expanded">add</mat-icon>
+        <mat-icon *ngIf="signup.expanded">remove</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <!-- 3rd Row Accordian Content Sec-->
+    <div class="row">
+      <div class="module-ordering-checkbox-list">
+        <mat-form-field class="max-width-binding-cls">
+          <input matInput placeholder="Sign Up email domain" [(ngModel)]="signUpModuleData.signUpEmailDomain" (ngModelChange)="isSignUpChanged = true;"
+            [required]="signUpModuleData.isSignUpEnabled" #signUpModule="ngModel" maxlength="100">
+          <mat-hint *ngIf="signUpModule.errors?.required && ( (signUpModule.touched && signUpModuleData.isSignUpEnabled) || !isValid )">{{appMessage.U0028}}</mat-hint>
+        </mat-form-field>
+
+
+        <div class="adress-mandatory-chk-sec">
+          <mat-checkbox [(ngModel)]="signUpModuleData.isAddressRequired" (ngModelChange)="isSignUpChanged = true;">Make Address Required</mat-checkbox>
+        </div>
+
+
+        <div class="module-page-btn-group">
+          <button (click)="onSaveSignUpModule()" mat-flat-button class="popup-sec-btn" [class.active-btn]= "isSignUpChanged" [disabled]="!isSignUpChanged">Submit</button>
+        </div>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+
+</mat-accordion>

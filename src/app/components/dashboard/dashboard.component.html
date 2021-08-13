@@ -1,0 +1,164 @@
+<div class="container-fluid">
+
+    <div class="page-content-wrapper-sec dashboard-page-cls">
+
+        <div class="content-heading-sec">
+            <div class="page-heading-sec">
+                <h2>Dashboard</h2>
+            </div>
+            <div class="button-group-in-heading-sec relative-sec-cls after-cls">
+                <form>
+                    <!-- <mat-form-field>
+                        <mat-select placeholder="Select Client" [(ngModel)]="selectedValue" name="client" (keyup.enter)="keyPress($event)">
+                            <mat-option (click)="clientSelected(null)">Select Client</mat-option>
+                            <mat-option *ngFor="let client of clients" [value]="client.id" (click)="clientSelected(client)">
+                                {{client.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                    <mat-form-field class="example-full-width">
+                        <input type="text" placeholder="Select Client" name="client" matInput
+                             [matAutocomplete]="auto" (keyup.enter)="keyPress($event)" [formControl]="searchClientName">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option (click)="clientSelected(null,$event)">Select Client</mat-option>
+                            <mat-option *ngFor="let client of filteredOptions" [value]="client.name"
+                                (onSelectionChange)="clientSelected(client,$event)" >
+                                {{client.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                    </mat-form-field>
+                </form>
+                <button *ngIf="hasPermission" mat-flat-button [class.active-btn]="selectedValue != ''" (click)="goToStore()"
+                    [disabled]="selectedValue == ''">
+                    Go To Store</button>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="page-content-sec">
+                <div class="row margin-10-cls">
+                    <div class="col s12 m6 l6 padding-l-0">
+                        <div class="dashboard-box-layout">
+                            <div class="dashboard-img-sec new-order-sec">
+                                <h4>Placed<span>Orders</span></h4>
+                                <img src="../assets/images/new-orders-box-icon.svg" />
+                            </div>
+                            <div class="dashboard-con-sec">
+                                <mat-table [dataSource]="placeDataSource" [hidden]="!noPlaceRecord">
+
+                                    <ng-container matColumnDef="OrderNo">
+                                        <mat-header-cell *matHeaderCellDef> Order # </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.orderNumber}} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="OrderDate">
+                                        <mat-header-cell *matHeaderCellDef> Order Date
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.orderDate}} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Client">
+                                        <mat-header-cell *matHeaderCellDef> Client </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.clientName}} </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"
+                                        (click)="onRowClick(row.orderId, row)"></mat-row>
+                                </mat-table>
+                                <mat-card *ngIf="noPlaceRecord">
+                                    <div class="center">No Records Found</div>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l6 padding-r-0">
+                        <div class="dashboard-box-layout">
+                            <div class="dashboard-img-sec orders-not-returned-sec">
+                                <h4>Orders Not<span>Returned</span></h4>
+                                <img src="../assets/images/orders-not-returned-box-icon.svg" />
+                            </div>
+                            <div class="dashboard-con-sec">
+                                <mat-table [dataSource]="notReturnedDataSource" [hidden]="!noReturnedRecord">
+
+                                    <ng-container matColumnDef="OrderNo">
+                                        <mat-header-cell *matHeaderCellDef> Order # </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.orderNumber}} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="OrderDate">
+                                        <mat-header-cell *matHeaderCellDef> Pick Up Date
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.orderDate}} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Client">
+                                        <mat-header-cell *matHeaderCellDef> Client </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.clientName}} </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"
+                                        (click)="onRowClick(row.orderId, row)"></mat-row>
+                                </mat-table>
+                                <mat-card *ngIf="noReturnedRecord">
+                                    <div class="center">No Records Found</div>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-2 margin-10-cls">
+                    <div class="col s12 m6 l6 padding-l-0">
+                        <div class="dashboard-box-layout">
+                            <div class="dashboard-img-sec upcoming-shipment-sec">
+                                <h4>Upcoming<span>Shipment</span></h4>
+                                <img src="../assets/images/upcoming-shipment-box-icon.svg" />
+                            </div>
+                            <div class="dashboard-con-sec">
+                                <mat-table [dataSource]="shipmentDataSource" [hidden]="!noShipmentRecord">
+
+                                    <ng-container matColumnDef="OrderNo">
+                                        <mat-header-cell *matHeaderCellDef> Order # </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.orderNumber}} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="OrderDate">
+                                        <mat-header-cell *matHeaderCellDef> Arrival Date
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.orderDate}} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Client">
+                                        <mat-header-cell *matHeaderCellDef> Client </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.clientName}} </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"
+                                        (click)="onRowClick(row.orderId, row)"></mat-row>
+                                </mat-table>
+                                <mat-card *ngIf="noShipmentRecord">
+                                    <div class="center">No Records Found</div>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l6 padding-r-0">
+                        <div class="dashboard-box-layout">
+                            <div class="dashboard-img-sec damage-items-sec">
+                                <h4>Damage<span>Products</span></h4>
+                                <img src="../assets/images/damage-item-box-icon.svg" />
+                            </div>
+                            <div class="dashboard-con-sec dmg-item-sec">
+                                <span class="damage-item-no-sec">{{data.damageItemCount}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

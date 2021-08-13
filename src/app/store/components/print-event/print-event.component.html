@@ -1,0 +1,50 @@
+<div class="custom-defined-msg-box store-event-popup">
+    <div class="popup-sec-icon store-popup-header-sec">
+      <div class="store-popup-header-overlay dy-header-color"></div>
+  
+      <div class="store-popup-heading-sec">
+        <button type="button" mat-mini-fab class="dy-action-btn-color close-btn-popup" routerLink="/eventcalendar"
+          (click)="dialogRef.close()">
+          <mat-icon class="mini-fab-btn"><i class="material-icons">close</i></mat-icon>
+        </button>
+        <h3 class="dy-body-txt-color">Select Event Dates</h3>
+      </div>
+    </div>
+  
+    <mat-dialog-content>
+  
+      <div class="add-event-popup-sec" >
+        <div class="row">
+          <form #printEventForm="ngForm">
+            <div class="col s6 m6 l6 left-padding-0">
+              <mat-form-field class="full-width">
+                <input matInput [matDatepicker]="eventStart" placeholder="Event Start Date *" [(ngModel)]="eventStartDate"
+                  name="startDate" (ngModelChange)="dateChange('eventStart')" readonly (click)="eventStart.open()">
+                <mat-datepicker-toggle matSuffix [for]="eventStart"></mat-datepicker-toggle>
+                <mat-datepicker #eventStart></mat-datepicker>
+                <mat-hint *ngIf="startDateError" class="alert alert-danger">
+                  {{appMessage.U0070}}
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col s6 m6 l6 right-padding-0">
+              <mat-form-field class="full-width">
+                <input matInput [matDatepicker]="eventEnd" placeholder="Event End Date *" [(ngModel)]="eventEndDate"
+                  name="endDate" (ngModelChange)="dateChange('eventEnd')" readonly (click)="eventEnd.open()">
+                <mat-datepicker-toggle matSuffix [for]="eventEnd"></mat-datepicker-toggle>
+                <mat-datepicker #eventEnd></mat-datepicker>
+                <mat-hint *ngIf="endDateError" class="alert alert-danger">
+                  {{appMessage.U0071}}
+                </mat-hint>
+              </mat-form-field>
+            </div>
+  
+            <div class="date-picker-sec full-width">
+              <button mat-button class="store-active-btn dy-action-btn-color popup-sec-btn" (click)="printEvent()">PRINT EVENT</button>
+            </div>
+          </form>
+        </div>
+      </div>
+  
+    </mat-dialog-content>
+  </div>

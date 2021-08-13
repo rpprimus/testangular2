@@ -1,0 +1,56 @@
+<div class="row">
+
+  <h5>Inventory History</h5>
+
+  <div infiniteScroll [infiniteScrollDistance]="1" debounce [infiniteScrollThrottle]="300" (scrolled)="onScroll()"
+    [infiniteScrollUpDistance]="2">
+    <mat-table [dataSource]="dataSource" class="" [hidden]="!noRecords">
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef>DATE</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{util.convertUTCDateToLocalDate(element.date) | date :'MM-dd-yyyy HH:mm a':'shortTime'}} </mat-cell>
+      </ng-container>
+
+      <!-- Warehouse Column -->
+      <ng-container matColumnDef="warehouseName">
+        <mat-header-cell *matHeaderCellDef>WAREHOUSE</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.warehouseName}} </mat-cell>
+      </ng-container>
+
+      <!-- Updated Quantity Column -->
+      <ng-container matColumnDef="updatedQuantity">
+        <mat-header-cell *matHeaderCellDef> UPDATED QUANTITY </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.updatedQuantity}}</mat-cell>
+      </ng-container>
+
+      <!-- Updated By Column -->
+      <ng-container matColumnDef="updatedBy">
+        <mat-header-cell *matHeaderCellDef>UPDATED BY</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.updatedBy}} </mat-cell>
+      </ng-container>
+
+      <!-- Reason Column -->
+      <ng-container matColumnDef="reason">
+        <mat-header-cell *matHeaderCellDef> REASON </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.reason}}</mat-cell>
+      </ng-container>
+
+      <!-- Other Notes Column -->
+      <ng-container matColumnDef="notes">
+        <mat-header-cell *matHeaderCellDef>OTHER NOTES</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.notes}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="read-only-table-row"></mat-row>
+    </mat-table>
+  </div>
+
+  <div class="" *ngIf="noRecords">
+    <mat-card>
+      <div class="center">No Records Found</div>
+    </mat-card>
+  </div>
+
+</div>

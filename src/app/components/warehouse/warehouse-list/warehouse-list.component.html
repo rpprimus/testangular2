@@ -1,0 +1,110 @@
+<div class="container-fluid">
+
+  <div class="page-content-wrapper-sec warehouse-list-page-cls">
+
+    <div class="content-heading-sec">
+      <div class="page-heading-sec">
+        <h2>Warehouse</h2>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="page-content-sec">
+        <div class="row warehouse-pg-con-sec">
+          <div class="card-view-layout">
+            <h5>List of Warehouse</h5>
+            <mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc"
+              matSortDisableClear>
+
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>WAREHOUSE NAME</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <span *ngIf="!element.isEdit">{{element.name}}</span>
+                  <div class="editable-warehouse-field-sec" *ngIf="element.isEdit">
+                    <mat-form-field>
+                      <input matInput class="form-control" placeholder="Warehouse Name" maxlength="60" trimDirective
+                        appFocus [(ngModel)]="warehouseName" #wareHouseName="ngModel" required="true"
+                        name="wareHouseName" />
+                      <mat-hint *ngIf="wareHouseName.errors?.required && wareHouseName.touched"
+                        class="alert alert-danger">
+                        {{appMessage.U0027}}
+                      </mat-hint>
+                    </mat-form-field>
+                   <!-- <div class="warehouse-pg-button-group">
+                      <button type="button" mat-button class="transparent-btn popup-sec-btn" (click)="onCancel(element)">Cancel</button>
+                      <button type="button" mat-flat-button class="active-btn popup-sec-btn"
+                        (click)='save(element)'>Submit</button>
+                    </div>  -->
+                  </div>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="link">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <button id="link" [matMenuTriggerFor]="menu" mat-icon-button
+                    [style.pointer-events]="isAdd || isEditWareHouse ? 'none': ''" *ngIf="!element.isEdit">
+                    <mat-icon aria-label="">
+                      <i id="link" class="material-icons three-dots-icon">more_vert</i>
+                    </mat-icon>
+                    <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before">
+                      <button mat-menu-item class="small-menu-item-btn" (click)="editWarehouse(element)">Edit</button>
+                    </mat-menu>
+                  </button>
+
+
+                  <div class="warehouse-pg-button-group" *ngIf="element.isEdit">
+                    <button type="button" mat-mini-fab (click)='save(element)'>
+                      <mat-icon class="mini-fab-btn"><i class="material-icons">done</i></mat-icon>
+                    </button>
+                    <button type="button" mat-mini-fab (click)="onCancel(element)">
+                      <mat-icon class="mini-fab-btn"><i class="material-icons">clear</i></mat-icon>
+                    </button>
+                  </div>
+
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            </mat-table>
+            <div *ngIf="!isAdd && !isEditWareHouse" class="click-to-add-warehouse-detail">
+              <a (click)="isAdd = true; warehouseName = '';"> + Add Warehouse</a>
+            </div>
+            <div *ngIf="isAdd" class="add-warehouse-detail-sec">
+              <div class="add-warehouse-input-sec">
+                <mat-form-field>
+                  <input matInput class="form-control" placeholder="Warehouse Name" maxlength="60" trimDirective
+                    appFocus [(ngModel)]="warehouseName" #wareHouseName1="ngModel" required name="wareHouseName1" />
+                  <mat-hint *ngIf="wareHouseName1.errors?.required && (wareHouseName1.touched || !isValid)"
+                    class="alert alert-danger">
+                    {{appMessage.U0027}}
+                  </mat-hint>
+
+                </mat-form-field>
+                <!-- <mat-error *ngIf="nameError && wareHouseName.untouched">{{appMessage.U0027}}</mat-error> -->
+              </div>
+
+              <div class="warehouse-pg-button-group">
+                <!-- <button type="button" mat-button class="transparent-btn popup-sec-btn"
+                  (click)="onCancel()">Cancel</button>
+                <button type="button" mat-flat-button [class.active-btn]="wareHouseName1.dirty" [disabled]="!wareHouseName1.dirty" (click)='save()'>Submit</button> -->
+                <button type="button" class="mat-mini-fab mat-accent" [class.active-btn]="wareHouseName1.dirty" [disabled]="!wareHouseName1.dirty" (click)='save()'>
+                  <mat-icon class="mini-fab-btn"><i class="material-icons">done</i></mat-icon></button>
+                <button type="button"  class="mat-mini-fab mat-accent" (click)="onCancel()">
+                  <mat-icon class="mini-fab-btn"><i class="material-icons">clear</i></mat-icon></button>
+                
+              </div>
+
+            </div>
+          </div>
+          <div class="warehouse-content-img-sec">
+            <img title="" src="../assets/images/warehousebg.svg" alt="">
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

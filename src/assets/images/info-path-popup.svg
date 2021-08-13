@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 63 42.54">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Info_path);
+      }
+
+      .cls-2 {
+        fill: #8e8c4c;
+      }
+
+      .cls-3 {
+        fill: #fcfcfc;
+      }
+
+      .cls-4 {
+        fill: #dbd863;
+        fill-rule: evenodd;
+      }
+
+      .cls-5 {
+        fill: #d3d3d1;
+      }
+
+      .cls-6 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-Info_path">
+      <rect width="63" height="42.54"/>
+    </clipPath>
+  </defs>
+  <g id="Info_path" data-name="Info path" class="cls-1">
+    <g id="Group_3766" data-name="Group 3766" transform="translate(680 -2590.371)">
+      <g id="folder" transform="translate(-669.656 2590.371)">
+        <rect id="Rectangle_1023" data-name="Rectangle 1023" class="cls-2" width="47.457" height="35.367" transform="translate(2.05 2.26)"/>
+        <rect id="Rectangle_1024" data-name="Rectangle 1024" class="cls-3" width="44.858" height="37.209" transform="translate(2.05 4.068)"/>
+        <path id="Path_515" data-name="Path 515" class="cls-4" d="M241.918,138.826H199.545a4.915,4.915,0,0,1-4.915-4.915V96.34h16.215a8.531,8.531,0,0,1,8.474,7.062h27.57v30.565a4.915,4.915,0,0,1-4.915,4.915Z" transform="translate(-194.67 -96.34)"/>
+      </g>
+      <g id="documentation" transform="translate(-735.5 2476.81)">
+        <g id="XMLID_28_" transform="translate(55.5 124.3)">
+          <g id="Group_1920" data-name="Group 1920" transform="translate(0)">
+            <path id="Path_565" data-name="Path 565" class="cls-5" d="M66.809,134.5v4.921H61.9Z" transform="translate(-61.15 -133.305)"/>
+            <path id="Path_566" data-name="Path 566" class="cls-6" d="M97.791,130.3v24H61.4V136.416h5.718v-6.1H97.791Zm-19.18,20.2v-.7H64.54v.7Zm0-2.906v-.7H64.54v.7Zm0-2.917v-.7H64.54v.7Zm0-2.917v-.7H64.54v.7Zm0-2.917v-.7H64.54v.7Z" transform="translate(-60.709 -129.597)"/>
+            <path id="Path_567" data-name="Path 567" d="M58.042,149.7H55.5V130.615l5.917-6.315H93.285v25.342m.059-.644v.621L58.71,149.7m33.919-.7V125H61.885v6.1H56.156V149H92.629Zm-31.4-18.582v-4.909l-4.6,4.909Z" transform="translate(-55.5 -124.3)"/>
+            <rect id="Rectangle_1032" data-name="Rectangle 1032" width="31.634" height="0.703" transform="translate(3.808 20.211)"/>
+            <rect id="Rectangle_1033" data-name="Rectangle 1033" width="31.634" height="0.703" transform="translate(3.808 17.293)"/>
+            <rect id="Rectangle_1034" data-name="Rectangle 1034" width="31.634" height="0.703" transform="translate(3.808 14.376)"/>
+            <rect id="Rectangle_1035" data-name="Rectangle 1035" width="31.634" height="0.703" transform="translate(3.808 11.459)"/>
+            <rect id="Rectangle_1036" data-name="Rectangle 1036" width="31.634" height="0.703" transform="translate(3.808 8.541)"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,535 @@
+<div class="container-fluid">
+
+  <div class="page-content-wrapper-sec add-product-page-cls">
+    <form #addProductForm="ngForm">
+      <div class="content-heading-sec" [ngClass]="id>0 ? 'three-column-sec' : ''">
+        <div class="page-heading-sec">
+          <h2>{{id>0 ? 'Product Details' : 'Add Product'}}
+            <span *ngIf="id>0" class="total-record-cls">
+              ({{currentRecord}} of {{totalRecords}} records)
+            </span>
+          </h2>
+        </div>
+        <div class="multiple-btns-sec" *ngIf="id>0">
+          <a (click)="getRecord('first',$event)" [class.disable-link]="currentRecord == 1"> First</a>
+          <a (click)="getRecord('pre',$event)" [class.disable-link]="currentRecord == 1"> Previous</a>
+          <a (click)="getRecord('next',$event)" [class.disable-link]="currentRecord == totalRecords"> Next</a>
+          <a (click)="getRecord('last',$event)" [class.disable-link]="currentRecord == totalRecords"> Last </a>
+        </div>
+        <div class="button-group-in-heading-sec">
+          <!-- <button mat-flat-button [class.active-btn]="addProductForm.valid"
+          (click)="approveNsave()" *ngIf="(!isWorkshopTeamMember && (data.productStatus == 'APPROVAL_AWAITED') && !disableHoldProduct)"
+          [disabled]="addProductForm.invalid">Approve & Save</button> -->
+
+          <button mat-flat-button [class.active-btn]="addProductForm.valid"
+          (click)="approveNsave()" *ngIf="(!isWorkshopTeamMember && (data.productStatus == 'WAITING_APPROVAL') && !disableHoldProduct)"
+          [disabled]="addProductForm.invalid">Approve & Save</button>
+
+          <button mat-flat-button [class.active-btn]="addProductForm.dirty && addProductForm.valid"
+            (click)="submitProductDetails('next')" class="approve-btn" *ngIf="id>0"
+            [disabled]="!addProductForm.dirty || addProductForm.invalid">Save & Next</button>
+
+            <button mat-flat-button [class.active-btn]="addProductForm.dirty && addProductForm.valid"
+            (click)="submitProductDetails('exit')" class="approve-btn"
+            [disabled]="!addProductForm.dirty || addProductForm.invalid">Save & Exit</button>
+          <!-- <button mat-button class="transparent-btn" type="reset" (click)="resetProductDetails()">Reset</button> -->
+          
+          <button mat-button class="transparent-btn" type="reset" routerLink="/product">Cancel</button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="data">
+        <div class="page-content-sec card-view-layout">
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <h5>Product Details</h5>
+            </div>
+
+            <div class="col s12 m6 l6">
+              <div class="left-col-content-sec">
+                <div class="">
+                  <mat-form-field class="">
+                    <input matInput placeholder="Product Id " maxlength="100" trimDirective appFocus required
+                      class="form-control" [(ngModel)]="data.productNumber" #productId=ngModel name="productId"
+                      [disabled]="(id > 0 && data.productStatus != enum.Inactive) || isWorkshopTeamMember" />
+                    <mat-hint *ngIf="productId.errors?.required && (productId.touched || !isFormValid)"
+                      class="alert alert-danger">
+                      {{appMessage.U0052}}
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="">
+                  <mat-form-field (click)="openCatDialog()" class="">
+                    <input readonly matInput placeholder="Product Category" name="productCategory"
+                      matTooltip="{{selectedCategoriesText}}" [(ngModel)]="selectedCategoriesText" required
+                      class="form-control" #productCategory=ngModel name="productCategory" [disabled]="isWorkshopTeamMember"/>
+                    <mat-hint *ngIf="productCategory.errors?.required && !isFormValid" class="alert alert-danger">
+                      {{appMessage.U0061}}
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="col s12 m6 l6">
+              <div class="right-col-content-sec">
+                <div class="">
+                  <mat-form-field>
+                    <input matInput placeholder="Product Name" maxlength="500" minlength="3" trimDirective required
+                      class="form-control" [(ngModel)]="data.productName" #productName=ngModel name="productName">
+                    <mat-hint *ngIf="productName.errors?.required && (productName.touched || !isFormValid)"
+                      class="alert alert-danger">
+                      {{appMessage.U0053}}
+                    </mat-hint>
+                    <mat-hint *ngIf="productName.errors?.minlength && (productName.touched || !isFormValid)"
+                    class="alert alert-danger">
+                    {{appMessage.U0169}}
+                  </mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="" *ngIf="isClientLabelName != '' ">
+                  <mat-form-field class="">
+                    <input matInput
+                      placeholder="{{isClientLabelName != '' ? isClientLabelName : 'Client Product Number' }}"
+                      name="ClientProductNumber" maxlength="100" class="form-control" [disabled]="isWorkshopTeamMember"
+                      [(ngModel)]="data.clientProductName" />
+                  </mat-form-field>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row extra-top-margin-spc">
+            <div class="col s12 m12 l12">
+              <h5>Additional Product Features</h5>
+            </div>
+
+            <div class="col s12 m12 l12 editor-sec">
+              <small>Product Description <span
+                  class="mat-placeholder-required mat-form-field-required-marker">*</span></small>
+              <ckeditor placeholder="Title" name="editor1" debounce="500" [(ngModel)]="data.briefDescription"
+                #editor1="ngModel" language="en" [config]="util.ckEditorBaseConfigDescription" required
+                [ngClass]="isWorkshopTeamMember ? 'disable-ckeditor':''">
+              </ckeditor>
+              <mat-error *ngIf="briefDescriptionError">{{briefDescriptionError}}</mat-error>
+              <!-- <mat-error *ngIf="editor1.touched && editor1.value && editor1.value.length > 2070 ">Maximum 2000
+                characters are allowed.</mat-error> -->
+              <!-- <mat-error *ngIf="editor1.errors?.required && (editor1.touched || !isFormValid)">{{appMessage.U0056}}</mat-error> -->
+            </div>
+          </div>
+          <div class="row extra-top-margin-spc">
+            <div class="col s12 m6 l6 padding-left-0">
+              <div class="left-col-content-sec">
+                <div class="col s12 m6 l6">
+                  <mat-form-field class="">
+                    <input matInput placeholder="Low Threshold Limit" maxlength="6" class="form-control"
+                      [(ngModel)]="data.lowThresholdLimit" name="lowThresholdLimit" #lowThresholdLimit=ngModel
+                      [pattern]="appConstant.wholeNumberRegEx" />
+                    <mat-hint *ngIf="lowThresholdLimit.errors?.pattern" class="alert alert-danger">
+                      {{appMessage.U0054}}
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="col s12 m6 l6">
+                  <mat-form-field class="">
+                    <input matInput placeholder="Max Order Quantity" maxlength="6" class="form-control"
+                      [(ngModel)]="data.maxOrderQuantity" name="maxOrderQuantity" #maxOrderQuantity=ngModel
+                      [pattern]="appConstant.wholeNumberRegEx" />
+                    <mat-hint *ngIf="maxOrderQuantity.errors?.pattern" class="alert alert-danger">
+                      {{appMessage.U0054}}
+                    </mat-hint>
+                    <mat-hint *ngIf="maxOrderQuantity.value && maxOrderQuantity.value == 0" class="alert alert-danger">
+                      {{appMessage.U0135}}
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="col s12 m12 l12">
+                  <h6>Product Details</h6>
+                  <div class="price-method-cls">
+                    <label id="select-price-method">Select Price Method: </label>
+                    <mat-radio-group aria-labelledby="select-price-method" class="select-price-method"
+                      [(ngModel)]="data.isPriceRange" name="price-range">
+                      <mat-radio-button checked="true" [value]="false">Fixed Price</mat-radio-button>
+                      <mat-radio-button [value]="true">Price Range</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+
+                </div>
+
+                <div class="col s6 m6 l6">
+                  <div class="fixed-price-sec" *ngIf="!data.isPriceRange">
+                    <mat-form-field>
+                      <input matInput placeholder="Product Price" name="cost" class="form-control" type="text" currency
+                        [(ngModel)]="data.productPrice" (rawChange)="data.productPrice=$event">
+                      <span matPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                  </div>
+                  <div class="range-price-sec" *ngIf="data.isPriceRange">
+                    <mat-form-field class="min-price-sec">
+                      <input matInput placeholder="Min Price" name="productPrice" class="form-control" min="0"
+                        type="text" currency [(ngModel)]="data.productPrice" (rawChange)="data.productPrice=$event">
+                      <span matPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                    <mat-form-field class="max-price-sec">
+                      <input matInput placeholder="Max Price" name="productMaxPrice" class="form-control" type="text"
+                        currency [(ngModel)]="data.productMaxPrice" (rawChange)="data.productMaxPrice=$event">
+                      <span matPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col s6 m6 l6 reset-button-style">
+                  <mat-form-field>
+                    <input matInput [min]="minDate" [matDatepicker]="productExpirationDate"
+                      placeholder="Expiration Date" [(ngModel)]="expirationDate" name="productDate" readonly
+                      (click)="productExpirationDate.open()">
+                    <mat-datepicker-toggle matSuffix [for]="productExpirationDate"></mat-datepicker-toggle>
+                    <mat-datepicker #productExpirationDate></mat-datepicker>
+                    <mat-hint *ngIf="prodExpiryDate()">{{appMessage.U0164}}</mat-hint>
+                  </mat-form-field>
+                  <button *ngIf="expirationDate" type="button" mat-mini-fab (click)="resetProductExpirationDate()"
+                  [disabled]="isWorkshopTeamMember">
+                    <mat-icon class="mini-fab-btn"><i class="material-icons">clear</i></mat-icon>
+                  </button>
+
+                </div>
+
+                <div class="col s12 m12 l12">
+                  <h6>Other Features</h6>
+                </div>
+                <div class="row other-features-checkbox-list-sec">
+                  <div class="col s6 m6 l6">
+                    <mat-checkbox [(ngModel)]="data.otherFeatures.newProduct" name="newProducts">New Product
+                    </mat-checkbox>
+                  </div>
+                  <div class="col s6 m6 l6">
+                    <mat-checkbox [(ngModel)]="data.otherFeatures.returnableProduct" name="returnableProduct"
+                      [disabled]="!isEventEnabled && id==0 || data.isOrderPlaced || isWorkshopTeamMember">Returnable
+                      Product</mat-checkbox>
+                  </div>
+                  <div class="col s6 m6 l6">
+                    <mat-checkbox [(ngModel)]="data.otherFeatures.itemOnHold" name="itemOnHold"
+                    [disabled]="disableHoldProduct">Item on Hold
+                    </mat-checkbox>
+                  </div>
+                  <div class="col s6 m6 l6">
+                    <mat-checkbox [(ngModel)]="data.showPrice" name="showPrice">Show Price</mat-checkbox>
+                  </div>
+                  <div class="col s6 m6 l6">
+                    <mat-checkbox [(ngModel)]="isOnDemandGraphic" name="onDemandGraphic">
+                      On Demand Graphics</mat-checkbox>
+                  </div>
+                  <div class="col s12 m12 l12 radio-grp-sec" *ngIf="isOnDemandGraphic">
+                    <mat-radio-group (change)="onSelectDemandGraphic($event)" class="select-ondemand-method" [disabled]="isWorkshopTeamMember">
+                      <mat-radio-button [checked]="data.isTextGraphic" class="add-text-on-graphics" value="isTextGraphic">Add Text On Graphics 
+                      </mat-radio-button>
+                      <mat-radio-button [checked]="data.isUploadGraphic" value="isUploadGraphic">Upload Graphics
+                      </mat-radio-button>
+                    </mat-radio-group>
+                    <mat-error *ngIf="isTypeOfDemandSelected">{{appMessage.U0163}}</mat-error>
+                    <div *ngIf="data.isTextGraphic" class="max-char-limit">  <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Max Character Limit" [(ngModel)]="data.textGraphicCount" 
+                        name="textGraphicCount" [disabled]="isWorkshopTeamMember">
+                      </mat-form-field></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col s12 m6 l6 padding-left-0">
+              <div class="right-col-content-sec">
+                <div class="col s12 m12 l12">
+                  <div *ngIf="isVisibility" name="visibility">
+                    <app-chip [data]="visibilityGroup" [isReset]="isReset" [selected]="selectedGroup"
+                      (chipValueChange)="onChangeVisibilityGroup($event)" [disabled]="isWorkshopTeamMember">
+                    </app-chip>
+                    <!-- <mat-error *ngIf="data.visibilityGroup.length == 0 && !isFormValid" class="alert alert-danger">
+                      {{appMessage.U0015}}
+                    </mat-error> -->
+                  </div>
+                </div>
+
+                <div class="col s12 m12 l12">
+                  <h6>Dimensions</h6>
+                </div>
+
+                <div class="col s6 m6 l3">
+                  <mat-form-field class="">
+                    <input matInput placeholder="Length" name="Length" maxlength="10" class="form-control"
+                      [(ngModel)]="data.dimensions.length" />
+                  </mat-form-field>
+                </div>
+                <div class="col s6 m6 l3">
+                  <mat-form-field class="">
+                    <input matInput placeholder="Width" name="Width" maxlength="10" class="form-control"
+                      [(ngModel)]="data.dimensions.width" />
+                  </mat-form-field>
+                </div>
+                <div class="col s6 m6 l3">
+                  <mat-form-field class="">
+                    <input matInput placeholder="Height" name="Height" maxlength="10" class="form-control"
+                      [(ngModel)]="data.dimensions.height" />
+                  </mat-form-field>
+                </div>
+                <div class="col s6 m6 l3">
+                  <mat-form-field class="">
+                    <input matInput placeholder="Weight" name="Weight" maxlength="10" class="form-control"
+                      [(ngModel)]="data.dimensions.weight"/>
+                  </mat-form-field>
+                </div>
+                <div class="col s12 m12 l12">
+                  <h6>Opening Balance</h6>
+                </div>
+
+                <div *ngFor="let item of data.wareHouses;let i = index;">
+                  <div class="col s8 m8 l8">
+                    <mat-form-field>
+                      <mat-select placeholder="Warehouse" [(ngModel)]="item.id" [ngModelOptions]="{standalone: true}"
+                        #houseid="ngModel" (openedChange)="disableSelectedWareHouse()" [disabled]="id>0 && !item.isNew"
+                        [required]="item.quantity > 0">
+                        <mat-option>Select Warehouse</mat-option>
+                        <mat-option *ngFor="let house of warehouse" [value]="house.id"
+                          [disabled]="selectedWarehouse.indexOf(house.id) > -1">
+                          {{house.name}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-hint *ngIf="houseid.errors?.required && (houseid.touched || !isFormValid)">
+                        {{appMessage.U0119}}
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="col s3 m3 l3">
+                    <mat-form-field class="">
+                      <input matInput placeholder="Quantity" maxlength="6" [(ngModel)]="item.quantity"
+                        [ngModelOptions]="{standalone: true}" [disabled]="id>0 && !item.isNew"
+                        #wareHouseQuantity=ngModel [pattern]="appConstant.wholeNumberRegEx" [required]="item.id"
+                        (ngModelChange)="addProductForm.form.markAsDirty()" />
+                      <mat-hint *ngIf="wareHouseQuantity.errors?.pattern" class="alert alert-danger">
+                        {{appMessage.U0054}}
+                      </mat-hint>
+                      <mat-hint
+                        *ngIf="wareHouseQuantity.errors?.required && (wareHouseQuantity.touched || !isFormValid)"
+                        class="alert alert-danger">
+                        {{appMessage.U0055}}
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="col s1 m1 l1">
+                    <button type="button" *ngIf="data.wareHouses.length > 1 && item.isNew" mat-mini-fab
+                      (click)="onRemoveWarehouseItems(i,item.id)" [disabled]="isWorkshopTeamMember">
+                      <mat-icon class="mini-fab-btn"><i class="material-icons">clear</i></mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <div class="col s12 m12 l12">
+                  <button type="button" mat-mini-fab (click)="onAddWarehouseItems()" [disabled]="isWorkshopTeamMember">
+                    <mat-icon class="mini-fab-btn"><i class="material-icons">add</i></mat-icon>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div [class.disabled-cls]="this.id == 0">
+            <app-product-resources [data]="data.productResources" [productId]="this.id" [isWorkshopTeamMember]="isWorkshopTeamMember"></app-product-resources>
+          </div>
+
+          <div class="row extra-top-margin-spc">
+            <div class="col s12 m12 l12">
+              <div class="sec-heading-with-two-col">
+                
+                <h5 class="no-border-heading">Associate Ordering</h5>
+                <div class="step-btn-group">
+                  <button mat-flat-button (click)="importStep()" [disabled]='id == 0 || isWorkshopTeamMember' [class.active-btn]='id > 0 && !isWorkshopTeamMember'>IMPORT</button>
+                  <button mat-flat-button (click)="addStep()" [disabled]='id == 0 || isWorkshopTeamMember' [class.active-btn]='id > 0 && !isWorkshopTeamMember'>ADD
+                    STEP</button>  
+                </div>
+                
+              </div>
+            </div>
+            <div *ngFor="let step of data.steps;let index = index;">
+              <div class="associate-prod-form-sec">
+                <div class="col s3 m3 l3">
+
+                  <mat-form-field>
+                    <textarea matInput placeholder="Step Name" class="form-control" name="stepName_{{index}}"
+                      [disabled]="id == 0 || isWorkshopTeamMember" [(ngModel)]="step.stepName" maxlength="50"></textarea>
+                    <!-- <textarea matInput placeholder="Step Name" class="form-control" name="stepName_{{index}}" [disabled]="id == 0"
+                     trimDirective required [(ngModel)]="step.stepName" #stepName=ngModel></textarea>
+                     <mat-hint *ngIf="stepName.errors?.required && (stepName.touched || !isFormValid)"
+                     class="alert alert-danger">
+                     {{appMessage.U0152}}
+                   </mat-hint> -->
+
+
+                  </mat-form-field>
+                </div>
+
+                <div class="col s6 m6 l6">
+                  <mat-form-field>
+                    <textarea matInput placeholder="Step Description" class="form-control" name="stepDesc_{{index}}"
+                      [disabled]="id == 0 || isWorkshopTeamMember" [(ngModel)]="step.stepDescription" maxlength="200"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col s1 m1 l1">
+                  <mat-form-field>
+                    <textarea matInput placeholder="Step Qty" class="form-control" #stepQty=ngModel
+                      [(ngModel)]="step.quantity" [pattern]="appConstant.naturalNumberRegex" maxlength="3" 
+                      name="stepQty_{{index}}" [disabled]="isWorkshopTeamMember"></textarea>
+
+                    <mat-hint *ngIf="stepQty.errors?.pattern" class="alert alert-danger">
+                      {{appMessage.U0054}}
+                    </mat-hint>
+                  </mat-form-field>
+
+                  <!-- <mat-form-field>
+                    <textarea matInput placeholder="Step Quantity" class="form-control" name="stepQty_{{index}}"  #stepQuantity=ngModel
+                       [(ngModel)]="stepQty" maxlength="3" [pattern]="appConstant.naturalNumberRegex" ></textarea>
+                      <mat-hint *ngIf="stepQuantity.errors?.pattern" class="alert alert-danger">
+                        {{appMessage.U0054}}
+                      </mat-hint>
+                  </mat-form-field> -->
+                </div>
+
+                <div class="col s1 m1 l1">
+                  <div class="associate-form-field">
+                    <mat-slide-toggle class="slide-option-prod-detail" name="stepRequired_{{index}}"
+                      [(ngModel)]="step.isRequired" [disabled]="id == 0 || isWorkshopTeamMember"><span>Is Required</span></mat-slide-toggle>
+                  </div>
+                </div>
+
+                <div class="col s1 m1 l1">
+                  <div class="associate-form-field clear-btn">
+                    <!-- <button type="button" mat-mini-fab (click)="storeAssociateStepAndProductList(element,step, true)" -->
+                    <button type="button" mat-mini-fab (click)="deleteAssociatedStep(step)" [disabled]="isWorkshopTeamMember">
+
+                      <!-- *ngIf="data.steps.length > 1"> -->
+                      <mat-icon class="mini-fab-btn"><i class="material-icons">clear</i></mat-icon>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col s12 m12 l12">
+                <div class="add-prod-btn-sec">
+                  <a href="javascript:void(0)" (click)="addAssociatedProducts(step)" [class.disabled-cls]="isWorkshopTeamMember"
+                    [class.active-link-btn]='id == 0 && !isWorkshopTeamMember'><i class="material-icons">
+                      add_circle_outline
+                    </i><span>Add Products</span></a>
+
+                </div>
+                <!-- <button mat-flat-button (click)="addAssociatedProducts(step)" [disabled]='id == 0'
+                  [class.active-btn]='id > 0'>Add
+                  Products</button> -->
+              </div>
+
+              <div class="col s12 m12 l12">
+                <mat-table class="associate-ordering" [dataSource]="step.products">
+
+                  <ng-container matColumnDef="productImg">
+                    <mat-header-cell *matHeaderCellDef> Product Image</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      <img
+                        [src]="element.url ? _domSanitizationService.bypassSecurityTrustUrl(element.url) : defaultImageSrc" />
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="productId">
+                    <mat-header-cell *matHeaderCellDef> PRODUCT ID </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.productNumber}}
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="productName">
+                    <mat-header-cell *matHeaderCellDef> PRODUCT NAME </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="categories">
+                    <mat-header-cell *matHeaderCellDef> CATEGORY </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.categories}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="minQuantity">
+                    <mat-header-cell *matHeaderCellDef> Min Quantity </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      <mat-form-field *ngIf="element.productId != 0" class="input-quantity">
+                        <!-- <input matInput placeholder="Min Quantity" maxlength="4" [(ngModel)]="element.minQuantity"
+                          [ngModelOptions]="{standalone: true}" #productMinQuantity=ngModel name="stepDesc_{{index}}"
+                          [pattern]="appConstant.naturalNumberRegex" required /> -->
+                        <input matInput type="number" placeholder="Min Quantity" [(ngModel)]="element.minQuantity"
+                          #productMinQuantity=ngModel name="minQuantity{{element.productId}}"
+                          [pattern]="appConstant.naturalNumberRegex" required [disabled]="isWorkshopTeamMember"/>
+                        <mat-hint *ngIf="productMinQuantity.errors?.pattern" class="alert alert-danger">
+                          {{appMessage.U0054}}
+                        </mat-hint>
+                        <mat-hint
+                          *ngIf="productMinQuantity.errors?.required && (productMinQuantity.touched || !isFormValid)"
+                          class="alert alert-danger">
+                          {{appMessage.U0055}}
+                        </mat-hint>
+                      </mat-form-field>
+                      <mat-form-field *ngIf="element.productId == 0">
+                        <input matInput [disabled]="isWorkshopTeamMember"/>
+                      </mat-form-field>
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="maxQuantity">
+                    <mat-header-cell *matHeaderCellDef> Max Quantity </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      <mat-form-field *ngIf="element.productId != 0" class="input-quantity">
+                        <!-- <input matInput placeholder="Max Quantity" maxlength="4" [(ngModel)]="element.maxOrderQuantity"
+                          [ngModelOptions]="{standalone: true}" #productMaxQuantity=ngModel
+                          [pattern]="appConstant.naturalNumberRegex" required /> -->
+                        <input matInput type="number" placeholder="Max Quantity" [(ngModel)]="element.maxOrderQuantity"
+                          name="maxOrderQuantity{{element.productId}}" #productMaxQuantity=ngModel
+                          [pattern]="appConstant.naturalNumberRegex" required [disabled]="isWorkshopTeamMember"/>
+                        <mat-hint *ngIf="productMaxQuantity.errors?.pattern" class="alert alert-danger">
+                          {{appMessage.U0054}}
+                        </mat-hint>
+                        <mat-hint
+                          *ngIf="productMaxQuantity.errors?.required && (productMaxQuantity.touched || !isFormValid)"
+                          class="alert alert-danger">
+                          {{appMessage.U0055}}
+                        </mat-hint>
+                      </mat-form-field>
+                      <mat-form-field *ngIf="element.productId == 0">
+                        <input matInput [disabled]="isWorkshopTeamMember"/>
+                      </mat-form-field>
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="link">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      <!-- <button type="button" mat-mini-fab (click)="deleteAssociatedProduct(element,step)"
+                        *ngIf="element.productId != 0"> -->
+                      <button type="button" mat-mini-fab (click)="storeAssociateStepAndProductList(element,step)"
+                        *ngIf="element.productId != 0" [disabled]="isWorkshopTeamMember">
+                        <mat-icon class="mini-fab-btn"><i class="material-icons">clear</i></mat-icon>
+                      </button>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+                </mat-table>
+              </div>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

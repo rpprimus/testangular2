@@ -1,0 +1,17 @@
+<div *ngIf="field">
+  <div *ngFor="let child of field.linkedFields" class="detail-sec-card-content dy-body-txt-color">
+    <div *ngIf="child.linkedFieldValue == field.value">
+        <div class="service-description-sec dy-body-txt-color">
+            {{obj == "serviceDetails" ? child.description : ''}}
+            <span *ngIf="child.isRequired && obj == 'serviceDetails'" class="mat-placeholder-required mat-form-field-required-marker">*</span>
+          </div>
+          <div class="service-value-sec dy-body-txt-color">
+            <app-dynamic-input-field [field]="child" [obj]="obj" [type]="type"></app-dynamic-input-field>
+          </div>
+          <div *ngIf="field.value">
+            <app-display-linked-fields [field]="child" [obj]="obj" [type]="type"></app-display-linked-fields>
+        </div>
+    </div>
+  
+  </div>
+</div>

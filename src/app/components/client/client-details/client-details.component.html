@@ -1,0 +1,36 @@
+<div class="row">
+  <form [formGroup]="addClientForm">
+    <div class="col s12 m6 l6">
+      <div class="left-col-content-sec">
+        <div class="">
+          <mat-form-field class="">
+            <input matInput placeholder="Client Name" maxlength="100" formControlName="name" trimDirective
+              [errorStateMatcher]="matcher" required appFocus>
+            <mat-error *ngIf="addClientForm.controls.name.hasError('required')">
+              {{appMessage.U0003}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6 l6">
+      <div class="right-col-content-sec">
+        <div class="">
+          <div class="client-detail-domain-read-only" *ngIf="util.clientId > 0;else domainInput;">
+            <div class="domain-read-only-placeholder">Domain *</div>
+            <div class="domain-read-only-name">{{domainValue}}.sparkslink.com</div>
+          </div>
+          <ng-template #domainInput>
+            <mat-form-field class="fixed-domain-field-sec">
+              <input matInput class="domain-rel-input-field" [ngStyle]="{'width.px' : domainFieldWidth}" placeholder="domain"
+                trimDirective maxlength="40" formControlName="domain" [errorStateMatcher]="matcher" required>
+              <mat-error *ngIf="addClientForm.controls.domain.hasError('required')">
+                {{appMessage.U0007}}
+              </mat-error>
+            </mat-form-field>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

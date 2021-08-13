@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 85 85">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Dashboard);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-Dashboard">
+      <rect width="85" height="85"/>
+    </clipPath>
+  </defs>
+  <g id="Dashboard" class="cls-1">
+    <path id="dashboard-2" data-name="dashboard" class="cls-2" d="M69.24,33.109,84,24.676,42,.825,0,24.676l14.76,8.433L0,41.491l14.76,8.433L0,58.305l42,24,42-24L69.24,49.92,84,41.488ZM42,4.344,77.822,24.685,42,45.153,6.178,24.685ZM17.847,34.873,42,48.663l24.154-13.8,11.679,6.627L42,61.967,6.178,41.5ZM77.825,58.314,42,78.782,6.178,58.314l11.679-6.627,24.154,13.8,24.154-13.8Z" transform="translate(0.5 1.175)"/>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 85 85">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Reports);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-Reports">
+      <rect width="85" height="85"/>
+    </clipPath>
+  </defs>
+  <g id="Reports" class="cls-1">
+    <g id="reports-2" data-name="reports" transform="translate(8)">
+      <g id="Group_14" data-name="Group 14" transform="translate(0 0)">
+        <g id="Group_13" data-name="Group 13">
+          <path id="Path_366" data-name="Path 366" class="cls-2" d="M62.19,84.873H6.375A6.311,6.311,0,0,1,0,78.5V6.376A6.311,6.311,0,0,1,6.375,0H46.9a1.214,1.214,0,0,1,1.275,1.275A1.214,1.214,0,0,1,46.9,2.551H6.375A3.919,3.919,0,0,0,2.55,6.376V78.5a3.919,3.919,0,0,0,3.825,3.819H62.19A3.919,3.919,0,0,0,66.012,78.5V22.162a1.275,1.275,0,0,1,2.55,0V78.5a6.475,6.475,0,0,1-6.372,6.372Z" transform="translate(0 0.126)"/>
+          <path id="Path_367" data-name="Path 367" class="cls-2" d="M39.564,23.138H19.176A1.214,1.214,0,0,1,17.9,21.863V1.475a1.275,1.275,0,0,1,2.55,0V20.6H39.576a1.214,1.214,0,0,1,1.275,1.275A1.366,1.366,0,0,1,39.564,23.138Z" transform="translate(27.72 0.438)"/>
+          <path id="Path_368" data-name="Path 368" class="cls-2" d="M39.64,23.525a1.934,1.934,0,0,1-1.02-.51L18.233,2.117a1.232,1.232,0,0,1,0-1.785,1.232,1.232,0,0,1,1.785,0l20.388,20.9a1.233,1.233,0,0,1,0,1.785C40.162,23.525,39.9,23.525,39.64,23.525Z" transform="translate(27.647 0.05)"/>
+        </g>
+      </g>
+      <g id="Group_1925" data-name="Group 1925" transform="translate(15.177 30.357)">
+        <path id="Path_1013" data-name="Path 1013" class="cls-2" d="M1.4,69.422H36.429v-2.8h-2.8V45.6a1.406,1.406,0,0,0-1.4-1.4h-5.6a1.406,1.406,0,0,0-1.4,1.4V66.62h-1.4V51.208a1.406,1.406,0,0,0-1.4-1.4h-5.6a1.406,1.406,0,0,0-1.4,1.4V66.62h-1.4V56.812a1.406,1.406,0,0,0-1.4-1.4h-5.6a1.406,1.406,0,0,0-1.4,1.4V66.62H2.8V40H0V68.023a1.406,1.406,0,0,0,1.4,1.4ZM28.023,47h2.8V66.62h-2.8ZM18.214,52.61h2.8V66.62h-2.8Zm-9.808,5.6h2.8V66.62h-2.8Z" transform="translate(0 -32.994)"/>
+        <rect id="Rectangle_1031" data-name="Rectangle 1031" class="cls-2" width="2.802" height="2.802"/>
+        <rect id="Rectangle_1032" data-name="Rectangle 1032" class="cls-2" width="16.812" height="2.802" transform="translate(5.604)"/>
+      </g>
+    </g>
+  </g>
+</svg>

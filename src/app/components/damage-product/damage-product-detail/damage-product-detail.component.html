@@ -1,0 +1,158 @@
+<div class="container-fluid">
+  <div class="page-content-wrapper-sec  add-client-page-cls">
+    <form #damageDetailForm="ngForm">
+      <div class="content-heading-sec">
+        <div class="page-heading-sec">
+          <h2>Damage Item # {{data.productId}}</h2>
+        </div>
+        <div class="button-group-in-heading-sec">
+          <button mat-flat-button [class.active-btn]="damageDetailForm.dirty && !isDisabled" (click)="submitDamageDetails()"
+            [disabled]="!damageDetailForm.dirty || isDisabled">submit</button>
+          <button mat-button class="transparent-btn" (click)="navigateToList()">cancel</button>
+        </div>
+      </div>
+
+      <div class="row" [style.pointer-events]= "isDisabled ? 'none' : ''">
+        <div class="page-content-sec card-view-layout">
+
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <h5>Damage Details</h5>
+            </div>
+
+            <div class="col s12 m6 l6">
+              <div class="left-col-content-sec">
+                <mat-form-field>
+                  <input matInput placeholder="Order #" [value]="data.orderNumber" disabled>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col s12 m6 l6">
+              <div class="right-col-content-sec">
+                <mat-form-field>
+                  <input matInput placeholder="Received Date" name="ReceivedDate" [value]="data.receiveDate | date :'MM-dd-yyyy'"
+                    disabled />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <!-- Below code is used for Associate Product -->
+
+          <div class="row">
+
+            <div class="col s12 m12 l12 padding-l-0 padding-r-0">
+              <mat-table [dataSource]="dataSource" [hidden]="!noRecords">
+                <!-- Product No -->
+                <ng-container matColumnDef="productNo">
+                  <mat-header-cell *matHeaderCellDef>PRODUCT ID </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.productId}} </mat-cell>
+                </ng-container>
+
+                <!-- Product Name Column -->
+                <ng-container matColumnDef="productName">
+                  <mat-header-cell *matHeaderCellDef> PRODUCT NAME </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+                </ng-container>
+
+                <!-- Category Column -->
+                <ng-container matColumnDef="categories">
+                  <mat-header-cell *matHeaderCellDef> CATEGORY </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.categories}} </mat-cell>
+                </ng-container>
+
+                <!-- Ordered Quantity Column -->
+                <ng-container matColumnDef="OrderedQuantity">
+                  <mat-header-cell *matHeaderCellDef> ORDERED QUANTITY </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.orderQuantity}} </mat-cell>
+                </ng-container>
+
+
+                <!-- Received Quantity Column -->
+                <ng-container matColumnDef="ReceivedQuantity">
+                  <mat-header-cell *matHeaderCellDef> RECEIVED QUANTITY </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.receiveQuantity}} </mat-cell>
+                </ng-container>
+
+                <!-- Damage Quantity Column -->
+                <ng-container matColumnDef="DamageQuantity">
+                  <mat-header-cell *matHeaderCellDef> DAMAGE QUANTITY </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.damageQuantity}} </mat-cell>
+                </ng-container>
+
+                <!-- FIXED QUANTITY Column -->
+                <ng-container matColumnDef="fixedQuantity">
+                  <mat-header-cell *matHeaderCellDef> FIXED QUANTITY </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-form-field>
+                      <input matInput maxlength="4" class="form-control" [(ngModel)]="element.currentFixedQty" name="fixedQty"
+                       (ngModelChange)="validateChangeQty('fixed')" [disabled]="isDisabled"
+                        #fixedQty=ngModel [pattern]="appConstant.wholeNumberRegEx" />
+                      <mat-hint *ngIf="!fixedQtyError && fixedQty.errors?.pattern" class="alert alert-danger">
+                        {{appMessage.U0054}}
+                      </mat-hint>
+                      <mat-hint *ngIf="fixedQtyError" class="alert alert-danger">
+                        {{appMessage.U0133}}
+                      </mat-hint>
+                    </mat-form-field>
+                  </mat-cell>
+                </ng-container>
+
+                <!--  TRASH QUANTITY Column -->
+                <ng-container matColumnDef="trashQuantity">
+                  <mat-header-cell *matHeaderCellDef> TRASH QUANTITY</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-form-field>
+                      <input matInput maxlength="4" class="form-control" [(ngModel)]="element.currentTrashQty" name="trashQty" 
+                      (ngModelChange)="validateChangeQty('trash')" [disabled]="isDisabled"
+                        #trashQty=ngModel [pattern]="appConstant.wholeNumberRegEx" />
+                      <mat-hint *ngIf="trashQty.errors?.pattern" class="alert alert-danger">
+                        {{appMessage.U0054}}
+                      </mat-hint>
+                    </mat-form-field>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+
+              <div class="" *ngIf="noRecords">
+                <mat-card>
+                  <div class="center">No Records Found</div>
+                </mat-card>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12 m6 l6">
+              <div class="left-col-content-sec">
+                <h6>Damage Product Images </h6>
+                  <app-damage-product-resource [data]="data.damageResouces" [orderProductId]="this.id"></app-damage-product-resource>
+              </div>
+            </div>
+
+            <div class="col s12 m6 l6">
+              <div class="right-col-content-sec">
+                <h6>Damage/Lost Report</h6>
+                <div class="row">
+                  <div class="product-images-upload-sec">
+                    <ckeditor class="damage-lost-prod-ckeditor" name="editor1" debounce="500" [(ngModel)]="data.report" #editor1="ngModel" language="en"
+                      [config]="util.ckEditorBaseConfigDescription">
+                    </ckeditor>
+                  </div>
+                  <mat-error *ngIf="reportError">{{reportError}}</mat-error>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div [ngSwitch]="type">
+  <div *ngSwitchCase="'RADIO_BUTTON'">
+    <mat-radio-group>
+      <mat-radio-button [style.pointer-events]="none" checked>{{value}}</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div *ngSwitchCase="'CHECK_BOX'">
+    <mat-checkbox [style.pointer]="none" checked="true" *ngFor="let value of value | lookupvalues">{{value}}</mat-checkbox>
+  </div>
+  <div *ngSwitchCase="'TEXT_AREA'">
+    <mat-form-field>
+      <textarea readonly cdkTextareaAutosize [(ngModel)]="value" matInput></textarea>
+    </mat-form-field>
+  </div>
+
+  <div *ngSwitchCase="'CUSTOM_DATE'">
+    <mat-form-field>
+      <input matInput [(ngModel)]="value" class="form-control">
+    </mat-form-field>
+  </div>
+
+  <div *ngSwitchCase="'EMAIL'">
+    <mat-form-field>
+      <input matInput [(ngModel)]="value" class="form-control">
+    </mat-form-field>
+  </div>
+
+  <div *ngSwitchCase="'READ_ONLY'">
+    <mat-form-field>
+      <textarea readonly cdkTextareaAutosize [innerHtml]="value" matInput></textarea>
+    </mat-form-field>
+  </div>
+  <div *ngSwitchCase="'UPLOAD'">
+      <p *ngIf="!file">- -</p>
+      <div class="upload-img-list-sec" *ngIf="file">
+          <div class="content-row">
+              <div class="content-row-col-cell">
+                  <a href="javascript:void(0)" (click)="sharedService.downloadOnDemandFile(file)">{{file.fileName}}</a></div>
+          </div>
+      </div>
+  </div>
+  <div *ngSwitchDefault>
+    <mat-form-field class="">
+      <input readonly matInput [(ngModel)]="value" class="form-control">
+    </mat-form-field>
+  </div>
+
+</div>

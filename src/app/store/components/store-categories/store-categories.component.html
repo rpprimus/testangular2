@@ -1,0 +1,10 @@
+<mat-accordion class="cat-level-2" *ngFor="let node of data; let i= index" [hideToggle]="node.childrens.length == 0">
+  <!-- <mat-expansion-panel [disabled]="node.childrens.length == 0" [expanded] = "i == 0 ? true : false"> -->
+  <mat-expansion-panel [disabled]="node.childrens.length == 0" [expanded]="node.expandedClass">
+    <!-- <mat-expansion-panel-header id="store-categories-click" [ngClass]="node.selectedClass ? 'selected' : ''" (click)="selectCategory(node, $event)"> -->
+      <mat-expansion-panel-header id="store-categories-click" [class.selected]="node.selectedClass && !common.isStoreProductSearched" (click)="selectCategory(node, $event)">
+      <h5 class="dy-body-txt-color" >{{node.name}}</h5>
+    </mat-expansion-panel-header>
+    <app-store-categories *ngIf="node.childrens.length > 0" [data]="node.childrens" (selectedCategoryId)="changedCategoryId(node.id)"></app-store-categories>
+  </mat-expansion-panel>
+</mat-accordion>

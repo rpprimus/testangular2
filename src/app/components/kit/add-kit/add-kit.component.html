@@ -1,0 +1,181 @@
+<div class="container-fluid">
+  <div class="page-content-wrapper-sec  add-client-page-cls">
+
+    <div class="content-heading-sec">
+      <div class="page-heading-sec">
+        <h2>{{id>0 ? 'Kit Details' : 'Add Kit'}}</h2>
+      </div>
+      <div class="button-group-in-heading-sec">
+        <!-- <button mat-flat-button [class.active-btn]="addkitForm.valid"
+        (click)="approve()" *ngIf="(!isWorkshopTeam && (data.kitStatus == 'APPROVAL_AWAITED') && !isApproveBtnVisible)"
+        [disabled]="addkitForm.invalid">Approve & Save</button> -->
+
+        <button mat-flat-button [class.active-btn]="addkitForm.valid"
+        (click)="approve()" *ngIf="(!isWorkshopTeam && (data.kitStatus == 'WAITING_APPROVAL') && !isApproveBtnVisible)"
+        [disabled]="addkitForm.invalid">Approve & Save</button>
+
+        <button mat-flat-button [class.active-btn]="addkitForm.dirty && addkitForm.valid" 
+        (click)="submitKitDetails()" [disabled]="!addkitForm.dirty || addkitForm.invalid" class="approve-btn">submit</button>
+
+        <button mat-button class="transparent-btn" type="reset" routerLink="/kit">Cancel</button>
+        <!-- <button mat-button class="transparent-btn" type="reset" (click)="resetKitDetails()">Reset</button> -->
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="page-content-sec card-view-layout">
+        <form #addkitForm="ngForm">
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class="sec-heading-with-two-col">
+                <h5>Kit Details</h5>
+              </div>
+
+            </div>
+
+            <div class="col s12 m6 l6">
+              <div class="left-col-content-sec">
+                <mat-form-field class="">
+                  <input matInput placeholder="Kit Id" maxlength="100" trimDirective appFocus required class="form-control" 
+                  [(ngModel)]="data.kitId" #kitId=ngModel name="kitId" [disabled]="id > 0" />
+                  <mat-hint *ngIf="kitId.errors?.required && (kitId.touched || !isFormValid)" class="alert alert-danger">
+                    {{appMessage.U0127}}
+                  </mat-hint>
+                </mat-form-field>
+                <mat-form-field (click)="openCategoryDialog()" class="">
+                  <input readonly matInput placeholder="Kit Category" name="kitCategory" [(ngModel)]="selectedCategoriesName"
+                    required class="form-control" #kitCategory=ngModel matTooltip="{{selectedCategoriesName}}" [disabled]="isWorkshopTeam"/>
+                  <mat-hint *ngIf="kitCategory.errors?.required && !isFormValid" class="alert alert-danger">
+                    {{appMessage.U0130}}
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col s12 m6 l6">
+              <div class="right-col-content-sec">
+                <mat-form-field>
+                  <input matInput placeholder="Kit Name" maxlength="500" minlength="3" trimDirective required class="form-control"
+                    [(ngModel)]="data.kitName" #kitname=ngModel name="kitname">
+                  <mat-hint *ngIf="kitname.errors?.required && (kitname.touched || !isFormValid)" class="alert alert-danger">
+                    {{appMessage.U0128}}
+                  </mat-hint>
+                  <mat-hint *ngIf="kitname.errors?.minlength && (kitname.touched || !isFormValid)" class="alert alert-danger">
+                    {{appMessage.U0169}}
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12 m12 l12 editor-sec">
+              <small>Kit Description <span class="mat-placeholder-required mat-form-field-required-marker">*</span></small>
+              <ckeditor placeholder="Title" name="editor1" debounce="500" [(ngModel)]="data.kitDescription" #editor1="ngModel"
+                language="en" [config]="util.ckEditorBaseConfigDescription" required [ngClass]="isWorkshopTeam ? 'disable-ckeditor':''">
+              </ckeditor>
+              <mat-error *ngIf="descriptionError">{{descriptionError}}</mat-error>
+              <!-- <mat-error *ngIf="editor1.errors?.required && (editor1.touched || !isFormValid)">{{appMessage.U0129}}</mat-error> -->
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12 m6 l6 ">
+              <div class="left-col-content-sec" *ngIf="isVisibility" name="visibility">
+                <app-chip [data]="visibilityGroup" [isReset]="isReset" [selected]="selectedGroup" (chipValueChange)="onChangeVisibilityGroup($event)"
+                [disabled]="isWorkshopTeam">
+                </app-chip>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- Below code is used for Associate Product -->
+
+        <div class="row">
+          <div class="col s12 m12 l12">
+            <div class="sec-heading-with-two-col">
+              <h5>Associated Products</h5>
+              <!-- <button mat-flat-button (click)="openSelectProductPopup()" [disabled]='id > 0' [class.active-btn]='id == 0'>Add
+                Product</button> -->
+                <button mat-flat-button (click)="openSelectProductPopup()" [class.active-btn]='!isWorkshopTeam'
+                [disabled]='isWorkshopTeam'>Add
+                  Product</button>
+            </div>
+          </div>
+
+          <div class="col s12 m12 l12">
+            <mat-table [dataSource]="selectedProductList">
+
+              <ng-container matColumnDef="productImg">
+                <mat-header-cell *matHeaderCellDef> Product Image</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <img [src]="element.url ? _domSanitizationService.bypassSecurityTrustUrl(element.url) : defaultImageSrc" />
+                </mat-cell>
+              </ng-container>
+
+
+              <ng-container matColumnDef="productId">
+                <mat-header-cell *matHeaderCellDef> PRODUCT ID </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.productNumber}}
+                </mat-cell>
+              </ng-container>
+
+
+              <ng-container matColumnDef="productName">
+                <mat-header-cell *matHeaderCellDef> PRODUCT NAME </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+              </ng-container>
+
+
+              <ng-container matColumnDef="categories">
+                <mat-header-cell *matHeaderCellDef> CATEGORY </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.categories}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="quantity">
+                <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <mat-form-field *ngIf="element.productId != 0">
+                    <input matInput placeholder="Quantity" maxlength="4" [(ngModel)]="element.quantity" (ngModelChange)="addkitForm.form.markAsDirty();"
+                      [ngModelOptions]="{standalone: true}" #productQuantity=ngModel [pattern]="appConstant.wholeNumberRegEx"
+                      required [disabled]="isWorkshopTeam"/>
+                    <mat-hint *ngIf="productQuantity.errors?.pattern" class="alert alert-danger">
+                      {{appMessage.U0054}}
+                    </mat-hint>
+                    <mat-hint *ngIf="productQuantity.errors?.required && (productQuantity.touched || !isFormValid)"
+                      class="alert alert-danger">
+                      {{appMessage.U0055}}
+                    </mat-hint>
+                  </mat-form-field>
+                  <mat-form-field *ngIf="element.productId == 0">
+                    <input matInput [disabled]="isWorkshopTeam"/>
+                  </mat-form-field>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="link">
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <!-- <button type="button" mat-mini-fab (click)="removeProduct(element)" *ngIf="element.productId != 0 && element.id==0"> -->
+                    <button type="button" mat-mini-fab (click)="removeProduct(element)" [disabled]="isWorkshopTeam">
+                    <mat-icon class="mini-fab-btn"><i class="material-icons">clear</i></mat-icon>
+                  </button>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+            </mat-table>
+          </div>
+        </div>
+        <div [class.disabled-cls]="this.id == 0 || isWorkshopTeam" id="kitResource">
+          <app-kit-resource [data]="data.kitResouces" [kitId]="this.id"></app-kit-resource>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

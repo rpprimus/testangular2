@@ -1,0 +1,21 @@
+<div class="custom-defined-msg-box">
+  <div class="popup-sec-icon">
+    <div class="sparkle-bg"></div>
+
+    <button class="alert-popup-icon">
+      <mat-icon><img src="../assets/images/popup-zoom-img-icon.png" alt="" /></mat-icon>
+    </button>
+
+  </div>
+
+  <mat-dialog-content class="">
+    <img [src]="_domSanitizationService.bypassSecurityTrustUrl(data.url)" class="magnified-img" />
+  </mat-dialog-content>
+  <div class="popup-footer-btn-sec">
+
+    <button type="button" class="mat-flat-button mat-primary active-btn" (click)="dialogRef.close()">
+      close
+    </button>
+
+  </div>
+</div>

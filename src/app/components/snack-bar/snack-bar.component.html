@@ -1,0 +1,16 @@
+<div class="custom-defined-toast-msg-box">
+
+  <div class="toast-icon-sec" [ngClass]="data.code == 's' ? 'sparkle-bg-toast-success' : 'sparkle-bg-toast-error'">
+    <button *ngIf="data.code == 's'" mat-mini-fab class="toast-btn-bg">
+        <mat-icon ><img src="../assets/images/green-tick-icon.svg" alt="" /></mat-icon>
+      </button>
+
+    <button *ngIf="data.code == 'e'" mat-mini-fab class="toast-btn-bg">
+        <mat-icon ><img src="../assets/images/error-red-icon.svg" alt="" /></mat-icon>
+      </button>
+  </div>
+
+
+  <mat-dialog-content>{{data.content}}</mat-dialog-content>
+
+</div>

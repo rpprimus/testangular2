@@ -1,0 +1,189 @@
+<!-- Below code is used to call the store left and right content section -->
+<div class="store-page-content-sec s-product-store-page">
+
+  <!-- Below code is used to call the store left content section -->
+  <div class="store-page-left-content-sec">
+    <div class="store-category-list-sec">
+      <div class="cat-sec-top-bg"></div> <!-- Use for top section graphics element -->
+      <div class="cat-sec-bottom-bg"></div> <!-- Use for bottom section graphics element -->
+      <div class="only-dashbrd-cat-sec">
+        <h4 class="dy-body-txt-color">CATEGORIES</h4>
+        <div class="store-category-list">
+          <app-store-categories [data]="categoryService.categoryData" (selectedCategoryId)="changedCategoryId($event)"
+            class="store-category-sec"></app-store-categories>
+        </div>
+      </div>
+
+      <!-- This code is for mobile categories -->
+      <div class="only-mob-cat-sec">
+          <div class="only-mob-cat-heading-n-dropdown-sec">
+              <div class="cat-heading"><span class="dy-body-txt-color">CATEGORIES</span></div>
+              <div class="cat-val-sec">
+                <mat-form-field (click)="openCategoriesPopup()">
+                  <input matInput name="category-popup" [value]="common.selectedCategoryName" 
+                    readonly />
+                    <mat-icon matSuffix >keyboard_arrow_down</mat-icon>
+                </mat-form-field>
+    
+              </div>
+            </div>
+            <div class="store-category-list" *ngIf="common.isSelectedCategoryChanged">
+              <app-store-categories [data]="categoryService.categoryData" (selectedCategoryId)="changedCategoryId($event)"
+                class="store-category-sec"></app-store-categories>
+            </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Below code is used to call the store right content section -->
+  <div class="store-page-right-content-sec white-bg">
+    <div class="store-card-layout">
+      <div class="store-page-heading kit-detail-heading-sec">
+        <div class="kit-detail-heading">
+            <h2 class="dy-body-txt-color">{{productData.isKit ? 'Kit#': 'Product#'}} {{productData.productNumber}} : <span
+              class="dy-body-txt-color">{{productData.productName}}</span></h2>
+          <small class="dy-body-txt-color">{{common.selectedCategoryName}}</small>
+        </div>
+        
+        <div class="actionable-ntm-group" *ngIf="isFromReview">
+          <button (click)="backToReview()" mat-flat-button class="store-active-btn dy-action-btn-color">Back</button>
+        </div>
+        <!-- Adding back button for product detail page -->
+        <div class="actionable-ntm-group" *ngIf="!isFromReview">
+            <button (click)="backToPlaceorder()" mat-flat-button class="store-active-btn dy-action-btn-color">Back</button>
+          </div>
+        
+      </div>
+      <div class="row store-product-details">
+        <!-- Product Image Gallery Section -->
+        <div class="col s12 m6 l6 left-padding-0">
+          <div class="product-img-gallery-sec">
+            <div class="big-prod-img-sec">
+              <div class="overlay overlay-content " *ngIf="productDetailLoaderCheck">
+                <div class="overlay-content">
+                  <mat-spinner></mat-spinner>
+                </div>
+                </div>
+              <img class="demo-trigger" #img [src]="primaryImage.url ? _domSanitizationService.bypassSecurityTrustUrl(primaryImage.url) : defaultImageSrc"
+                [ngClass]="primaryImage.imgClass" />
+            </div>
+            <div class="thumb-prod-img-sec">
+              <span *ngFor="let item of imagesSrcArr">
+                <img *ngIf="item.url" [src]="item.url ? _domSanitizationService.bypassSecurityTrustUrl(item.url) : defaultImageSrc"
+                  (click)="viewImage(item.url,item.imgClass)" [ngClass]="item.imgClass" />
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Detail Section -->
+        <div class="col s12 m6 l6 right-padding-0 detail">
+          <div class="product-detail-sec">
+            <div class="product-qty-sec">
+              <div class="qty-sec" *ngIf="productData.totalQuantity">
+                <p class="dy-body-txt-color"><span class="t_qty_label dy-body-txt-color">Total Quantity</span>{{productData.totalQuantity}}</p>
+              </div>
+              <div class="qty-sec">
+                <p class="dy-body-txt-color"><span class="t_qty_label dy-body-txt-color">Available Quantity</span>
+                  {{productData.availableQuantity}}</p>
+              </div>
+              
+            </div>
+            <div class="select-prod-qty-sec" *ngIf="productData.productStatus == 'ACTIVE' && !isOnlyViewStore && !isFromReview">
+              <div class="select-qty-sec">
+                <span class="dy-body-txt-color">Select Quantity</span>
+              </div>
+              <div class="add-to-cart-btn-sec">
+                <app-quantity [data]="productData"></app-quantity>
+                <button [disabled]="!productData.availableQuantity" (click)="onAddCart()" [class.dy-action-btn-color]="productData.availableQuantity"
+                  mat-flat-button class="store-active-btn add-to-cart-btn">Add to
+                  cart</button>
+              </div>
+              <div class="cart-update-msg-sec dy-body-txt-color" *ngIf="productData.alreadyAddedCartQuantity">{{productData.alreadyAddedCartQuantity}}
+                already in cart</div>
+            </div>
+            <div class="prod-detail-item" *ngIf="!productData.isKit">
+              <div class="prod-detail-item-sec" *ngIf="productData.productPrice && productData.showPrice">
+                <p class="dy-body-txt-color" *ngIf="!productData.isPriceRange">
+                  <span class="prod-det-label dy-body-txt-color">Product Price</span>
+                  {{productData.productPrice | currency}}
+                </p>
+                <p class="dy-body-txt-color" *ngIf="productData.isPriceRange">
+                  <span class="prod-det-label dy-body-txt-color">Price Range</span>
+                  {{productData.productPrice | currency}} - {{productData.productMaxPrice | currency}}
+                </p>
+              </div>
+              <div class="prod-detail-item-sec" *ngIf="productData.productExpirationDate">
+                <p class="dy-body-txt-color"><span class="prod-det-label dy-body-txt-color">Expiration Date</span>
+                  {{productData.productExpirationDate}}</p>
+              </div>
+              <div class="prod-detail-item-sec" *ngIf="productData.clientProductName">
+                <p class="dy-body-txt-color"><span class="prod-det-label dy-body-txt-color">{{productData.clientProductLabel}}</span>
+                  {{productData.clientProductName}}</p>
+              </div>
+            </div>
+
+            <div class="product-overview-sec">
+              <p class="sec-heading dy-body-txt-color">Overview</p>
+              <div class="product-overview-con-sec dy-body-txt-color" innerHtml='{{productData.briefDescription}}'></div>
+            </div>
+
+            <div class="product-dimension-sec" *ngIf="productData.dimensions && (productData.dimensions.height || productData.dimensions.length
+            || productData.dimensions.width || productData.dimensions.weight)">
+              <p class="sec-heading dy-body-txt-color">Dimensions</p>
+              <div class="product-dimension-con-sec">
+                <p *ngIf="productData.dimensions.height">Height: {{productData.dimensions.height}}</p>
+                <p *ngIf="productData.dimensions.length">Length: {{productData.dimensions.length}}</p>
+                <p *ngIf="productData.dimensions.width">Width: {{productData.dimensions.width}}</p>
+                <p *ngIf="productData.dimensions.weight">Weight: {{productData.dimensions.weight}}</p>
+              </div>
+            </div>
+            <div class="product-resource-list-sec" *ngIf="otherResourceArr.length > 0">
+              <p class="sec-heading dy-body-txt-color">Resources</p>
+              <div class="prod-res-list">
+                <div class="other-resource-upload-img-list-sec">
+                  <div class="content-row" *ngFor="let item of otherResourceArr;let i = index;">
+                    <div class="content-row-col-cell" (click)="downloadFile(item.resourceId)"><img src="./assets/images/generic-file-icon.svg" /><span
+                        class="">{{item.fileName}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Associated Product Detail -->
+            <div class="product-detail-list-sec" *ngIf="productData.isKit">
+              <p class="sec-heading dy-body-txt-color">Bundled Products</p>
+              <mat-table [dataSource]="productData.productInfo" matSort class="dy-body-txt-color">
+
+                <!-- Product# Column -->
+                <ng-container matColumnDef="ProductNo">
+                  <mat-header-cell *matHeaderCellDef> Product Id </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.productNumber}} </mat-cell>
+                </ng-container>
+
+                <!-- Product Name Column -->
+                <ng-container matColumnDef="ProductName">
+                  <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+                </ng-container>
+
+                <!-- Quantity Column -->
+                <ng-container matColumnDef="Quantity">
+                  <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.availableQuantity}} </mat-cell>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToProductDetail(row.productId)"></tr>
+              </mat-table>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

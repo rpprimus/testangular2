@@ -1,0 +1,143 @@
+<div [ngSwitch]="field.type">
+    <div class="full-width-input-field-cls" *ngSwitchCase="'TEXT_BOX'">
+        <mat-form-field class="">
+            <!-- If fieldlength is not there or it is zero then defining the maxlength to 10000 else same as provided-->
+            <input matInput [disabled]="field.isReadOnly" [(ngModel)]="field.value" (change)="onFieldValueChange($event, field)" [placeholder]="obj == 'serviceDetails' ? 'Enter Input Value' : field.description" class="form-control" [required]="field.isRequired" name="field.id"
+                [maxlength]="field.fieldLength == 0 ? 10000 : field.fieldLength" #textBoxField=ngModel />
+            <mat-hint *ngIf="textBoxField.errors?.required && (textBoxField.touched || field.touched)" class="alert alert-danger">
+                {{field.description}} cannot be blank
+            </mat-hint>
+        </mat-form-field>
+    </div>
+    <div *ngSwitchCase="'RADIO_BUTTON'" class="radio-btn-group">
+        <label *ngIf="obj != 'serviceDetails'">{{field.description}}<span *ngIf="field.isRequired"
+        class="mat-placeholder-required mat-form-field-required-marker">*</span></label>
+        <mat-radio-group [(ngModel)]="field.value" (change)="onFieldValueChange($event, field)">
+            <mat-radio-button *ngFor="let value of field.lookupValue | lookupvalues" [value]="value" [disabled]="field.isReadOnly">{{value}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <!-- <mat-error *ngIf="radioBtnField.errors?.required && radioBtnField.touched" class="alert alert-danger">
+      {{field.description}} cannot be blank
+    </mat-error> -->
+    </div>
+    <div *ngSwitchCase="'CHECK_BOX'" class="checkbox-group">
+        <label *ngIf="obj != 'serviceDetails'">{{field.description}}<span *ngIf="field.isRequired"
+        class="mat-placeholder-required mat-form-field-required-marker">*</span></label>
+        <!-- <mat-checkbox [checked]="field.value?.includes(value)" (change)="onFieldValueChange($event, field, value)" -->
+        <mat-checkbox [checked]="isCheckboxSelected(field,value)" (change)="onFieldValueChange($event, field, value)" *ngFor="let value of field.lookupValue | lookupvalues" [disabled]="field.isReadOnly">{{value}}</mat-checkbox>
+        <!-- <mat-error *ngIf="checkBoxField.errors?.required && checkBoxField.touched" class="alert alert-danger">
+      {{field.description}} cannot be blank
+    </mat-error> -->
+    </div>
+    <div class="full-width-input-field-cls" *ngSwitchCase="'TEXT_AREA'">
+        <mat-form-field>
+            <!-- If fieldlength is not there or it is zero then defining the maxlength to 10000 else same as provided-->
+            <textarea [(ngModel)]="field.value" matInput cdkTextareaAutosize [placeholder]="obj == 'serviceDetails' ? 'Enter Input Value' : field.description" [maxlength]="field.fieldLength == 0 ? 10000 : field.fieldLength" [required]="field.isRequired" name="field.id"
+                #textareaField="ngModel" (change)="onFieldValueChange($event, field)" [disabled]="field.isReadOnly"></textarea>
+            <mat-hint *ngIf="textareaField.errors?.required && (textareaField.touched || field.touched)" class="alert alert-danger">
+                {{field.description}} cannot be blank
+            </mat-hint>
+        </mat-form-field>
+    </div>
+
+    <!-- DROP_DOWN type means custom dropdown field where data will come in a string  -->
+    <div class="full-width-input-field-cls" *ngSwitchCase="'DROP_DOWN'">
+        <mat-form-field>
+            <mat-select [placeholder]="obj == 'serviceDetails' ? 'Select Value' : field.description" (selectionChange)="onFieldValueChange($event, field)" [(ngModel)]="field.value" [required]="field.isRequired" name="field.id" #dropDownField="ngModel" [disabled]="field.isReadOnly">
+                <mat-option *ngFor="let value of field.lookupValue | lookupvalues" [value]="value">{{value}}</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="dropDownField.errors?.required && dropDownField.touched" class="alert alert-danger">
+                {{field.description}} cannot be blank
+            </mat-hint>
+        </mat-form-field>
+    </div>
+    <!-- REMOTE_DROP_DOWN means these are dropdown where we have to load data via API Like country, state -->
+    <!-- bindProperty : this property is fixed & defined in common file If we have to laod global data into dropdown -->
+    <!-- parentFieldId : this property defines that we have to load data based on its parent field value -->
+    <!-- remoteData : this property contains data based on its parent fields selected value -->
+    <div class="full-width-input-field-cls" *ngSwitchCase="'REMOTE_DROP_DOWN'">
+        <mat-form-field>
+            <mat-select [placeholder]="obj == 'serviceDetails' ? 'Select Value' : field.description" (selectionChange)="onFieldValueChange($event, field)" [(ngModel)]="field.value" [required]="field.isRequired" [ngModelOptions]="{standalone: true}" #remoteDropDownField="ngModel"
+                [disabled]="field.isReadOnly">
+                <mat-option *ngFor="let value of (field.parentFieldId ? field.remoteData : common[field.bindProperty])" [value]="value.id">{{value.name}}</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="remoteDropDownField.errors?.required && remoteDropDownField.touched" class="alert alert-danger">
+                {{field.description}} cannot be blank
+            </mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="full-width-input-field-cls" *ngSwitchCase="'READ_ONLY'">
+        <mat-form-field class="">
+            <!-- <input matInput disabled [placeholder]="obj == 'serviceDetails' ? '' : field.description" class="form-control" [(ngModel)]="field.lookupValue"> -->
+            <textarea matInput disabled cdkTextareaAutosize [placeholder]="obj == 'serviceDetails' ? '' : field.description" class="form-control" [(ngModel)]="field.lookupValue"></textarea>
+        </mat-form-field>
+    </div>
+    <div class="full-width-input-field-cls" *ngSwitchCase="'DATE_FIELD'">
+        <mat-form-field>
+            <input matInput [disabled]="field.isReadOnly" (click)="datefield.open()" [(ngModel)]="field.value" [matDatepicker]="datefield" [required]="field.isRequired" [placeholder]="obj == 'serviceDetails' ? 'Select Date' : field.description" (ngModelChange)="onFieldValueChange($event, field)"
+                name="field.id" #dateField="ngModel">
+            <mat-datepicker-toggle matSuffix [for]="datefield"></mat-datepicker-toggle>
+            <mat-datepicker #datefield></mat-datepicker>
+            <mat-hint *ngIf="dateField.errors?.required && (dateField.touched || field.touched)" class="alert alert-danger">
+                {{field.description}} cannot be blank
+            </mat-hint>
+        </mat-form-field>
+    </div>
+
+    <div class="full-width-input-field-cls" *ngSwitchCase="'EMAIL'">
+        <mat-form-field class="">
+            <input matInput [disabled]="field.isReadOnly" [(ngModel)]="field.value" class="form-control" (change)="onFieldValueChange($event, field)" [pattern]="appConstant.emailRegex" [placeholder]="field.description ? field.description : 'Enter E-mail Address'"
+                [required]="field.isRequired" name="field.id" [maxlength]="field.fieldLength == 0 ? 10000 : field.fieldLength" #emailField='ngModel' />
+            <mat-hint *ngIf="emailField.errors?.required && (emailField.touched || field.touched)" class="alert alert-danger">
+                {{field.description}} cannot be blank
+            </mat-hint>
+            <mat-hint *ngIf="emailField.errors?.pattern" class="alert alert-danger">
+                {{appMessage.U0005}}
+            </mat-hint>
+        </mat-form-field>
+
+    </div>
+
+    <div class="full-width-input-field-cls" *ngSwitchCase="'CUSTOM_DATE'">
+        <mat-form-field>
+            <input matInput [disabled]="field.isReadOnly" (click)="customdatefield.open()" [(ngModel)]="field.value" [matDatepicker]="customdatefield" [required]="field.isRequired" [placeholder]="field.description ? field.description : 'Select Date'" (ngModelChange)="onFieldValueChange($event, field)"
+                name="field.id" #customdatefield="ngModel">
+            <mat-datepicker-toggle matSuffix [for]="customdatefield"></mat-datepicker-toggle>
+            <mat-datepicker #customdatefield></mat-datepicker>
+            <mat-hint *ngIf="customdatefield.errors?.required && (customdatefield.touched || field.touched)" class="alert alert-danger">
+                {{field.description}} cannot be blank
+            </mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="full-width-input-field-cls" *ngSwitchCase="'UPLOAD'">
+        <label *ngIf="obj != 'serviceDetails'">{{field.description}}<span *ngIf="field.isRequired"
+            class="mat-placeholder-required mat-form-field-required-marker">*</span></label>
+        <div class="upload-sec" *ngIf="!file && (!type || type=='eventCalender')">
+
+            <div class="placeholder-icon-sec">
+                <img src="./assets/images/other-res-upload-icon-img.svg" alt="" />
+            </div>
+            <div class="click-to-upload-sec">
+                <p class="placeholder-img-sec"><img src="./assets/images/cloud-computing.svg" alt="" /></p>
+                <p><strong>Drag & Drop</strong> <a class="browse-file-anchor-tag" (click)="browseFileClick('docInput_'+field.id)" href="javascript:void(0)"><em>your
+              files here, or </em>Browse file</a></p>
+            </div>
+            <input #uploadFile style="opacity:0;" id="docInput_{{field.id}}" [disabled]="field.isReadOnly" type="file" (change)="onFieldValueChange($event, field)" />
+
+        </div>
+        <small *ngIf="!file && (!type || type=='eventCalender')"><em>Note:</em> Available format: DOCX, PDF, XLSX, CSV, PPT, JPG, JPEG, PNG. Size must be less
+      than 30MB.</small>
+        <p *ngIf="!file && (type !='eventCalender' && type)">No file available!!</p>
+        <div class="upload-img-list-sec" *ngIf="file">
+            <div class="content-row">
+                <div class="content-row-col-cell">
+                    <a href="javascript:void(0)" (click)="sharedService.downloadOnDemandFile(file)">{{file.fileName}}</a></div>
+
+                <div class="content-row-col-cell" *ngIf="(type=='eventCalender' || !type)">
+                    <mat-icon class="mini-fab-btn edit-btn" (click)="deleteFile(field)"><i class="material-icons">edit</i>
+                    </mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

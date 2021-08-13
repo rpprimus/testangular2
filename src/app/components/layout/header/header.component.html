@@ -1,0 +1,44 @@
+<div class="header-sec">
+
+  <!-- Below Div is used for header layout purpose -->
+  <div class="hemberg-icon-sec">
+  </div>
+
+  <div class="main-logo-sec">
+    <!--<img src="../assets/images/logo-small.svg" alt="">-->
+    <!-- <img src="../assets/images/logo.png" (click)= "onLogoClick()" /> -->
+    <div class="logo-container-sec" *ngIf="common.storeLogo">
+      
+        <img [src]=" common.storeLogo != 'null' ? _domSanitizationService.bypassSecurityTrustUrl(common.storeLogo) : defaultLogoUrl" 
+        (click)="onLogoClick()" />
+<!-- Here the code for powered by sparkslinks logo will come -->
+      <p> 
+          <span>powered by</span>
+          <span >
+              <img src="../assets/images/logo-grey.png" (click)="onLogoClick()" />
+            </span>
+            
+      </p>
+    </div>
+    <div class="logo-container-sec" *ngIf="!common.storeLogo">
+      <img src="../assets/images/logo.png" (click)="onLogoClick()" />
+    </div>
+
+  </div>
+
+  <div class="loggedin-user-sec">
+    <div class="user-sec">
+      <span class="first-char-circle">{{firstChar}}</span> Hello,
+      <aside [matMenuTriggerFor]="menu">{{name}}<i class="material-icons pro-drop-dn-icon">
+        keyboard_arrow_down
+        </i>
+        <mat-menu #menu="matMenu" class="logout-btn-sec" y-position="below" [overlapTrigger]="false" xPosition="before">
+          <button mat-menu-item class="small-menu-item-btn" (click)="feedback()">Feedback</button>
+          <button mat-menu-item class="small-menu-item-btn" (click)="logOut()">Logout</button>
+        </mat-menu>
+      </aside>
+    </div>
+
+  </div>
+
+</div>

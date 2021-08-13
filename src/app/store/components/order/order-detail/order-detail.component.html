@@ -1,0 +1,151 @@
+<!-- Below code is used to call the store left and right content section -->
+<div class="store-page-content-sec s-product-store-page">
+
+    <!-- Below code is used to call the store left content section -->
+    <div class="store-page-left-content-sec">
+        <div class="store-category-list-sec">
+            <div class="cat-sec-top-bg"></div>
+            <!-- Use for top section graphics element -->
+            <div class="cat-sec-bottom-bg"></div>
+            <!-- Use for bottom section graphics element -->
+            <h4 class="dy-body-txt-color">Order details</h4>
+            <div class="store-category-list">
+                <ul class="service-page-left-content-sec">
+                    <li *ngIf="data.eventDetails?.isChecked" (click)="scroll(1)">Event Details</li>
+                    <li *ngIf="data.shipmentDetails?.isChecked" (click)="scroll(2)">Shipment Details</li>
+                    <li *ngIf="data.pickupDetails?.isChecked" (click)="scroll(3)">Pickup Details</li>
+                    <li *ngIf="data.additionalInfoDetails?.isChecked" (click)="scroll(4)">Additional Info</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Below code is used to call the store right content section -->
+    <div class="store-page-right-content-sec">
+
+        <div class="first-store-card">
+            <div class="review-order-heading-sec">
+                <h2 class="dy-body-txt-color">Order Details</h2>
+                <app-header-footer-note data="HEADER"></app-header-footer-note>
+
+            </div>
+            <div class="actionable-ntm-group">
+                <button mat-flat-button class="active-btn dy-action-btn-color" (click)="common.backward()">Previous</button>
+                <button mat-flat-button class="active-btn dy-action-btn-color" (click)="common.forward()">Next</button>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="store-card-layout">
+                <div class="ser-field-two-col">
+                    <mat-form-field *ngIf="!isStoreUser">
+                        <mat-select placeholder="Requestor Name" [(ngModel)]="common.placeOrderObj.requestorId" name="requestor" #requestor="ngModel" required>
+                            <mat-option>Select Requestor</mat-option>
+                            <mat-option *ngFor="let requestor of requestors" [value]="requestor.id" (click)="requestorSelected($event)">
+                                {{requestor.name}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint *ngIf="requestor.errors?.required && requestor.touched">{{appMessage.U0093}}</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="isStoreUser">
+                        <input matInput class="form-control" placeholder="Requestor Name" [value]="requestorName" disabled />
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+
+        <div *ngIf="data.eventDetails?.isChecked" class="row" #events>
+            <div class="store-card-layout">
+                <div class="title-sec-card-content dy-body-txt-color">Event Details</div>
+                <div class="service-value-sec">
+                    <div class="ser-field-two-col" *ngFor="let field of eventDetailsField">
+                        <app-dynamic-input-field [field]="field" obj="eventDetails"></app-dynamic-input-field>
+                        <div class="service-description-sec" *ngIf="field.value">
+                            <app-display-linked-fields [field]="field" obj="eventDetails"></app-display-linked-fields>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="data.shipmentDetails?.isChecked" class="row" #shipments>
+            <div class="store-card-layout">
+                <div class="title-sec-card-content dy-body-txt-color">Shipment Details
+                    <span class="same-as-pickup" *ngIf="data.eventDetails?.isChecked">
+            <mat-checkbox name="sameasPickup" [(ngModel)]="util.isSameAsEventOnShipment"
+              (ngModelChange)="sameAsEvent('shipment')">
+              Same as Event detail
+            </mat-checkbox>
+          </span>
+                </div>
+                <div class="service-value-sec">
+                    <div class="ser-field-two-col" *ngFor="let field of shipmentDetailFields">
+                        <app-dynamic-input-field [field]="field" obj="shipmentDetails"></app-dynamic-input-field>
+                        <div class="service-description-sec" *ngIf="field.value">
+                            <app-display-linked-fields [field]="field" obj="shipmentDetails"></app-display-linked-fields>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="data.pickupDetails?.isChecked" class="row" #pickups>
+            <div class="store-card-layout">
+                <div class="title-sec-card-content dy-body-txt-color">Pickup Details
+                    <span class="same-as-pickup" *ngIf="data.eventDetails?.isChecked">
+            <mat-checkbox name="sameasPickup" [(ngModel)]="util.isSameAsEventOnPickup"
+              (ngModelChange)="sameAsEvent('pickup')">
+              Same as Event detail
+            </mat-checkbox>
+          </span>
+                </div>
+
+                <div class="service-value-sec">
+                    <div class="ser-field-two-col" *ngFor="let field of pickupDetailsFields">
+                        <app-dynamic-input-field [field]="field" obj="pickupDetails"></app-dynamic-input-field>
+                        <div class="service-description-sec" *ngIf="field.value">
+                            <app-display-linked-fields [field]="field" obj="pickupDetails"></app-display-linked-fields>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Show Additional Info section only when there is custom field defined into this -->
+        <div *ngIf="data.additionalInfoDetails?.isChecked && additionalInfoDetailFields?.length > 0" class="row" #additionals>
+            <div class="store-card-layout">
+                <div class="title-sec-card-content dy-body-txt-color">Additional Info</div>
+                <div class="service-value-sec alignment-issue-cls">
+                    <div class="ser-field-two-col" *ngFor="let field of additionalInfoDetailFields">
+                        <app-dynamic-input-field [field]="field" obj="additionalInfoDetails"></app-dynamic-input-field>
+                        <div class="service-description-sec" *ngIf="field.value">
+                            <app-display-linked-fields [field]="field" obj="additionalInfoDetails"></app-display-linked-fields>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="store-card-layout cus-footer-txt-sec">
+      <app-header-footer-note data="FOOTER"></app-header-footer-note>
+    </div> -->
+
+        <div class="store-card-layout cus-footer-txt-sec order-footer">
+            <app-header-footer-note data="FOOTER"></app-header-footer-note>
+            <div class="actionable-ntm-group">
+                <button mat-flat-button class="active-btn dy-action-btn-color" (click)="common.backward()">Previous</button>
+                <button mat-flat-button class="active-btn dy-action-btn-color" (click)="common.forward()">Next</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
