@@ -404,7 +404,7 @@ export class mockCommon {
           isActive: true,
           isRequired: true,
           fieldSequence: 0,
-          dbPropertyName: "eventZip1",
+          dbPropertyName: "eventZip",
           value: "test"
         },
         {
