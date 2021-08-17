@@ -1,8 +1,0 @@
-@import './_variables';
-@import './_mixins';
-
-@media screen and (max-width: $break-at-mobile-414) {
-.transparent-btn.mat-button {
-    display: inline-block !important;
-}
-}
