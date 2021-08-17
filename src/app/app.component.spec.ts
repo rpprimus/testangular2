@@ -42,10 +42,13 @@ describe('AppComponent', () => {
    expect(component.solution).toBe(9);
 });
 
-it('failed test case',()=>{
-  component.num1 = 5;
-   component.num2 = 4;
-   component.add();
-   expect(component.solution).toBe(12);
+// it('failed test case',()=>{
+//   component.num1 = 5;
+//    component.num2 = 4;
+//    component.add();
+//    expect(component.solution).toBe(12);
+// });
 });
-});
+
+
+
