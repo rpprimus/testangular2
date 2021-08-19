@@ -62,10 +62,10 @@ describe('AppComponent', () => {
   fixture.detectChanges();
   expect(component.clickEvent).toBeTruthy();
 });
-  it('test case should failed ',()=>{
-  let event={target:{id:"menubtnnn"}};
-  component.clickEvent(event);
-  fixture.detectChanges();
-  expect(component.clickEvent).toBeFalsy();
-});
+//  it('test case should failed ',()=>{
+//  let event={target:{id:"menubtnnn"}};
+//  component.clickEvent(event);
+//  fixture.detectChanges();
+//  expect(component.clickEvent).toBeFalsy();
+//});
 });
