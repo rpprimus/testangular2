@@ -16,7 +16,7 @@ export class AppComponent {
   }
 
   add() {
-    this.solution =this.num1 - this.num2;
+    this.solution =this.num1 + this.num2;
   }
 
 }
